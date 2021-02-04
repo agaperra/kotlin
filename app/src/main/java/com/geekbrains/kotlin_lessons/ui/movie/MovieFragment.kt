@@ -2,7 +2,6 @@ package com.geekbrains.kotlin_lessons.ui.movie
 
 import android.content.res.Configuration
 import android.os.Bundle
-import android.os.CountDownTimer
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +11,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.geekbrains.kotlin_lessons.*
-import kotlinx.android.synthetic.main.fragment_movie.*
 
 class MovieFragment : Fragment() {
     companion object {
@@ -50,9 +48,7 @@ class MovieFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        movieViewModel.liveData.observe(this, Observer {
-            textView.text=it
-        })
+        movieViewModel.liveData.observe(this, { textView.text = it })
     }
 
 

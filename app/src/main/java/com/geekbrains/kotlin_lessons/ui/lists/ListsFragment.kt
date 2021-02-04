@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.geekbrains.kotlin_lessons.R
-import com.geekbrains.kotlin_lessons.ui.movie.MovieFragment
 
 class ListsFragment : Fragment() {
 
@@ -32,8 +31,6 @@ class ListsFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        listsViewModel.liveData.observe(this, Observer {
-            textView.text=it
-        })
+        listsViewModel.liveData.observe(this, { textView.text = it })
     }
 }

@@ -30,9 +30,7 @@ class SearchFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        searchViewModel.liveData.observe(this, Observer {
-            textView.text=it
-        })
+        searchViewModel.liveData.observe(this, { textView.text = it })
     }
 
 }

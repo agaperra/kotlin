@@ -8,7 +8,6 @@ class Constants {
         const val THEME_TAG="TAG_THEME"
         const val THEME_LIGHT=0
         const val THEME_DARK=1
-        var dateFormat = java.text.SimpleDateFormat("YYYY-MM-DD",
-            Locale.forLanguageTag(Locale.getDefault().language))
+        //var dateFormat = java.text.SimpleDateFormat("yyy-MM-dd", Locale.forLanguageTag(Locale.getDefault().language))
     }
 }

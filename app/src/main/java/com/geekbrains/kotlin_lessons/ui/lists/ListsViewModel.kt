@@ -1,6 +1,5 @@
 package com.geekbrains.kotlin_lessons.ui.lists
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 

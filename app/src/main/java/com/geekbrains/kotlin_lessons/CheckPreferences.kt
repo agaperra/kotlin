@@ -1,7 +1,6 @@
 package com.geekbrains.kotlin_lessons
 
 import androidx.appcompat.app.AppCompatDelegate
-import com.geekbrains.kotlin_lessons.ui.movie.MovieFragment
 
 class CheckPreferences() {
 

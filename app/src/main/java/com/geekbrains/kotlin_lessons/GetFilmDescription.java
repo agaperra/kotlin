@@ -1,11 +1,7 @@
 package com.geekbrains.kotlin_lessons;
 
-import android.annotation.SuppressLint;
-import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
-
-import androidx.annotation.RequiresApi;
 
 import com.google.gson.Gson;
 
@@ -14,7 +10,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.stream.Collectors;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -25,7 +20,7 @@ public class GetFilmDescription {
     public static void getFilm() {
         try {
             URL url = new URL("https://api.themoviedb.org/3/movie/550?api_key="+BuildConfig.FILM_API_KEY);
-            Handler handler = new Handler(Looper.getMainLooper());
+            //Handler handler = new Handler(Looper.getMainLooper());
             new Thread(() -> {
                 HttpsURLConnection urlConnection;
                 try {
@@ -35,7 +30,7 @@ public class GetFilmDescription {
                     BufferedReader in = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
                     String result = getLines(in);
 
-                    FilmRequest filmRequest = gson.fromJson(result, FilmRequest.class);
+                    //FilmRequest filmRequest = gson.fromJson(result, FilmRequest.class);
                     System.out.println(result);
                     //handler.post(() -> parent.displayWeather(weatherRequest));
                     urlConnection.disconnect();
