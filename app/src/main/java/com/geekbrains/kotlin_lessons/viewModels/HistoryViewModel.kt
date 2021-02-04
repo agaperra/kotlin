@@ -3,7 +3,7 @@ package com.geekbrains.kotlin_lessons.viewModels
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class ListsViewModel : ViewModel() {
+class HistoryViewModel : ViewModel() {
 
    val liveData=MutableLiveData<String>()
 

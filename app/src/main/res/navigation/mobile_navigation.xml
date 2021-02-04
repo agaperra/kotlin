@@ -12,14 +12,14 @@
         tools:layout="@layout/fragment_movie" />
 
     <fragment
-        android:id="@+id/navigation_search"
-        android:name="com.geekbrains.kotlin_lessons.fragments.SearchFragment"
-        android:label="@string/title_search"
-        tools:layout="@layout/fragment_search" />
+        android:id="@+id/navigation_favorites"
+        android:name="com.geekbrains.kotlin_lessons.fragments.FavoritesFragment"
+        android:label="@string/title_favorites"
+        tools:layout="@layout/fragment_favorites" />
 
     <fragment
-        android:id="@+id/navigation_lists"
-        android:name="com.geekbrains.kotlin_lessons.fragments.ListsFragment"
-        android:label="@string/title_lists"
-        tools:layout="@layout/fragment_lists" />
+        android:id="@+id/navigation_history"
+        android:name="com.geekbrains.kotlin_lessons.fragments.HistoryFragment"
+        android:label="@string/title_history"
+        tools:layout="@layout/fragment_history" />
 </navigation>

@@ -7,13 +7,13 @@
         android:title="@string/title_movie" />
 
     <item
-        android:id="@+id/navigation_search"
-        android:icon="@drawable/ic_menu_search"
-        android:title="@string/title_search" />
+        android:id="@+id/navigation_favorites"
+        android:icon="@drawable/ic_menu_favorite"
+        android:title="@string/title_favorites" />
 
     <item
-        android:id="@+id/navigation_lists"
-        android:icon="@drawable/ic_menu_lists"
-        android:title="@string/title_lists" />
+        android:id="@+id/navigation_history"
+        android:icon="@drawable/ic_menu_history"
+        android:title="@string/title_history" />
 
 </menu>

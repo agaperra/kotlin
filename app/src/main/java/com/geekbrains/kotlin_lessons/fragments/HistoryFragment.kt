@@ -7,28 +7,27 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.geekbrains.kotlin_lessons.R
-import com.geekbrains.kotlin_lessons.viewModels.ListsViewModel
-import kotlinx.android.synthetic.main.fragment_lists.*
+import com.geekbrains.kotlin_lessons.viewModels.HistoryViewModel
+import kotlinx.android.synthetic.main.fragment_history.*
 
-class ListsFragment : Fragment() {
+class HistoryFragment : Fragment() {
 
-    private lateinit var listsViewModel: ListsViewModel
-    //private lateinit var textView: TextView
+    private lateinit var historyViewModel: HistoryViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        listsViewModel =
-            ViewModelProvider(this).get(ListsViewModel::class.java)
+        historyViewModel =
+            ViewModelProvider(this).get(HistoryViewModel::class.java)
 
-        return inflater.inflate(R.layout.fragment_lists, container, false)
+        return inflater.inflate(R.layout.fragment_history, container, false)
     }
 
 
     override fun onStart() {
         super.onStart()
-        listsViewModel.liveData.observe(this, { text_lists.text = it })
+        historyViewModel.liveData.observe(this, { text_history.text = it })
     }
 }

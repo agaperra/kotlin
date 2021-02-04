@@ -2,15 +2,15 @@
     <!-- Base application theme. -->
     <style name="Theme.Kotlin_Lessons" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/yellow_m</item>
-        <item name="colorPrimaryVariant">@android:color/transparent</item>
-        <item name="colorOnPrimary">@color/black</item>
+        <item name="colorPrimary">@color/bottom_nav_menu</item>
+        <item name="colorPrimaryVariant">@color/bottom_nav</item>
+        <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">#756A06</item>
-        <item name="colorSecondaryVariant">#958838</item>
+        <item name="colorSecondary">#975C14</item>
+        <item name="colorSecondaryVariant">#EFA74D</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorOnPrimary</item>
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
         <item name="alertDialogTheme">@style/YDialog</item>
     </style>
@@ -19,6 +19,12 @@
     <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
         <item name="android:windowBackground">@drawable/splash_screen</item>
     </style>
+    <style name="Theme.Kotlin_Lessons.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+
 
 
 

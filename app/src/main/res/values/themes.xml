@@ -3,11 +3,11 @@
     <style name="Theme.Kotlin_Lessons" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">#673F0E</item>
-        <item name="colorPrimaryVariant">@android:color/transparent</item>
+        <item name="colorPrimaryVariant">#673F0E</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">#975C14</item>
-        <item name="colorSecondaryVariant">#BA7D33</item>
+        <item name="colorSecondaryVariant">#EFA74D</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimary</item>

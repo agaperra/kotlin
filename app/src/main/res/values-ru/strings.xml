@@ -9,11 +9,11 @@
     <string name="nav_header_desc">Главная</string>
     <string name="action_settings">Настройки</string>
 
-    <string name="menu_search">Поиск</string>
+    <string name="menu_favorites">Избранное</string>
     <string name="ok">ОК</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_movie">Фильмы</string>
-    <string name="title_search">Поиск</string>
-    <string name="title_lists">Мои списки</string>
+    <string name="title_favorites">Избранное</string>
+    <string name="title_history">История</string>
 
 </resources>

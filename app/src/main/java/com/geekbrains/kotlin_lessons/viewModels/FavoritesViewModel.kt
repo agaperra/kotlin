@@ -3,7 +3,7 @@ package com.geekbrains.kotlin_lessons.viewModels
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class SearchViewModel : ViewModel() {
+class FavoritesViewModel : ViewModel() {
 
     val liveData= MutableLiveData<String>()
 
@@ -12,6 +12,6 @@ class SearchViewModel : ViewModel() {
     }
 
     private fun start(){
-        liveData.value="This is search Fragment"
+        liveData.value="This is favorites Fragment"
     }
 }
