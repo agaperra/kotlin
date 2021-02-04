@@ -1,57 +1,43 @@
-package com.geekbrains.kotlin_lessons.sharedPeferences;
+package com.geekbrains.kotlin_lessons.sharedPeferences
 
-import android.app.Activity;
-import android.content.SharedPreferences;
+import android.app.Activity
+import android.content.SharedPreferences
+import android.content.SharedPreferences.Editor
 
-public class SharedPreferencesManager {
+class SharedPreferencesManager(activity: Activity) {
+    private val sPreferences: SharedPreferences = activity.getPreferences(Activity.MODE_PRIVATE)
+    private var sEditor: Editor? = null
+    private val editor: Editor
+        get() = sPreferences.edit()
 
-    private final SharedPreferences sPreferences;
-
-    private SharedPreferences.Editor sEditor;
-
-    public SharedPreferencesManager(Activity activity){
-        sPreferences= activity.getPreferences(Activity.MODE_PRIVATE);
+    fun storeBoolean(tag: String?, value: Boolean) {
+        sEditor = editor
+        sEditor!!.putBoolean(tag, value)
+        sEditor!!.commit()
     }
 
-    public SharedPreferences.Editor getEditor() {
-        return sPreferences.edit();
+    fun storeString(tag: String?, str: String?) {
+        sEditor = editor
+        sEditor!!.putString(tag, str)
+        sEditor!!.commit()
     }
 
-
-    public void storeBoolean(String tag, boolean value) {
-        sEditor = getEditor();
-        sEditor.putBoolean(tag, value);
-        sEditor.commit();
+    fun retrieveBoolean(tag: String?, defValue: Boolean): Boolean {
+        return sPreferences.getBoolean(tag, defValue)
     }
 
-    public void storeString(String tag, String str) {
-        sEditor = getEditor();
-        sEditor.putString(tag, str);
-        sEditor.commit();
+    fun retrieveString(tag: String?, defStr: String?): String? {
+        return sPreferences.getString(tag, defStr)
     }
 
-    public boolean retrieveBoolean(String tag, boolean defValue) {
-        return sPreferences.getBoolean(tag, defValue);
-
+    fun retrieveInt(tag: String?, defValue: Int): Int {
+        return sPreferences.getInt(tag, defValue)
     }
 
-
-    public String retrieveString(String tag, String defStr) {
-        return sPreferences.getString(tag, defStr);
+    fun storeInt(tag: String?, defValue: Int) {
+        sEditor = editor
+        sEditor!!.putInt(tag, defValue)
+        sEditor!!.commit()
     }
-
-
-    public int retrieveInt(String tag, int defValue) {
-        return sPreferences.getInt(tag, defValue);
-    }
-
-
-    public void storeInt(String tag, int defValue) {
-        sEditor = getEditor();
-        sEditor.putInt(tag, defValue);
-        sEditor.commit();
-    }
-
 
 }
-
