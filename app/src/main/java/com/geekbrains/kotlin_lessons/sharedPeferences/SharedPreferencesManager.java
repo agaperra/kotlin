@@ -1,4 +1,4 @@
-package com.geekbrains.kotlin_lessons;
+package com.geekbrains.kotlin_lessons.sharedPeferences;
 
 import android.app.Activity;
 import android.content.SharedPreferences;

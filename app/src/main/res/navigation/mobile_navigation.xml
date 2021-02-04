@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/navigation_movie"
-        android:name="com.geekbrains.kotlin_lessons.ui.movie.MovieFragment"
+        android:name="com.geekbrains.kotlin_lessons.fragments.MovieFragment"
         android:label="@string/title_movie"
         tools:layout="@layout/fragment_movie" />
 
     <fragment
         android:id="@+id/navigation_search"
-        android:name="com.geekbrains.kotlin_lessons.ui.search.SearchFragment"
+        android:name="com.geekbrains.kotlin_lessons.fragments.SearchFragment"
         android:label="@string/title_search"
         tools:layout="@layout/fragment_search" />
 
     <fragment
         android:id="@+id/navigation_lists"
-        android:name="com.geekbrains.kotlin_lessons.ui.lists.ListsFragment"
+        android:name="com.geekbrains.kotlin_lessons.fragments.ListsFragment"
         android:label="@string/title_lists"
         tools:layout="@layout/fragment_lists" />
 </navigation>

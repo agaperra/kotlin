@@ -2,12 +2,19 @@ package com.geekbrains.kotlin_lessons
 
 import java.util.*
 
+
 class Constants {
 
-    companion object {
-        const val THEME_TAG="TAG_THEME"
-        const val THEME_LIGHT=0
-        const val THEME_DARK=1
-        //var dateFormat = java.text.SimpleDateFormat("yyy-MM-dd", Locale.forLanguageTag(Locale.getDefault().language))
+    enum class THEME{
+        THEME_LIGHT,
+        THEME_DARK
+    }
+
+    enum class TAGS{
+        THEME_TAG
+    }
+
+    companion object{
+        var dateFormat = java.text.SimpleDateFormat("yyy-MM-dd", Locale.forLanguageTag(Locale.getDefault().language))
     }
 }

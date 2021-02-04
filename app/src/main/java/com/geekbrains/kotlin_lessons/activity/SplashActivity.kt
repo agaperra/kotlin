@@ -1,4 +1,4 @@
-package com.geekbrains.kotlin_lessons
+package com.geekbrains.kotlin_lessons.activity
 
 import android.content.Intent
 import android.os.Bundle

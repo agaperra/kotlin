@@ -1,4 +1,4 @@
-package com.geekbrains.kotlin_lessons.ui.movie
+package com.geekbrains.kotlin_lessons.viewModels
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

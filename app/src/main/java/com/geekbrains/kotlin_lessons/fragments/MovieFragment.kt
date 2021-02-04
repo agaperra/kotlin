@@ -1,4 +1,4 @@
-package com.geekbrains.kotlin_lessons.ui.movie
+package com.geekbrains.kotlin_lessons.fragments
 
 import android.content.res.Configuration
 import android.os.Bundle
@@ -8,9 +8,12 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.geekbrains.kotlin_lessons.*
+import com.geekbrains.kotlin_lessons.activity.MainActivity
+import com.geekbrains.kotlin_lessons.sharedPeferences.CheckPreferences
+import com.geekbrains.kotlin_lessons.sharedPeferences.SharedPreferencesManager
+import com.geekbrains.kotlin_lessons.viewModels.MovieViewModel
 
 class MovieFragment : Fragment() {
     companion object {
@@ -35,10 +38,10 @@ class MovieFragment : Fragment() {
         textView.setOnClickListener {
             if (k == Configuration.UI_MODE_NIGHT_NO) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                sPrefs.storeInt(Constants.THEME_TAG, Constants.THEME_DARK)
+                sPrefs.storeString(Constants.TAGS.THEME_TAG.toString(), Constants.THEME.THEME_DARK.toString())
             } else {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-                sPrefs.storeInt(Constants.THEME_TAG, Constants.THEME_LIGHT)
+                sPrefs.storeString(Constants.TAGS.THEME_TAG.toString(), Constants.THEME.THEME_LIGHT.toString())
             }
         }
 

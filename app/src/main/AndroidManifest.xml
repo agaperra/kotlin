@@ -11,10 +11,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Kotlin_Lessons">
         <activity
-            android:name=".MainActivity"
+            android:name=".activity.MainActivity"
             android:label="@string/title_activity_main"></activity>
         <activity
-            android:name=".SplashActivity"
+            android:name=".activity.SplashActivity"
             android:theme="@style/SplashTheme">
             >
             <intent-filter>

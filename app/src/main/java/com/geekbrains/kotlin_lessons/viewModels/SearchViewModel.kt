@@ -1,11 +1,11 @@
-package com.geekbrains.kotlin_lessons.ui.search
+package com.geekbrains.kotlin_lessons.viewModels
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class SearchViewModel : ViewModel() {
 
-    val liveData=MutableLiveData<String>()
+    val liveData= MutableLiveData<String>()
 
     init {
         start()
