@@ -7,4 +7,19 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="splash">#2F3032</color>
+    <color name="app_yellow">#FFC107</color>
+    <color name="yellow_m">#CCAE40</color>
+    <color name="red_m">#2E1313</color>
+
+
+
+    <color name="dialog_background">#86C1A7FF</color>
+    <color name="dialog_text">#EEEEEE</color>
+    <color name="dialog_buttons_color">#FFFFFF</color>
+    <color name="dialog_checkbox">#FFF</color>
+    <color name="dialog_checkbox_activated">#E4B86A</color>
+    <color name="dialog_list_item">#FFF</color>
+    <color name="dialog_accent_button">#FFF</color>
+    <color name="dialog_button">#77FFFFFF</color>
 </resources>

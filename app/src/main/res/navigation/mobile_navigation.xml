@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_movie">
+
+    <fragment
+        android:id="@+id/navigation_movie"
+        android:name="com.geekbrains.kotlin_lessons.ui.movie.MovieFragment"
+        android:label="@string/title_movie"
+        tools:layout="@layout/fragment_movie" />
+
+    <fragment
+        android:id="@+id/navigation_search"
+        android:name="com.geekbrains.kotlin_lessons.ui.search.SearchFragment"
+        android:label="@string/title_search"
+        tools:layout="@layout/fragment_search" />
+
+    <fragment
+        android:id="@+id/navigation_lists"
+        android:name="com.geekbrains.kotlin_lessons.ui.lists.ListsFragment"
+        android:label="@string/title_lists"
+        tools:layout="@layout/fragment_lists" />
+</navigation>
