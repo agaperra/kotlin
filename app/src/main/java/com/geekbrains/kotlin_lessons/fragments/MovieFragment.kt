@@ -1,59 +1,105 @@
 package com.geekbrains.kotlin_lessons.fragments
 
-import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatDelegate
+import android.widget.Toast
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.geekbrains.kotlin_lessons.*
-import com.geekbrains.kotlin_lessons.activity.MainActivity
-import com.geekbrains.kotlin_lessons.sharedPeferences.CheckPreferences
-import com.geekbrains.kotlin_lessons.sharedPeferences.SharedPreferencesManager
+import com.geekbrains.kotlin_lessons.R
+import com.geekbrains.kotlin_lessons.adapters.HorizontalRecyclerAdapter
+import com.geekbrains.kotlin_lessons.databinding.FragmentMovieBinding
+import com.geekbrains.kotlin_lessons.interactors.string.StringInteractorImpl
+import com.geekbrains.kotlin_lessons.models.Movie
+import com.geekbrains.kotlin_lessons.responses.MovieResponse
 import com.geekbrains.kotlin_lessons.viewModels.MovieViewModel
+import java.util.*
+import kotlin.collections.ArrayList
 
 class MovieFragment : Fragment() {
-    companion object {
-        lateinit var sPrefs: SharedPreferencesManager
-    }
 
-    private lateinit var textView: TextView
+    private lateinit var binding: FragmentMovieBinding
     private lateinit var movieViewModel: MovieViewModel
+    private val moviesPopular: ArrayList<Movie> = ArrayList()
+    private val moviesNowPlaying: ArrayList<Movie> = ArrayList()
+    private val moviesUpComing: ArrayList<Movie> = ArrayList()
+    private lateinit var movieAdapterPopular: HorizontalRecyclerAdapter
+    private lateinit var movieAdapterNowPlaying: HorizontalRecyclerAdapter
+    private lateinit var movieAdapterUpComing: HorizontalRecyclerAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        movieViewModel =
-            ViewModelProvider(this).get(MovieViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_movie, container, false)
-        textView= root.findViewById(R.id.text_movie)
+    ): View {
 
-        sPrefs = MainActivity.sPrefs
-        val k:Int =resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
-        textView.setOnClickListener {
-            if (k == Configuration.UI_MODE_NIGHT_NO) {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                sPrefs.storeString(Constants.TAGS.THEME_TAG.toString(), Constants.THEME.THEME_DARK.toString())
-            } else {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-                sPrefs.storeString(Constants.TAGS.THEME_TAG.toString(), Constants.THEME.THEME_LIGHT.toString())
-            }
-        }
-
-        CheckPreferences.checkTheme(sPrefs)
-        return root
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_movie, container, false)
+        doInitialization()
+        return binding.root
     }
 
-    override fun onStart() {
-        super.onStart()
-        movieViewModel.liveData.observe(this, { textView.text = it })
+
+    private fun doInitialization() {
+        binding.mainRecycler.setHasFixedSize(true)
+        binding.lookingRecycler.setHasFixedSize(true)
+        binding.upcomingRecycler.setHasFixedSize(true)
+        movieViewModel=MovieViewModel(StringInteractorImpl(requireContext()))
+        movieViewModel.liveDataPopular.observe(viewLifecycleOwner, { binding.textView2.text = it })
+        movieViewModel.liveDataNowPlaying.observe(viewLifecycleOwner, { binding.textLookNow.text = it })
+        movieViewModel.liveDataUpComing.observe(viewLifecycleOwner, { binding.textUpComingNow.text = it })
+        movieAdapterPopular = HorizontalRecyclerAdapter(moviesPopular)
+        movieAdapterNowPlaying = HorizontalRecyclerAdapter(moviesNowPlaying)
+        movieAdapterUpComing=HorizontalRecyclerAdapter(moviesUpComing)
+        binding.viewModel = movieViewModel
+        binding.mainRecycler.adapter = movieAdapterPopular
+        binding.lookingRecycler.adapter =movieAdapterNowPlaying
+        binding.upcomingRecycler.adapter =movieAdapterUpComing
+        getPopularMovies()
+        getLookNowMovies()
+        getUpComingMovies()
     }
 
+    private fun getPopularMovies() {
+        binding.isLoading = true
+        movieViewModel.popularMovie.observe(viewLifecycleOwner,
+            { movieResponse ->
+                if (movieResponse != null) {
+                    moviesPopular.addAll(movieResponse.results)
+                    movieAdapterPopular.notifyDataSetChanged()
+                    binding.isLoading = false
+                }
+            })
+
+    }
+
+    private fun getLookNowMovies() {
+        binding.isLoading = true
+        movieViewModel.lookNowMovie.observe(viewLifecycleOwner,
+            { movieResponse ->
+                if (movieResponse != null) {
+                    moviesNowPlaying.addAll(movieResponse.results)
+                    movieAdapterNowPlaying.notifyDataSetChanged()
+                    binding.isLoading = false
+                }
+            })
+
+    }
+
+    private fun getUpComingMovies() {
+        binding.isLoading = true
+        movieViewModel.upComingMovie.observe(viewLifecycleOwner,
+            { movieResponse ->
+                if (movieResponse != null) {
+                    moviesUpComing.addAll(movieResponse.results)
+                    movieAdapterUpComing.notifyDataSetChanged()
+                    binding.isLoading = false
+                }
+            })
+
+    }
 
 
 }

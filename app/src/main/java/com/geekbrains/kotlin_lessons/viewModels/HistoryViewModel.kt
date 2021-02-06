@@ -12,6 +12,6 @@ class HistoryViewModel : ViewModel() {
     }
 
     private fun start(){
-        liveData.value="This is lists Fragment"
+        liveData.value="This is history Fragment"
     }
 }

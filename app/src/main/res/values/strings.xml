@@ -9,9 +9,15 @@
     <string name="action_settings">Settings</string>
 
     <string name="menu_favorites">Favorites</string>
+    <string name="menu_search">Search</string>
     <string name="ok">OK</string>
     <string name="title_activity_main">MainActivity</string>
-    <string name="title_movie">Movie</string>
+    <string name="title_movie">Main page</string>
     <string name="title_favorites">Favorites</string>
     <string name="title_history">History</string>
+    <string name="search">Search</string>
+    <string name="releaseDate">Release date:</string>
+    <string name="popular">Popular movies</string>
+    <string name="looknow">Now playing</string>
+    <string name="upcoming">Up coming</string>
 </resources>

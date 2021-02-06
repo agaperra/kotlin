@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.geekbrains.kotlin_lessons.R
 import com.geekbrains.kotlin_lessons.viewModels.FavoritesViewModel
-import kotlinx.android.synthetic.main.fragment_favorites.*
 
 class FavoritesFragment : Fragment() {
 
@@ -20,14 +19,11 @@ class FavoritesFragment : Fragment() {
     ): View? {
         favoritesViewModel =
             ViewModelProvider(this).get(FavoritesViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_favorites, container, false)
-
-        return root
+        return inflater.inflate(R.layout.fragment_favorites, container, false)
     }
 
     override fun onStart() {
         super.onStart()
-        favoritesViewModel.liveData.observe(this, { text_favorites.text = it })
+      //  favoritesViewModel.liveData.observe(this, { text_favorites.text = it })
     }
-
 }

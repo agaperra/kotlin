@@ -1,17 +1,38 @@
 package com.geekbrains.kotlin_lessons.viewModels
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.geekbrains.kotlin_lessons.interactors.string.StringInteractor
+import com.geekbrains.kotlin_lessons.repositories.MovieRepository
+import com.geekbrains.kotlin_lessons.responses.MovieResponse
 
-class MovieViewModel : ViewModel() {
+class MovieViewModel(private val stringInteractor: StringInteractor) : ViewModel(){
+    private val movieRepository: MovieRepository = MovieRepository()
+    val popularMovie: LiveData<MovieResponse>
+        get() = movieRepository.getPopularMovies()
 
-    val liveData=MutableLiveData<String>()
+    val lookNowMovie: LiveData<MovieResponse>
+        get() = movieRepository.getLookNowMovies()
 
+    val upComingMovie: LiveData<MovieResponse>
+        get() = movieRepository.getUpComingMovies()
+
+    val liveDataPopular = MutableLiveData<String>()
+    val liveDataNowPlaying = MutableLiveData<String>()
+    val liveDataUpComing = MutableLiveData<String>()
     init {
-        start()
+        setPopularText()
+        setLookNowText()
+        setUpComingText()
     }
-
-    private fun start(){
-        liveData.value="This is movie Fragment"
+    private fun setPopularText(){
+        liveDataPopular.value=stringInteractor.textPopular
+    }
+    private fun setLookNowText(){
+        liveDataNowPlaying.value=stringInteractor.textLookNow
+    }
+    private fun setUpComingText(){
+        liveDataUpComing.value=stringInteractor.textUpComing
     }
 }
