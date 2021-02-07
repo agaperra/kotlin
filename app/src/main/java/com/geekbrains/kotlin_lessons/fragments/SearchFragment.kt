@@ -28,7 +28,7 @@ class SearchFragment : Fragment() {
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_search, container, false)
         setUpSearchView()
         doInitialization()
@@ -48,7 +48,7 @@ class SearchFragment : Fragment() {
                 .getIdentifier("android:id/search_src_text", null, null)
         val textView = searchView.findViewById<View>(id) as TextView
         textView.setTextColor(Color.parseColor("#D1A874"))
-        textView.setHintTextColor(Color.parseColor("#D8C5AE"));
+        textView.setHintTextColor(Color.parseColor("#D8C5AE"))
 
         id = searchView.context
                 .resources
@@ -62,12 +62,6 @@ class SearchFragment : Fragment() {
         imageView = searchView.findViewById<View>(id) as ImageView
         imageView.setImageResource(R.drawable.searcview_icon)
 
-//        id = searchView.context
-//                .resources
-//                .getIdentifier("android:id/search_title", null, null)
-//        searchView.clearFocus();
-//        val text=searchView.findViewById<View>(id) as SearchView.SearchAutoComplete
-//        text.setText(R.string.edit_search)
     }
 
 }

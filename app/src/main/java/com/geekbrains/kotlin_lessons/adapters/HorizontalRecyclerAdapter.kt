@@ -3,7 +3,6 @@ package com.geekbrains.kotlin_lessons.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.graphics.drawable.toDrawable
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.geekbrains.kotlin_lessons.R
@@ -56,12 +55,6 @@ class HorizontalRecyclerAdapter(private val movies: List<Movie>) :
                         itemLike.tag = R.string.nolike
                     }
                 }
-                //
-//                if(itemLike.drawable==(R.drawable.ic_baseline_favorite_24).toDrawable()){
-//                    itemLike.background=(R.drawable.ic_sharp_favorite_border_24).toDrawable()
-//                } else{
-//                    itemLike.background=(R.drawable.ic_baseline_favorite_24).toDrawable()
-//                }
             }
             itemMovieListBinding.movie = movie
             itemMovieListBinding.executePendingBindings()
