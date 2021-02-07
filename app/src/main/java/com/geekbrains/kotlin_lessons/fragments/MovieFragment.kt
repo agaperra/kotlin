@@ -67,6 +67,7 @@ class MovieFragment : Fragment() {
         getLookNowMovies()
         getUpComingMovies()
         getTopMovies()
+
     }
 
     private fun getPopularMovies() {

@@ -10,7 +10,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Kotlin_Lessons"
+        android:theme="@style/Theme.Kotlin_Lessons.NoActionBar"
         tools:targetApi="m">
         <activity android:name=".activity.MainActivity"
             android:label="@string/title_activity_main">

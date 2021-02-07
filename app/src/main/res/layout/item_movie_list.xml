@@ -49,6 +49,8 @@
         </com.makeramen.roundedimageview.RoundedImageView>
 
         <ImageView
+            android:id="@+id/like"
+            android:tag="@string/nolike"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_sharp_favorite_border_24"

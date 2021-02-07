@@ -22,8 +22,4 @@ class FavoritesFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_favorites, container, false)
     }
 
-    override fun onStart() {
-        super.onStart()
-      //  favoritesViewModel.liveData.observe(this, { text_favorites.text = it })
-    }
 }

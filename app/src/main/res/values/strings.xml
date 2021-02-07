@@ -21,4 +21,7 @@
     <string name="looknow">Now playing</string>
     <string name="upcoming">Up coming</string>
     <string name="top">Top movies</string>
+    <string name="edit_search">Enter the movie name</string>
+    <string name="nolike" translatable="false">no like</string>
+    <string name="like" translatable="false">like</string>
 </resources>
