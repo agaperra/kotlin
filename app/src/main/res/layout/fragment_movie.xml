@@ -12,6 +12,9 @@
         <variable
             name="viewModel"
             type="com.geekbrains.kotlin_lessons.viewModels.MovieViewModel" />
+        <variable
+            name="isLoadingMore"
+            type="Boolean" />
 
         <import type="android.view.View" />
 
@@ -80,7 +83,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="4dp"
                     android:textSize="20sp"
                     app:layout_constraintEnd_toEndOf="@+id/mainRecycler"
                     app:layout_constraintStart_toStartOf="@+id/mainRecycler"

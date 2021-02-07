@@ -1,6 +1,5 @@
 package com.geekbrains.kotlin_lessons.repositories
 
-import androidx.annotation.NonNull
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.geekbrains.kotlin_lessons.BuildConfig
@@ -19,11 +18,11 @@ class MovieRepository {
 
         apiService.getPopular(BuildConfig.FILM_API_KEY,Constants.locale).enqueue(object :
             retrofit2.Callback<MovieResponse> {
-            override fun onResponse(call: Call<MovieResponse>, @NonNull response: Response<MovieResponse>) {
+            override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
                 data.value = response.body()
             }
 
-            override fun onFailure(call: Call<MovieResponse>, @NonNull t: Throwable) {
+            override fun onFailure(call: Call<MovieResponse>,t: Throwable) {
 
             }
         })
@@ -35,11 +34,11 @@ class MovieRepository {
 
         apiService.getLookNow(BuildConfig.FILM_API_KEY,Constants.locale).enqueue(object :
             retrofit2.Callback<MovieResponse> {
-            override fun onResponse(call: Call<MovieResponse>, @NonNull response: Response<MovieResponse>) {
+            override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
                 data.value = response.body()
             }
 
-            override fun onFailure(call: Call<MovieResponse>, @NonNull t: Throwable) {
+            override fun onFailure(call: Call<MovieResponse>, t: Throwable) {
 
             }
         })
@@ -51,11 +50,11 @@ class MovieRepository {
 
         apiService.getUpComing(BuildConfig.FILM_API_KEY,Constants.locale).enqueue(object :
             retrofit2.Callback<MovieResponse> {
-            override fun onResponse(call: Call<MovieResponse>, @NonNull response: Response<MovieResponse>) {
+            override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
                 data.value = response.body()
             }
 
-            override fun onFailure(call: Call<MovieResponse>, @NonNull t: Throwable) {
+            override fun onFailure(call: Call<MovieResponse>, t: Throwable) {
 
             }
         })
@@ -68,11 +67,11 @@ class MovieRepository {
 
         apiService.getTop(BuildConfig.FILM_API_KEY,Constants.locale).enqueue(object :
             retrofit2.Callback<MovieResponse> {
-            override fun onResponse(call: Call<MovieResponse>, @NonNull response: Response<MovieResponse>) {
+            override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
                 data.value = response.body()
             }
 
-            override fun onFailure(call: Call<MovieResponse>, @NonNull t: Throwable) {
+            override fun onFailure(call: Call<MovieResponse>, t: Throwable) {
 
             }
         })

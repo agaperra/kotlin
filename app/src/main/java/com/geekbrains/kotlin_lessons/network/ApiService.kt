@@ -19,4 +19,11 @@ interface ApiService {
 
     @GET(value = Constants.top)
     fun getTop(@Query("api_key") key: String, @Query("language") lang: String): Call<MovieResponse>
+
+    @GET(value = Constants.search)
+    fun searchMovie(@Query("api_key") key: String,@Query("language") lang: String, @Query("query") query: String) : Call<MovieResponse>
+
+//    @GET(value = "/3/search/person")
+//    fun searchActor(@Query("api_key") key: String, @Query("query") query: String) : Call<ActorsResponse>
+
 }

@@ -24,4 +24,5 @@
     <string name="edit_search">Enter the movie name</string>
     <string name="nolike" translatable="false">no like</string>
     <string name="like" translatable="false">like</string>
+    <string name="pictures">Pictures</string>
 </resources>

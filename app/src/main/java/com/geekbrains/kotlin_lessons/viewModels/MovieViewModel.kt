@@ -8,6 +8,7 @@ import com.geekbrains.kotlin_lessons.repositories.MovieRepository
 import com.geekbrains.kotlin_lessons.responses.MovieResponse
 
 class MovieViewModel(private val stringInteractor: StringInteractor) : ViewModel(){
+
     private val movieRepository: MovieRepository = MovieRepository()
     val popularMovie: LiveData<MovieResponse>
         get() = movieRepository.getPopularMovies()

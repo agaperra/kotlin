@@ -5,4 +5,5 @@ interface StringInteractor {
     val textLookNow: String
     val textUpComing: String
     val textTop: String
+    val textSearch: String
 }

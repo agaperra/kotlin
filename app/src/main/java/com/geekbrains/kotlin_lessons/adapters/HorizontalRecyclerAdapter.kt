@@ -3,15 +3,18 @@ package com.geekbrains.kotlin_lessons.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.geekbrains.kotlin_lessons.Constants
 import com.geekbrains.kotlin_lessons.R
 import com.geekbrains.kotlin_lessons.adapters.HorizontalRecyclerAdapter.MovieViewHolder
 import com.geekbrains.kotlin_lessons.databinding.ItemMovieListBinding
 import com.geekbrains.kotlin_lessons.models.Movie
+import com.squareup.picasso.Picasso
 
 
-class HorizontalRecyclerAdapter(private val movies: List<Movie>) :
+class HorizontalRecyclerAdapter(private val movies: ArrayList<Movie>) :
         RecyclerView.Adapter<MovieViewHolder>(),  View.OnClickListener {
 
     private var layoutInflater: LayoutInflater? = null
@@ -28,19 +31,22 @@ class HorizontalRecyclerAdapter(private val movies: List<Movie>) :
 
     }
 
-    override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-        holder.bindMovie(movies[position])
-    }
+    override fun onBindViewHolder(holder: MovieViewHolder, position: Int)= holder.bindMovie(movies[position])
 
-    override fun getItemCount(): Int {
-        return movies.size
-    }
+    fun addItems(movies: ArrayList<Movie>) = this.movies.addAll(movies)
+
+    fun clearItems() = this.movies.clear()
+
+    override fun getItemCount()= movies.size
 
     class MovieViewHolder(private val itemMovieListBinding: ItemMovieListBinding) :
             RecyclerView.ViewHolder(
                     itemMovieListBinding.root
             ) {
         fun bindMovie(movie: Movie?) {
+
+            val poster: ImageView = itemView.findViewById(R.id.imageMovie)
+            if (movie != null) Picasso.get().load("""${Constants.imageURL}${movie.poster_path}""").into(poster)
             val itemLike=itemMovieListBinding.like
             itemLike.tag=R.string.nolike
             itemLike.setOnClickListener{

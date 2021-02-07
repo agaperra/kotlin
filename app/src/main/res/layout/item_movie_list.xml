@@ -37,16 +37,11 @@
             android:layout_height="200dp"
             android:layout_margin="10dp"
             android:layout_marginTop="15dp"
-            android:imageURL="@{movie.poster_path}"
-            android:scaleType="centerCrop"
+            android:scaleType="centerInside"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:riv_corner_radius="8dp" >
-
-
-
-        </com.makeramen.roundedimageview.RoundedImageView>
+            app:riv_corner_radius="8dp" />
 
         <ImageView
             android:id="@+id/like"

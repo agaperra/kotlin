@@ -65,6 +65,7 @@ class MovieFragment : Fragment() {
 
     }
 
+
     private fun getPopularMovies() {
         binding.isLoading = true
         movieViewModel.popularMovie.observe(viewLifecycleOwner,
