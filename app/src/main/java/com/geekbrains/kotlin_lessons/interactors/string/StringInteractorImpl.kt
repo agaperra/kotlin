@@ -7,4 +7,5 @@ class StringInteractorImpl(context: Context) : StringInteractor {
     override val textPopular: String=context.getString(R.string.popular)
     override val textLookNow: String=context.getString(R.string.looknow)
     override val textUpComing: String =context.getString(R.string.upcoming)
+    override val textTop: String = context.getString(R.string.top)
 }

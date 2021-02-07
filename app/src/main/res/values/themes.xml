@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.Kotlin_Lessons" parent="Theme.AppCompat.DayNight.DarkActionBar">
+    <style name="Theme.Kotlin_Lessons" parent="Theme.AppCompat.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">#150101</item>
         <item name="colorPrimaryVariant">@android:color/transparent</item>
@@ -9,8 +9,7 @@
         <item name="colorSecondary">#975C14</item>
         <item name="colorSecondaryVariant">#EFA74D</item>
         <item name="colorOnSecondary">@color/black</item>
-        <item name="android:actionBarTheme">@style/myAction</item>
-        <item name="android:windowBackground">#191414</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:textColor">#FAC8C8</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimary</item>

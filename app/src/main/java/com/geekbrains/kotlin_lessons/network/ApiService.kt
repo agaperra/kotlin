@@ -16,4 +16,7 @@ interface ApiService {
 
     @GET(value = Constants.upcoming)
     fun getUpComing(@Query("api_key") key: String, @Query("language") lang: String): Call<MovieResponse>
+
+    @GET(value = Constants.top)
+    fun getTop(@Query("api_key") key: String, @Query("language") lang: String): Call<MovieResponse>
 }

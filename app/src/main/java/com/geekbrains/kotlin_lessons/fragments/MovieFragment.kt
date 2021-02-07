@@ -26,9 +26,11 @@ class MovieFragment : Fragment() {
     private val moviesPopular: ArrayList<Movie> = ArrayList()
     private val moviesNowPlaying: ArrayList<Movie> = ArrayList()
     private val moviesUpComing: ArrayList<Movie> = ArrayList()
+    private val moviesTop: ArrayList<Movie> = ArrayList()
     private lateinit var movieAdapterPopular: HorizontalRecyclerAdapter
     private lateinit var movieAdapterNowPlaying: HorizontalRecyclerAdapter
     private lateinit var movieAdapterUpComing: HorizontalRecyclerAdapter
+    private lateinit var movieAdapterTop: HorizontalRecyclerAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -46,20 +48,25 @@ class MovieFragment : Fragment() {
         binding.mainRecycler.setHasFixedSize(true)
         binding.lookingRecycler.setHasFixedSize(true)
         binding.upcomingRecycler.setHasFixedSize(true)
+        binding.topRecycler.setHasFixedSize(true)
         movieViewModel=MovieViewModel(StringInteractorImpl(requireContext()))
         movieViewModel.liveDataPopular.observe(viewLifecycleOwner, { binding.textView2.text = it })
         movieViewModel.liveDataNowPlaying.observe(viewLifecycleOwner, { binding.textLookNow.text = it })
         movieViewModel.liveDataUpComing.observe(viewLifecycleOwner, { binding.textUpComingNow.text = it })
+        movieViewModel.liveDataTop.observe(viewLifecycleOwner, { binding.textTop.text = it })
         movieAdapterPopular = HorizontalRecyclerAdapter(moviesPopular)
         movieAdapterNowPlaying = HorizontalRecyclerAdapter(moviesNowPlaying)
         movieAdapterUpComing=HorizontalRecyclerAdapter(moviesUpComing)
+        movieAdapterTop=HorizontalRecyclerAdapter(moviesTop)
         binding.viewModel = movieViewModel
         binding.mainRecycler.adapter = movieAdapterPopular
         binding.lookingRecycler.adapter =movieAdapterNowPlaying
         binding.upcomingRecycler.adapter =movieAdapterUpComing
+        binding.topRecycler.adapter =movieAdapterTop
         getPopularMovies()
         getLookNowMovies()
         getUpComingMovies()
+        getTopMovies()
     }
 
     private fun getPopularMovies() {
@@ -95,6 +102,19 @@ class MovieFragment : Fragment() {
                 if (movieResponse != null) {
                     moviesUpComing.addAll(movieResponse.results)
                     movieAdapterUpComing.notifyDataSetChanged()
+                    binding.isLoading = false
+                }
+            })
+
+    }
+
+    private fun getTopMovies() {
+        binding.isLoading = true
+        movieViewModel.topMovie.observe(viewLifecycleOwner,
+            { movieResponse ->
+                if (movieResponse != null) {
+                    moviesTop.addAll(movieResponse.results)
+                    movieAdapterTop.notifyDataSetChanged()
                     binding.isLoading = false
                 }
             })

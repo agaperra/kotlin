@@ -14,10 +14,11 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="title_movie">Main page</string>
     <string name="title_favorites">Favorites</string>
-    <string name="title_history">History</string>
+    <string name="title_search">Search</string>
     <string name="search">Search</string>
-    <string name="releaseDate">Release date:</string>
+    <string name="releaseDate">Release year:</string>
     <string name="popular">Popular movies</string>
     <string name="looknow">Now playing</string>
     <string name="upcoming">Up coming</string>
+    <string name="top">Top movies</string>
 </resources>

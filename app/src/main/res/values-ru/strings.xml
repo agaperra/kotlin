@@ -15,11 +15,12 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="title_movie">Главная</string>
     <string name="title_favorites">Избранное</string>
-    <string name="title_history">История</string>
+    <string name="title_search">Поиск</string>
     <string name="search">Поиск</string>
-    <string name="releaseDate">Дата релиза:</string>
+    <string name="releaseDate">Год релиза:</string>
     <string name="popular">Популярное</string>
     <string name="looknow">Сейчас смотрят</string>
     <string name="upcoming">Недавние</string>
+    <string name="top">В топе</string>
 
 </resources>

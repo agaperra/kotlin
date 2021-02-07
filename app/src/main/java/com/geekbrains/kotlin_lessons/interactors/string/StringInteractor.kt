@@ -4,4 +4,5 @@ interface StringInteractor {
     val textPopular: String
     val textLookNow: String
     val textUpComing: String
+    val textTop: String
 }

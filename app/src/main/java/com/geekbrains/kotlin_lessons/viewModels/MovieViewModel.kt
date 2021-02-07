@@ -18,13 +18,18 @@ class MovieViewModel(private val stringInteractor: StringInteractor) : ViewModel
     val upComingMovie: LiveData<MovieResponse>
         get() = movieRepository.getUpComingMovies()
 
+    val topMovie: LiveData<MovieResponse>
+        get() = movieRepository.getTopMovies()
+
     val liveDataPopular = MutableLiveData<String>()
     val liveDataNowPlaying = MutableLiveData<String>()
     val liveDataUpComing = MutableLiveData<String>()
+    val liveDataTop = MutableLiveData<String>()
     init {
         setPopularText()
         setLookNowText()
         setUpComingText()
+        setTopText()
     }
     private fun setPopularText(){
         liveDataPopular.value=stringInteractor.textPopular
@@ -34,5 +39,8 @@ class MovieViewModel(private val stringInteractor: StringInteractor) : ViewModel
     }
     private fun setUpComingText(){
         liveDataUpComing.value=stringInteractor.textUpComing
+    }
+    private fun setTopText(){
+        liveDataTop.value=stringInteractor.textTop
     }
 }
