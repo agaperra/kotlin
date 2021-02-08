@@ -8,19 +8,19 @@ import retrofit2.http.Query
 
 interface ApiService {
 
-    @GET(value = Constants.popular)
+    @GET(value = Constants.popular_movies)
     fun getPopular(@Query("api_key") key: String, @Query("language") lang: String): Call<MovieResponse>
 
-    @GET(value = Constants.now_playing)
+    @GET(value = Constants.now_playing_movies)
     fun getLookNow(@Query("api_key") key: String, @Query("language") lang: String): Call<MovieResponse>
 
-    @GET(value = Constants.upcoming)
+    @GET(value = Constants.upcoming_movies)
     fun getUpComing(@Query("api_key") key: String, @Query("language") lang: String): Call<MovieResponse>
 
-    @GET(value = Constants.top)
+    @GET(value = Constants.top_movies)
     fun getTop(@Query("api_key") key: String, @Query("language") lang: String): Call<MovieResponse>
 
-    @GET(value = Constants.search)
+    @GET(value = Constants.search_movies)
     fun searchMovie(@Query("api_key") key: String,@Query("language") lang: String, @Query("query") query: String) : Call<MovieResponse>
 
 //    @GET(value = "/3/search/person")

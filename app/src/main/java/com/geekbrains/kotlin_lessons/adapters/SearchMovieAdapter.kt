@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.geekbrains.kotlin_lessons.Constants
 import com.geekbrains.kotlin_lessons.Constants.Companion.imageURL
 import com.geekbrains.kotlin_lessons.R
 import com.geekbrains.kotlin_lessons.models.Movie
@@ -32,11 +33,11 @@ class SearchMovieAdapter (private val movies: ArrayList<Movie>) :
 
         fun bindMovie(movie: Movie) {
             itemView.findViewById<ImageView>(R.id.like).visibility=View.INVISIBLE
-            if (movie.poster_path != null) {
-                Picasso.get().load("$imageURL${movie.poster_path}").into(poster)
-            } else {
-                poster.setImageResource(R.drawable.ic_baseline_image_not_supported_24)
-            }
+
+            Picasso.get().load("${Constants.imageURL}${movie.poster_path}")
+                .placeholder(R.drawable.ic_baseline_image_not_supported_24)
+                .into(poster)
+
             itemView.findViewById<TextView>(R.id.textName).text=movie.title
             itemView.findViewById<TextView>(R.id.textReleaseDate).text=movie.release_date
 

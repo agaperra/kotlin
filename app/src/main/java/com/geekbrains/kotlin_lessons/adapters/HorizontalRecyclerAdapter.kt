@@ -44,13 +44,13 @@ class HorizontalRecyclerAdapter(private val movies: ArrayList<Movie>) :
                 itemMovieListBinding.root
             ) {
         @SuppressLint("Recycle")
-        fun bindMovie(movie: Movie?) {
-
+        fun bindMovie(movie: Movie) {
 
             val poster: ImageView = itemView.findViewById(R.id.imageMovie)
-            if (movie != null) Picasso.get().load("""${Constants.imageURL}${movie.poster_path}""").into(
-                poster
-            )
+           Picasso.get().load("${Constants.imageURL}${movie.poster_path}")
+                   .placeholder(R.drawable.ic_baseline_image_not_supported_24)
+                   .into(poster)
+
             val itemLike=itemMovieListBinding.like
 
             itemLike.setOnClickListener{
