@@ -1,6 +1,5 @@
 package com.geekbrains.kotlin_lessons.viewModels
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.geekbrains.kotlin_lessons.interactors.string.StringInteractor
