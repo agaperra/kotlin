@@ -1,5 +1,6 @@
 package com.geekbrains.kotlin_lessons.adapters
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,12 +21,11 @@ class HorizontalRecyclerAdapter(private val movies: ArrayList<Movie>) :
     private var layoutInflater: LayoutInflater? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
-
         if (layoutInflater == null) {
             layoutInflater = LayoutInflater.from(parent.context)
         }
         val movieListBinding: ItemMovieListBinding = DataBindingUtil.inflate(
-                layoutInflater!!, R.layout.item_movie_list, parent, false
+            layoutInflater!!, R.layout.item_movie_list, parent, false
         )
         return MovieViewHolder(movieListBinding)
 
@@ -41,14 +41,18 @@ class HorizontalRecyclerAdapter(private val movies: ArrayList<Movie>) :
 
     class MovieViewHolder(private val itemMovieListBinding: ItemMovieListBinding) :
             RecyclerView.ViewHolder(
-                    itemMovieListBinding.root
+                itemMovieListBinding.root
             ) {
+        @SuppressLint("Recycle")
         fun bindMovie(movie: Movie?) {
 
+
             val poster: ImageView = itemView.findViewById(R.id.imageMovie)
-            if (movie != null) Picasso.get().load("""${Constants.imageURL}${movie.poster_path}""").into(poster)
+            if (movie != null) Picasso.get().load("""${Constants.imageURL}${movie.poster_path}""").into(
+                poster
+            )
             val itemLike=itemMovieListBinding.like
-            itemLike.tag=R.string.nolike
+
             itemLike.setOnClickListener{
 
                 when (itemLike.tag) {
