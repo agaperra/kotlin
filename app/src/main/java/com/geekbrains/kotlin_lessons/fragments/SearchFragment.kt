@@ -72,8 +72,8 @@ class SearchFragment : Fragment() {
             .resources
             .getIdentifier("android:id/search_src_text", null, null)
         val textView = searchView.findViewById<View>(id) as TextView
+        //использование resources.getColor(id: Int, theme: Resources.Theme!) возможно с API 23, а у меня минимальная версия API 21
         textView.setTextColor(resources.getColor(R.color.bottom_nav_menu))
-//        textView.setHintTextColor(Color.parseColor("#D8C5AE"))
 
         id = searchView.context
             .resources
