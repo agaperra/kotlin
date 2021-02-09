@@ -5,13 +5,13 @@ import androidx.lifecycle.ViewModel
 
 class FavoritesViewModel : ViewModel() {
 
-    val liveData= MutableLiveData<String>()
+    val liveData = MutableLiveData<String>()
 
     init {
         start()
     }
 
-    private fun start(){
-        liveData.value="This is favorites Fragment"
+    private fun start() {
+        liveData.value = "This is favorites Fragment"
     }
 }

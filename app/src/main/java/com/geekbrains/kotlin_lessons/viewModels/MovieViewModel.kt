@@ -7,25 +7,25 @@ import com.geekbrains.kotlin_lessons.interactors.string.StringInteractor
 import com.geekbrains.kotlin_lessons.repositories.MovieRepository
 import com.geekbrains.kotlin_lessons.responses.MovieResponse
 
-class MovieViewModel(private val stringInteractor: StringInteractor) : ViewModel(){
+class MovieViewModel(private val stringInteractor: StringInteractor) : ViewModel() {
 
     private val movieRepository: MovieRepository = MovieRepository()
 
 
-    val popularMovie:LiveData<MovieResponse>
-        get()=movieRepository.getPopularMovies()
+    val popularMovie: LiveData<MovieResponse>
+        get() = movieRepository.getPopularMovies()
 
-    val lookNowMovie:LiveData<MovieResponse>
-        get()=movieRepository.getLookNowMovies()
+    val lookNowMovie: LiveData<MovieResponse>
+        get() = movieRepository.getLookNowMovies()
 
 
-    val upComingMovie:LiveData<MovieResponse>
-        get()=movieRepository.getUpComingMovies()
+    val upComingMovie: LiveData<MovieResponse>
+        get() = movieRepository.getUpComingMovies()
 
-    val topMovie:LiveData<MovieResponse>
-        get()=movieRepository.getTopMovies()
+    val topMovie: LiveData<MovieResponse>
+        get() = movieRepository.getTopMovies()
 
-    val liveDataPopular= MutableLiveData<String>()
+    val liveDataPopular = MutableLiveData<String>()
     val liveDataNowPlaying = MutableLiveData<String>()
     val liveDataUpComing = MutableLiveData<String>()
     val liveDataTop = MutableLiveData<String>()
@@ -37,20 +37,20 @@ class MovieViewModel(private val stringInteractor: StringInteractor) : ViewModel
         setTop()
     }
 
-    private fun setPopular(){
-        liveDataPopular.value=stringInteractor.textPopular
+    private fun setPopular() {
+        liveDataPopular.value = stringInteractor.textPopular
     }
 
-    private fun setNowPlaying(){
-        liveDataNowPlaying.value=stringInteractor.textLookNow
+    private fun setNowPlaying() {
+        liveDataNowPlaying.value = stringInteractor.textLookNow
     }
 
-    private fun setUpComing(){
-        liveDataUpComing.value=stringInteractor.textUpComing
+    private fun setUpComing() {
+        liveDataUpComing.value = stringInteractor.textUpComing
     }
 
-    private fun setTop(){
-        liveDataTop.value=stringInteractor.textTop
+    private fun setTop() {
+        liveDataTop.value = stringInteractor.textTop
     }
 
 }

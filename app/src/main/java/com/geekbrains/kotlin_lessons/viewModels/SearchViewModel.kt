@@ -6,19 +6,20 @@ import com.geekbrains.kotlin_lessons.interactors.string.StringInteractor
 import com.geekbrains.kotlin_lessons.repositories.SearchRepository
 import com.geekbrains.kotlin_lessons.responses.MovieResponse
 
-class SearchViewModel (private val stringInteractor: StringInteractor): ViewModel() {
+class SearchViewModel(private val stringInteractor: StringInteractor) : ViewModel() {
     private val searchRepository: SearchRepository = SearchRepository()
 
     private var _observingMovies = MutableLiveData<MovieResponse>()
     fun getMovies() = _observingMovies
 
-    val liveDataPictures=MutableLiveData<String>()
+    val liveDataPictures = MutableLiveData<String>()
+
     init {
         start()
     }
 
-    private fun start(){
-        liveDataPictures.value=stringInteractor.textSearch
+    private fun start() {
+        liveDataPictures.value = stringInteractor.textSearch
     }
 
 

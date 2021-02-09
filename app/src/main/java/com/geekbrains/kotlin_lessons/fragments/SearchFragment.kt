@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.graphics.toColor
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.geekbrains.kotlin_lessons.R
@@ -23,7 +24,7 @@ class SearchFragment : Fragment() {
     private lateinit var binding: FragmentSearchBinding
     private val moviesSearch: ArrayList<Movie> = ArrayList()
     private lateinit var movieAdapterSearch: SearchMovieAdapter
-    private var data=""
+    private var data = ""
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,15 +32,15 @@ class SearchFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_search, container, false)
-        searchViewModel=SearchViewModel(StringInteractorImpl(requireContext()))
+        searchViewModel = SearchViewModel(StringInteractorImpl(requireContext()))
         setUpSearchView()
         return binding.root
     }
 
     private fun doInitialization() {
-        binding.searchMovie.visibility=View.VISIBLE
+        binding.searchMovie.visibility = View.VISIBLE
         binding.movieRecycler.setHasFixedSize(true)
-        searchViewModel=SearchViewModel(StringInteractorImpl(requireContext()))
+        searchViewModel = SearchViewModel(StringInteractorImpl(requireContext()))
         searchViewModel.liveDataPictures.observe(
             viewLifecycleOwner,
             { binding.textViewMovie.text = it })
@@ -52,7 +53,7 @@ class SearchFragment : Fragment() {
 
     }
 
-    private fun setObserver(viewModel: SearchViewModel, adapter: SearchMovieAdapter){
+    private fun setObserver(viewModel: SearchViewModel, adapter: SearchMovieAdapter) {
         binding.isLoading = true
         viewModel.getMovies().observe(viewLifecycleOwner, { movieResponse ->
             if (movieResponse != null) {
@@ -68,21 +69,21 @@ class SearchFragment : Fragment() {
     private fun setUpSearchView() {
         val searchView = binding.searchView
         var id = searchView.context
-                .resources
-                .getIdentifier("android:id/search_src_text", null, null)
+            .resources
+            .getIdentifier("android:id/search_src_text", null, null)
         val textView = searchView.findViewById<View>(id) as TextView
-        textView.setTextColor(Color.parseColor("#D1A874"))
-        textView.setHintTextColor(Color.parseColor("#D8C5AE"))
+        textView.setTextColor(resources.getColor(R.color.bottom_nav_menu))
+//        textView.setHintTextColor(Color.parseColor("#D8C5AE"))
 
         id = searchView.context
-                .resources
-                .getIdentifier("android:id/search_close_btn", null, null)
+            .resources
+            .getIdentifier("android:id/search_close_btn", null, null)
         var imageView = searchView.findViewById<View>(id) as ImageView
         imageView.setImageResource(R.drawable.ic_baseline_close_24)
 
         id = searchView.context
-                .resources
-                .getIdentifier("android:id/search_button", null, null)
+            .resources
+            .getIdentifier("android:id/search_button", null, null)
         imageView = searchView.findViewById<View>(id) as ImageView
         imageView.setImageResource(R.drawable.searcview_icon)
 

@@ -8,12 +8,10 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.geekbrains.kotlin_lessons.R
 import com.geekbrains.kotlin_lessons.adapters.HorizontalRecyclerAdapter
-import com.geekbrains.kotlin_lessons.adapters.SearchMovieAdapter
 import com.geekbrains.kotlin_lessons.databinding.FragmentMovieBinding
 import com.geekbrains.kotlin_lessons.interactors.string.StringInteractorImpl
 import com.geekbrains.kotlin_lessons.models.Movie
 import com.geekbrains.kotlin_lessons.viewModels.MovieViewModel
-import com.geekbrains.kotlin_lessons.viewModels.SearchViewModel
 import kotlin.collections.ArrayList
 
 class MovieFragment : Fragment() {
@@ -47,7 +45,7 @@ class MovieFragment : Fragment() {
         binding.upcomingRecycler.setHasFixedSize(true)
         binding.topRecycler.setHasFixedSize(true)
 
-        movieViewModel=MovieViewModel(StringInteractorImpl(requireContext()))
+        movieViewModel = MovieViewModel(StringInteractorImpl(requireContext()))
         setUpLiveData()
         setUpAdapters()
         setUpRecyclers()
@@ -113,25 +111,29 @@ class MovieFragment : Fragment() {
     }
 
 
-    private fun setUpLiveData(){
+    private fun setUpLiveData() {
         movieViewModel.liveDataPopular.observe(viewLifecycleOwner, { binding.textView2.text = it })
-        movieViewModel.liveDataNowPlaying.observe(viewLifecycleOwner, { binding.textLookNow.text = it })
-        movieViewModel.liveDataUpComing.observe(viewLifecycleOwner, { binding.textUpComingNow.text = it })
+        movieViewModel.liveDataNowPlaying.observe(
+            viewLifecycleOwner,
+            { binding.textLookNow.text = it })
+        movieViewModel.liveDataUpComing.observe(
+            viewLifecycleOwner,
+            { binding.textUpComingNow.text = it })
         movieViewModel.liveDataTop.observe(viewLifecycleOwner, { binding.textTop.text = it })
     }
 
-    private fun setUpAdapters(){
+    private fun setUpAdapters() {
         movieAdapterPopular = HorizontalRecyclerAdapter(moviesPopular)
         movieAdapterNowPlaying = HorizontalRecyclerAdapter(moviesNowPlaying)
-        movieAdapterUpComing=HorizontalRecyclerAdapter(moviesUpComing)
-        movieAdapterTop=HorizontalRecyclerAdapter(moviesTop)
+        movieAdapterUpComing = HorizontalRecyclerAdapter(moviesUpComing)
+        movieAdapterTop = HorizontalRecyclerAdapter(moviesTop)
     }
 
-    private fun setUpRecyclers(){
+    private fun setUpRecyclers() {
         binding.mainRecycler.adapter = movieAdapterPopular
-        binding.lookingRecycler.adapter =movieAdapterNowPlaying
-        binding.upcomingRecycler.adapter =movieAdapterUpComing
-        binding.topRecycler.adapter =movieAdapterTop
+        binding.lookingRecycler.adapter = movieAdapterNowPlaying
+        binding.upcomingRecycler.adapter = movieAdapterUpComing
+        binding.topRecycler.adapter = movieAdapterTop
     }
 
 }

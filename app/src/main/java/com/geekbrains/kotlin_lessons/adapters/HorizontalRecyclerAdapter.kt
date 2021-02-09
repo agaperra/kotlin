@@ -16,7 +16,7 @@ import com.squareup.picasso.Picasso
 
 
 class HorizontalRecyclerAdapter(private val movies: ArrayList<Movie>) :
-        RecyclerView.Adapter<MovieViewHolder>(),  View.OnClickListener {
+    RecyclerView.Adapter<MovieViewHolder>(), View.OnClickListener {
 
     private var layoutInflater: LayoutInflater? = null
 
@@ -31,29 +31,30 @@ class HorizontalRecyclerAdapter(private val movies: ArrayList<Movie>) :
 
     }
 
-    override fun onBindViewHolder(holder: MovieViewHolder, position: Int)= holder.bindMovie(movies[position])
+    override fun onBindViewHolder(holder: MovieViewHolder, position: Int) =
+        holder.bindMovie(movies[position])
 
     fun addItems(movies: ArrayList<Movie>) = this.movies.addAll(movies)
 
     fun clearItems() = this.movies.clear()
 
-    override fun getItemCount()= movies.size
+    override fun getItemCount() = movies.size
 
     class MovieViewHolder(private val itemMovieListBinding: ItemMovieListBinding) :
-            RecyclerView.ViewHolder(
-                itemMovieListBinding.root
-            ) {
+        RecyclerView.ViewHolder(
+            itemMovieListBinding.root
+        ) {
         @SuppressLint("Recycle")
         fun bindMovie(movie: Movie) {
 
             val poster: ImageView = itemView.findViewById(R.id.imageMovie)
-           Picasso.get().load("${Constants.imageURL}${movie.poster_path}")
-                   .placeholder(R.drawable.ic_baseline_image_not_supported_24)
-                   .into(poster)
+            Picasso.get().load("${Constants.imageURL}${movie.poster_path}")
+                .placeholder(R.drawable.ic_baseline_image_not_supported_24)
+                .into(poster)
 
-            val itemLike=itemMovieListBinding.like
+            val itemLike = itemMovieListBinding.like
 
-            itemLike.setOnClickListener{
+            itemLike.setOnClickListener {
 
                 when (itemLike.tag) {
                     R.string.nolike -> {

@@ -12,34 +12,38 @@ import com.geekbrains.kotlin_lessons.R
 import com.geekbrains.kotlin_lessons.models.Movie
 import com.squareup.picasso.Picasso
 
-class SearchMovieAdapter (private val movies: ArrayList<Movie>) :
-        RecyclerView.Adapter<SearchMovieAdapter.MovieSearchViewHolder>(){
+class SearchMovieAdapter(private val movies: ArrayList<Movie>) :
+    RecyclerView.Adapter<SearchMovieAdapter.MovieSearchViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =  MovieSearchViewHolder(itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_movie_list, parent, false))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = MovieSearchViewHolder(
+        itemView = LayoutInflater.from(parent.context)
+            .inflate(R.layout.item_movie_list, parent, false)
+    )
 
 
     fun addItems(movies: ArrayList<Movie>) = this.movies.addAll(movies)
 
     fun clearItems() = this.movies.clear()
 
-    override fun onBindViewHolder(holder: MovieSearchViewHolder, position: Int) = holder.bindMovie(movies[position])
+    override fun onBindViewHolder(holder: MovieSearchViewHolder, position: Int) =
+        holder.bindMovie(movies[position])
 
     override fun getItemCount(): Int = movies.size
 
-    inner class MovieSearchViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+    inner class MovieSearchViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         private val poster: ImageView = itemView.findViewById(R.id.imageMovie)
 
 
         fun bindMovie(movie: Movie) {
-            itemView.findViewById<ImageView>(R.id.like).visibility=View.INVISIBLE
+            itemView.findViewById<ImageView>(R.id.like).visibility = View.INVISIBLE
 
             Picasso.get().load("${Constants.imageURL}${movie.poster_path}")
                 .placeholder(R.drawable.ic_baseline_image_not_supported_24)
                 .into(poster)
 
-            itemView.findViewById<TextView>(R.id.textName).text=movie.title
-            itemView.findViewById<TextView>(R.id.textReleaseDate).text=movie.release_date
+            itemView.findViewById<TextView>(R.id.textName).text = movie.title
+            itemView.findViewById<TextView>(R.id.textReleaseDate).text = movie.release_date
 
         }
 
