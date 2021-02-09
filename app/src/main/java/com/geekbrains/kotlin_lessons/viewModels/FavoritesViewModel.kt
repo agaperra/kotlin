@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 
 class FavoritesViewModel : ViewModel() {
 
-    val liveData = MutableLiveData<String>()
+    private val liveData = MutableLiveData<String>()
 
     init {
         start()

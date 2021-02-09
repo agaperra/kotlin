@@ -38,7 +38,7 @@ class SearchMovieAdapter(private val movies: ArrayList<Movie>) :
         fun bindMovie(movie: Movie) {
             itemView.findViewById<ImageView>(R.id.like).visibility = View.INVISIBLE
 
-            Picasso.get().load("${Constants.imageURL}${movie.poster_path}")
+            Picasso.get().load("${imageURL}${movie.poster_path}")
                 .placeholder(R.drawable.ic_baseline_image_not_supported_24)
                 .into(poster)
 
