@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Фильмотека</string>
+    <string name="title_activity_drawer">DrawerActivity</string>
+    <string name="navigation_drawer_open">Открыть боковое меню</string>
+    <string name="navigation_drawer_close">Закрыть боковое меню</string>
+    <string name="nav_header_title">agaperra</string>
+    <string name="nav_header_subtitle">https://www.instagram.com/agaperra/</string>
+    <string name="nav_header_desc">Главная</string>
+    <string name="action_settings">Настройки</string>
+
+    <string name="menu_favorites">Избранное</string>
+    <string name="menu_search">Поиск</string>
+    <string name="ok">ОК</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_movie">Главная</string>
+    <string name="title_favorites">Избранное</string>
+    <string name="title_search">Поиск</string>
+    <string name="search">Поиск</string>
+    <string name="releaseDate">Год релиза:</string>
+    <string name="popular">Популярное</string>
+    <string name="looknow">Сейчас смотрят</string>
+    <string name="upcoming">Ожидаемые</string>
+    <string name="top">В топе</string>
+    <string name="edit_search">Введите название фильма</string>
+    <string name="pictures">Картины</string>
+
+</resources>
