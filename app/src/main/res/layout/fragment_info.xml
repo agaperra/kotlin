@@ -63,6 +63,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/_10sdp"
+                        android:fontFamily="@font/medium"
                         android:textSize="@dimen/_30ssp" />
 
                 </com.google.android.material.appbar.CollapsingToolbarLayout>
@@ -96,6 +97,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
                 android:textSize="@dimen/_13sdp"
+                android:fontFamily="@font/normal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/country"
                 app:layout_constraintTop_toBottomOf="@+id/recyclerViewGenres" />
@@ -107,6 +109,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:textSize="@dimen/_13sdp"
+                android:fontFamily="@font/normal"
                 app:layout_constraintEnd_toEndOf="@+id/country"
                 app:layout_constraintStart_toStartOf="@+id/country"
                 app:layout_constraintTop_toBottomOf="@+id/country" />
@@ -117,6 +120,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:textSize="@dimen/_13sdp"
+                android:fontFamily="@font/normal"
                 app:layout_constraintEnd_toEndOf="@+id/budget"
                 app:layout_constraintStart_toStartOf="@+id/budget"
                 app:layout_constraintTop_toBottomOf="@+id/budget" />
@@ -127,6 +131,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:textSize="@dimen/_13sdp"
+                android:fontFamily="@font/normal"
                 app:layout_constraintEnd_toEndOf="@+id/textRating"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/textRating"
@@ -138,6 +143,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/_13sdp"
                 android:layout_marginTop="15dp"
+                android:fontFamily="@font/normal"
                 app:layout_constraintEnd_toEndOf="@+id/runtime"
                 app:layout_constraintStart_toStartOf="@+id/runtime"
                 app:layout_constraintTop_toBottomOf="@+id/runtime" />
@@ -157,9 +163,11 @@
                 android:id="@+id/country"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="12dp"
                 android:textSize="@dimen/_13sdp"
+                android:fontFamily="@font/normal"
                 app:layout_constraintEnd_toEndOf="@+id/imageMovie"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/imageMovie"
                 app:layout_constraintTop_toBottomOf="@+id/imageMovie" />
 
@@ -169,6 +177,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/_13sdp"
                 android:layout_marginTop="15dp"
+                android:fontFamily="@font/normal"
                 app:layout_constraintStart_toStartOf="@+id/revenue"
                 app:layout_constraintTop_toBottomOf="@+id/revenue" />
 
@@ -179,6 +188,7 @@
                 android:padding="@dimen/_10sdp"
                 android:layout_marginTop="15dp"
                 android:text="@string/credits"
+                android:fontFamily="@font/medium"
                 android:textSize="@dimen/_15ssp"
                 app:layout_constraintTop_toBottomOf="@+id/textOverview" />
 

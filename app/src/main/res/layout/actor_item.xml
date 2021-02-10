@@ -34,6 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_3sdp"
         android:textSize="@dimen/_13ssp"
+        android:fontFamily="@font/normal"
         android:layout_marginBottom="15dp"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"

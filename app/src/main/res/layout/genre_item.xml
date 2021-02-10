@@ -12,11 +12,13 @@
         android:layout_marginBottom="@dimen/_5sdp"
         android:background="@drawable/background_owner"
         android:paddingTop="@dimen/_5sdp"
+        android:fontFamily="@font/small"
         android:paddingBottom="@dimen/_5sdp"
         android:textAlignment="center"
         android:textAllCaps="false"
         android:textSize="@dimen/_13ssp"
         android:text="@string/genres"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
