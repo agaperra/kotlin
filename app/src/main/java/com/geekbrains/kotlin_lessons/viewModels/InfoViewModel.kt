@@ -33,8 +33,8 @@ class InfoViewModel(private val stringInteractor: StringInteractor) : ViewModel(
     }
 
     fun getDetails(movieId: Int) {
-        movieDetailsRepository.getDetailsMovie( id = movieId,_observingMovie = _observingMovie)
-        movieDetailsRepository.getPeople( id = movieId, _observingPeople)
+        movieDetailsRepository.getDetailsMovie(id = movieId, _observingMovie = _observingMovie)
+        movieDetailsRepository.getPeople(id = movieId, _observingPeople)
     }
 
     fun getCountry(productionCountries: List<ProductionCountries>): String {

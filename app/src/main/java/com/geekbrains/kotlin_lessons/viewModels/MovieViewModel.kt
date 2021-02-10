@@ -26,19 +26,19 @@ class MovieViewModel(private val stringInteractor: StringInteractor) : ViewModel
     private val _observingMoviesTop = MutableLiveData<MovieResponse>()
     fun getObservedMoviesTop() = _observingMoviesTop
 
-    fun popularMovie(){
+    fun popularMovie() {
         movieRepository.getPopularMovies(_observingMoviesPopular)
     }
 
-    fun lookNowMovie(){
+    fun lookNowMovie() {
         movieRepository.getLookNowMovies(_observingMoviesLookNow)
     }
 
-    fun upComingMovie(){
+    fun upComingMovie() {
         movieRepository.getUpComingMovies(_observingMoviesUpComing)
     }
 
-    fun topMovie(){
+    fun topMovie() {
         movieRepository.getTopMovies(_observingMoviesTop)
     }
 

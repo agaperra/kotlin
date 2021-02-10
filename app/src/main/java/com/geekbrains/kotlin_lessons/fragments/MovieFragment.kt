@@ -28,27 +28,26 @@ class MovieFragment : Fragment() {
             requireView().findNavController().navigate(action)
         }
     })
-    private var movieAdapterNowPlaying =HorizontalRecyclerAdapter(onItemViewClickListener = object : OnItemViewClickListener {
+    private var movieAdapterNowPlaying = HorizontalRecyclerAdapter(onItemViewClickListener = object : OnItemViewClickListener {
         override fun onItemClick(movie: Movie) {
             val action = MovieFragmentDirections.openMovie(movieId = movie.id)
             requireView().findNavController().navigate(action)
         }
     })
 
-    private var movieAdapterUpComing =HorizontalRecyclerAdapter(onItemViewClickListener = object : OnItemViewClickListener {
+    private var movieAdapterUpComing = HorizontalRecyclerAdapter(onItemViewClickListener = object : OnItemViewClickListener {
         override fun onItemClick(movie: Movie) {
             val action = MovieFragmentDirections.openMovie(movieId = movie.id)
             requireView().findNavController().navigate(action)
         }
     })
 
-    private var  movieAdapterTop =HorizontalRecyclerAdapter(onItemViewClickListener = object : OnItemViewClickListener {
+    private var movieAdapterTop = HorizontalRecyclerAdapter(onItemViewClickListener = object : OnItemViewClickListener {
         override fun onItemClick(movie: Movie) {
             val action = MovieFragmentDirections.openMovie(movieId = movie.id)
             requireView().findNavController().navigate(action)
         }
     })
-
 
 
     override fun onCreateView(

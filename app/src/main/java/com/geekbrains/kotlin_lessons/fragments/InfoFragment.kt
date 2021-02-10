@@ -62,12 +62,12 @@ class InfoFragment : Fragment() {
 
     }
 
-    private fun startObserve(){
+    private fun startObserve() {
         infoViewModel.getObservedMovie().observe(viewLifecycleOwner, {
             setPoster(it.poster_path)
             setName(it.title)
-            setDate( infoViewModel.getDate(it.release_date))
-            setRating(it.vote_average,it.vote_count)
+            setDate(infoViewModel.getDate(it.release_date))
+            setRating(it.vote_average, it.vote_count)
             setBudget(it.budget)
             setRevenue(it.revenue)
             setCountry(infoViewModel.getCountry(it.production_countries))
@@ -88,7 +88,7 @@ class InfoFragment : Fragment() {
 
 
     private fun setPoster(poster_path: String?) {
-        if (poster_path==null)   binding.imageMovie.setImageResource(R.drawable.ic_baseline_image_not_supported_24)
+        if (poster_path == null) binding.imageMovie.setImageResource(R.drawable.ic_baseline_image_not_supported_24)
         Picasso.get().load("${Constants.imageURL}${poster_path}")
                 .placeholder(R.drawable.ic_baseline_image_not_supported_24)
                 .into(binding.imageMovie)
@@ -100,31 +100,32 @@ class InfoFragment : Fragment() {
 
     @SuppressLint("SetTextI18n")
     fun setRating(rating_average: Double, rating_count: Int) {
-        binding.textRating.text = getString(R.string.rating)+"\n"+rating_average.toString()+ "{$rating_count}"
+        binding.textRating.text = getString(R.string.rating) + "\n" + rating_average.toString() + "{$rating_count}"
     }
 
     @SuppressLint("SetTextI18n")
     private fun setDate(date: String) {
-        binding.date.text=getString(R.string.releaseDate)+date
-    }
-    @SuppressLint("SetTextI18n")
-    fun setBudget(budget:Int){
-        binding.budget.text= getString(R.string.budget)+"$$budget"
+        binding.date.text = getString(R.string.releaseDate) + date
     }
 
     @SuppressLint("SetTextI18n")
-    fun setRevenue(revenue:Int){
-        binding.revenue.text=getString(R.string.revenue)+"$$revenue"
+    fun setBudget(budget: Int) {
+        binding.budget.text = getString(R.string.budget) + "$$budget"
+    }
+
+    @SuppressLint("SetTextI18n")
+    fun setRevenue(revenue: Int) {
+        binding.revenue.text = getString(R.string.revenue) + "$$revenue"
     }
 
     @SuppressLint("SetTextI18n")
     private fun setRuntime(runtime: String) {
-        binding.runtime.text = getString(R.string.runtime)+runtime
+        binding.runtime.text = getString(R.string.runtime) + runtime
     }
 
     @SuppressLint("SetTextI18n")
     private fun setCountry(name: String) {
-        binding.country.text = getString(R.string.country)+"\n"+name
+        binding.country.text = getString(R.string.country) + "\n" + name
     }
 
     private fun setGenres(genres: List<Genres>) {

@@ -54,11 +54,11 @@ class MovieRepository {
     }
 
 
-    fun getTopMovies(_observingMovies:MutableLiveData<MovieResponse>){
+    fun getTopMovies(_observingMovies: MutableLiveData<MovieResponse>) {
         apiService.getTop(BuildConfig.FILM_API_KEY, Constants.locale).enqueue(object :
                 retrofit2.Callback<MovieResponse> {
             override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
-               _observingMovies.value = response.body()
+                _observingMovies.value = response.body()
             }
 
             override fun onFailure(call: Call<MovieResponse>, t: Throwable) {

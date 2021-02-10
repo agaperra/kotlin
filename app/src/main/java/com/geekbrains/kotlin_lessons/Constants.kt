@@ -20,7 +20,7 @@ class Constants {
         const val upcoming_movies = "/3/movie/upcoming"
         const val top_movies = "/3/movie/top_rated"
         const val search_movies = "/3/search/movie/"
-        const val show_details ="/3/movie"
+        const val show_details = "/3/movie"
         const val popular_tv = "/3/tv/popular"
         const val now_playing_tv = "/3/tv/airing-today"
         const val on_the_air_tv = "/3/tv/on-the-air"

@@ -10,7 +10,7 @@ data class MovieFull(
         val vote_average: Double,
         val vote_count: Int,
         val genres: ArrayList<Genres>,
-        val production_countries:ArrayList<ProductionCountries>,
+        val production_countries: ArrayList<ProductionCountries>,
         val budget: Int,
         val revenue: Int,
         val runtime: Int?,

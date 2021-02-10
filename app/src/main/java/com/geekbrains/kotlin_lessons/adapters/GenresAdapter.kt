@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.geekbrains.kotlin_lessons.R
 import com.geekbrains.kotlin_lessons.models.Genres
 
-class GenresAdapter  : RecyclerView.Adapter<GenresAdapter.GenresViewHolder>() {
+class GenresAdapter : RecyclerView.Adapter<GenresAdapter.GenresViewHolder>() {
 
     private val genre = arrayListOf<Genres>()
 
