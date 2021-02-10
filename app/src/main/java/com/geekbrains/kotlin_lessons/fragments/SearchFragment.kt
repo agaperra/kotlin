@@ -8,7 +8,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import com.geekbrains.kotlin_lessons.R
+import com.geekbrains.kotlin_lessons.adapters.HorizontalRecyclerAdapter
+import com.geekbrains.kotlin_lessons.adapters.OnItemViewClickListener
 import com.geekbrains.kotlin_lessons.adapters.SearchMovieAdapter
 import com.geekbrains.kotlin_lessons.databinding.FragmentSearchBinding
 import com.geekbrains.kotlin_lessons.interactors.string.StringInteractorImpl
@@ -21,7 +24,13 @@ class SearchFragment : Fragment() {
     private lateinit var searchViewModel: SearchViewModel
     private lateinit var binding: FragmentSearchBinding
     private val moviesSearch: ArrayList<Movie> = ArrayList()
-    private lateinit var movieAdapterSearch: SearchMovieAdapter
+   // private lateinit var movieAdapterSearch: SearchMovieAdapter
+    private var  movieAdapterSearch = SearchMovieAdapter(moviesSearch, onItemViewClickListener = object : OnItemViewClickListener {
+        override fun onItemClick(movie: Movie) {
+            val action = SearchFragmentDirections.actionNavigationSearchToInfoFragment(movieId = movie.id)
+            requireView().findNavController().navigate(action)
+        }
+    })
     private var data = ""
 
     override fun onCreateView(
@@ -42,7 +51,6 @@ class SearchFragment : Fragment() {
         searchViewModel.liveDataPictures.observe(
             viewLifecycleOwner,
             { binding.textViewMovie.text = it })
-        movieAdapterSearch = SearchMovieAdapter(moviesSearch)
         binding.viewModelSearch = searchViewModel
         binding.movieRecycler.adapter = movieAdapterSearch
 

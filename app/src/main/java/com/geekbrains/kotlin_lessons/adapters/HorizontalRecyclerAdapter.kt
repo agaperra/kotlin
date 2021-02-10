@@ -15,42 +15,44 @@ import com.geekbrains.kotlin_lessons.models.Movie
 import com.squareup.picasso.Picasso
 
 
-class HorizontalRecyclerAdapter(private val movies: ArrayList<Movie>) :
-    RecyclerView.Adapter<MovieViewHolder>(), View.OnClickListener {
+class HorizontalRecyclerAdapter(var onItemViewClickListener: OnItemViewClickListener) :
+        RecyclerView.Adapter<MovieViewHolder>(), View.OnClickListener {
 
     private var layoutInflater: LayoutInflater? = null
+
+    private val moviesList = arrayListOf<Movie>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         if (layoutInflater == null) {
             layoutInflater = LayoutInflater.from(parent.context)
         }
         val movieListBinding: ItemMovieListBinding = DataBindingUtil.inflate(
-            layoutInflater!!, R.layout.item_movie_list, parent, false
+                layoutInflater!!, R.layout.item_movie_list, parent, false
         )
         return MovieViewHolder(movieListBinding)
 
     }
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) =
-        holder.bindMovie(movies[position])
+            holder.bindMovie(moviesList[position])
 
-    fun addItems(movies: ArrayList<Movie>) = this.movies.addAll(movies)
+    fun addItems(movies: ArrayList<Movie>) = this.moviesList.addAll(movies)
 
-    fun clearItems() = this.movies.clear()
+    fun clearItems() = this.moviesList.clear()
 
-    override fun getItemCount() = movies.size
+    override fun getItemCount() = moviesList.size
 
-    class MovieViewHolder(private val itemMovieListBinding: ItemMovieListBinding) :
-        RecyclerView.ViewHolder(
-            itemMovieListBinding.root
-        ) {
+    inner class MovieViewHolder(private val itemMovieListBinding: ItemMovieListBinding) :
+            RecyclerView.ViewHolder(
+                    itemMovieListBinding.root
+            ) {
         @SuppressLint("Recycle")
         fun bindMovie(movie: Movie) {
 
             val poster: ImageView = itemView.findViewById(R.id.imageMovie)
             Picasso.get().load("${Constants.imageURL}${movie.poster_path}")
-                .placeholder(R.drawable.ic_baseline_image_not_supported_24)
-                .into(poster)
+                    .placeholder(R.drawable.ic_baseline_image_not_supported_24)
+                    .into(poster)
 
             val itemLike = itemMovieListBinding.like
 
@@ -69,6 +71,9 @@ class HorizontalRecyclerAdapter(private val movies: ArrayList<Movie>) :
             }
             itemMovieListBinding.movie = movie
             itemMovieListBinding.executePendingBindings()
+            itemView.setOnClickListener {
+                onItemViewClickListener.onItemClick(movie = movie)
+            }
         }
     }
 

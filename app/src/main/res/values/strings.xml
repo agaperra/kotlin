@@ -25,4 +25,9 @@
     <string name="nolike" translatable="false">no like</string>
     <string name="like" translatable="false">like</string>
     <string name="pictures">Pictures</string>
+    <string name="noOverview">No description available</string>
+    <string name="unknownRuntime">Unknown runtime</string>
+    <string name="unknown">Unknown</string>
+    <string name="h">h</string>
+    <string name="min">min</string>
 </resources>

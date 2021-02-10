@@ -12,7 +12,7 @@ import com.geekbrains.kotlin_lessons.R
 import com.geekbrains.kotlin_lessons.models.Movie
 import com.squareup.picasso.Picasso
 
-class SearchMovieAdapter(private val movies: ArrayList<Movie>) :
+class SearchMovieAdapter(private val movies: ArrayList<Movie>,  var onItemViewClickListener: OnItemViewClickListener) :
     RecyclerView.Adapter<SearchMovieAdapter.MovieSearchViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = MovieSearchViewHolder(
@@ -44,6 +44,9 @@ class SearchMovieAdapter(private val movies: ArrayList<Movie>) :
 
             itemView.findViewById<TextView>(R.id.textName).text = movie.title
             itemView.findViewById<TextView>(R.id.textReleaseDate).text = movie.release_date
+            itemView.setOnClickListener {
+                onItemViewClickListener.onItemClick(movie = movie)
+            }
 
         }
 

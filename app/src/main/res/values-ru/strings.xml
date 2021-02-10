@@ -24,5 +24,10 @@
     <string name="top">В топе</string>
     <string name="edit_search">Введите название фильма</string>
     <string name="pictures">Картины</string>
+    <string name="noOverview">Описание отсутствует</string>
+    <string name="unknownRuntime">Длительноть неизвестна</string>
+    <string name="unknown">Неизвестно</string>
+    <string name="h">ч</string>
+    <string name="min">мин</string>
 
 </resources>

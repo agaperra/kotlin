@@ -15,16 +15,23 @@
             type="com.geekbrains.kotlin_lessons.viewModels.InfoViewModel" />
         <import type="android.view.View" />
 
-        <variable
-            name="movie"
-            type="com.geekbrains.kotlin_lessons.models.Movie" />
 
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:animateLayoutChanges="true"
         tools:context=".fragments.InfoFragment">
+
+        <ProgressBar
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:visibility="@{isLoading ? View.VISIBLE : View.GONE, default=gone}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
         <com.google.android.material.appbar.AppBarLayout
@@ -44,12 +51,12 @@
                 app:layout_scrollFlags="noScroll"
                 app:titleEnabled="false">
 
+
                 <TextView
                     android:id="@+id/textView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/_10sdp"
-                    android:text="@{movie.title}"
                     android:textSize="@dimen/_30ssp" />
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>
@@ -60,6 +67,8 @@
             android:layout_width="210dp"
             android:layout_height="300dp"
             android:layout_margin="15dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
             android:scaleType="centerInside"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/appbar"
@@ -85,22 +94,76 @@
             app:layout_constraintTop_toBottomOf="@+id/appbar" />
 
         <TextView
-            android:id="@+id/textRating"
+            android:id="@+id/textRating1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            app:layout_constraintStart_toStartOf="@+id/textType"
+            app:layout_constraintTop_toBottomOf="@+id/textType" />
+
+        <TextView
+            android:id="@+id/textRating2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            app:layout_constraintEnd_toEndOf="@+id/textType"
+            app:layout_constraintStart_toEndOf="@+id/textRating1"
+            app:layout_constraintTop_toBottomOf="@+id/textType" />
+
+        <TextView
+            android:id="@+id/budget"
+            android:layout_width="0dp"
+            android:layout_marginTop="15dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="@+id/textType"
+            app:layout_constraintStart_toStartOf="@+id/textType"
+            app:layout_constraintTop_toBottomOf="@+id/textRating2" />
+
+        <TextView
+            android:id="@+id/revenue"
+            android:layout_width="0dp"
+            android:layout_marginTop="15dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="@+id/textType"
+            app:layout_constraintStart_toStartOf="@+id/textType"
+            app:layout_constraintTop_toBottomOf="@+id/budget" />
+
+        <TextView
+            android:id="@+id/runtime"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             app:layout_constraintEnd_toEndOf="@+id/textType"
             app:layout_constraintStart_toStartOf="@+id/textType"
-            app:layout_constraintTop_toBottomOf="@+id/textType" />
+            app:layout_constraintTop_toBottomOf="@+id/revenue" />
 
         <TextView
-            android:id="@+id/textOverride"
+            android:id="@+id/date"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            app:layout_constraintEnd_toEndOf="@+id/textRating"
+            app:layout_constraintEnd_toEndOf="@+id/textType"
+            app:layout_constraintStart_toStartOf="@+id/textType"
+            app:layout_constraintTop_toBottomOf="@+id/runtime" />
+
+
+        <TextView
+            android:id="@+id/country"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            app:layout_constraintEnd_toEndOf="@+id/imageMovie"
             app:layout_constraintStart_toStartOf="@+id/imageMovie"
             app:layout_constraintTop_toBottomOf="@+id/imageMovie" />
+
+        <TextView
+            android:id="@+id/textOverview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            app:layout_constraintEnd_toEndOf="@+id/textType"
+            app:layout_constraintStart_toStartOf="@+id/imageMovie"
+            app:layout_constraintTop_toBottomOf="@+id/country" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

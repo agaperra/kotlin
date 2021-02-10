@@ -4,26 +4,55 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.geekbrains.kotlin_lessons.interactors.string.StringInteractor
+import com.geekbrains.kotlin_lessons.models.Movie
 import com.geekbrains.kotlin_lessons.repositories.MovieRepository
 import com.geekbrains.kotlin_lessons.responses.MovieResponse
 
 class MovieViewModel(private val stringInteractor: StringInteractor) : ViewModel() {
 
     private val movieRepository: MovieRepository = MovieRepository()
+    private val _observingMoviesPopular = MutableLiveData<MovieResponse>()
+    fun getObservedMoviesPopular() = _observingMoviesPopular
+
+    private val _observingMoviesLookNow = MutableLiveData<MovieResponse>()
+    fun getObservedMoviesLookNow() = _observingMoviesLookNow
 
 
-    val popularMovie: LiveData<MovieResponse>
-        get() = movieRepository.getPopularMovies()
-
-    val lookNowMovie: LiveData<MovieResponse>
-        get() = movieRepository.getLookNowMovies()
+    private val _observingMoviesUpComing = MutableLiveData<MovieResponse>()
+    fun getObservedMoviesUpComing() = _observingMoviesUpComing
 
 
-    val upComingMovie: LiveData<MovieResponse>
-        get() = movieRepository.getUpComingMovies()
+    private val _observingMoviesTop = MutableLiveData<MovieResponse>()
+    fun getObservedMoviesTop() = _observingMoviesTop
 
-    val topMovie: LiveData<MovieResponse>
-        get() = movieRepository.getTopMovies()
+    fun popularMovie(){
+        movieRepository.getPopularMovies(_observingMoviesPopular)
+    }
+
+    fun lookNowMovie(){
+        movieRepository.getLookNowMovies(_observingMoviesLookNow)
+    }
+
+    fun upComingMovie(){
+        movieRepository.getUpComingMovies(_observingMoviesUpComing)
+    }
+
+    fun topMovie(){
+        movieRepository.getTopMovies(_observingMoviesTop)
+    }
+//
+//    val popularMovie: LiveData<MovieResponse>
+//        get() = movieRepository.getPopularMovies(_observingMovies)
+
+//    val lookNowMovie: LiveData<MovieResponse>
+//        get() = movieRepository.getLookNowMovies(_observingMovies)
+
+//
+//    val upComingMovie: LiveData<MovieResponse>
+//        get() = movieRepository.getUpComingMovies(_observingMovies)
+
+//    val topMovie: LiveData<MovieResponse>
+//        get() = movieRepository.getTopMovies(_observingMovies)
 
     val liveDataPopular = MutableLiveData<String>()
     val liveDataNowPlaying = MutableLiveData<String>()
