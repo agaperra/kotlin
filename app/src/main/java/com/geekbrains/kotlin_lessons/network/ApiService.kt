@@ -1,12 +1,15 @@
 package com.geekbrains.kotlin_lessons.network
 
 import com.geekbrains.kotlin_lessons.Constants
+import com.geekbrains.kotlin_lessons.models.Actor
 import com.geekbrains.kotlin_lessons.models.Movie
 import com.geekbrains.kotlin_lessons.models.MovieFull
+import com.geekbrains.kotlin_lessons.responses.ActorsResponse
 import com.geekbrains.kotlin_lessons.responses.MovieDetailsResponse
 import com.geekbrains.kotlin_lessons.responses.MovieResponse
 import retrofit2.Call
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface ApiService {
@@ -41,9 +44,15 @@ interface ApiService {
 
 
     @GET(value = "/3/movie/{id}")
-    fun showDetails( @Query("id") id: Int,
-            @Query("api_key") key: String,
-            @Query("language") lang: String
+    fun showDetails(@Path("id") id: Int,
+                    @Query("api_key") key: String,
+                    @Query("language") lang: String
     ): Call<MovieFull>
+
+    @GET(value = "/3/movie/{id}/credits")
+    fun showDetailsPeople(@Path("id") id: Int,
+                    @Query("api_key") key: String,
+                    @Query("language") lang: String
+    ): Call<ActorsResponse>
 
 }

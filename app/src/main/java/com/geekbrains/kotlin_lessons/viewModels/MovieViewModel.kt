@@ -11,6 +11,7 @@ import com.geekbrains.kotlin_lessons.responses.MovieResponse
 class MovieViewModel(private val stringInteractor: StringInteractor) : ViewModel() {
 
     private val movieRepository: MovieRepository = MovieRepository()
+
     private val _observingMoviesPopular = MutableLiveData<MovieResponse>()
     fun getObservedMoviesPopular() = _observingMoviesPopular
 
@@ -40,19 +41,6 @@ class MovieViewModel(private val stringInteractor: StringInteractor) : ViewModel
     fun topMovie(){
         movieRepository.getTopMovies(_observingMoviesTop)
     }
-//
-//    val popularMovie: LiveData<MovieResponse>
-//        get() = movieRepository.getPopularMovies(_observingMovies)
-
-//    val lookNowMovie: LiveData<MovieResponse>
-//        get() = movieRepository.getLookNowMovies(_observingMovies)
-
-//
-//    val upComingMovie: LiveData<MovieResponse>
-//        get() = movieRepository.getUpComingMovies(_observingMovies)
-
-//    val topMovie: LiveData<MovieResponse>
-//        get() = movieRepository.getTopMovies(_observingMovies)
 
     val liveDataPopular = MutableLiveData<String>()
     val liveDataNowPlaying = MutableLiveData<String>()

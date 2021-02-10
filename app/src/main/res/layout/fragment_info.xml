@@ -2,10 +2,11 @@
 
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="isLoading"
             type="Boolean" />
@@ -13,157 +14,188 @@
         <variable
             name="viewModel"
             type="com.geekbrains.kotlin_lessons.viewModels.InfoViewModel" />
+
         <import type="android.view.View" />
 
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:animateLayoutChanges="true"
-        tools:context=".fragments.InfoFragment">
+        android:layout_height="match_parent">
 
-        <ProgressBar
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:visibility="@{isLoading ? View.VISIBLE : View.GONE, default=gone}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-
-        <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/appbar"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:background="@android:color/transparent">
+            android:layout_height="match_parent"
+            android:animateLayoutChanges="true"
+            tools:context=".fragments.InfoFragment">
 
-            <com.google.android.material.appbar.CollapsingToolbarLayout
-                android:id="@+id/collapsing_toolbar"
+            <ProgressBar
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:visibility="@{isLoading ? View.VISIBLE : View.GONE, default=gone}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <com.google.android.material.appbar.AppBarLayout
+                android:id="@+id/appbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fitsSystemWindows="true"
-                app:layout_scrollFlags="noScroll"
-                app:titleEnabled="false">
+                android:background="@android:color/transparent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-
-                <TextView
-                    android:id="@+id/textView"
+                <com.google.android.material.appbar.CollapsingToolbarLayout
+                    android:id="@+id/collapsing_toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="@dimen/_10sdp"
-                    android:textSize="@dimen/_30ssp" />
-
-            </com.google.android.material.appbar.CollapsingToolbarLayout>
-        </com.google.android.material.appbar.AppBarLayout>
-
-        <com.makeramen.roundedimageview.RoundedImageView
-            android:id="@+id/imageMovie"
-            android:layout_width="210dp"
-            android:layout_height="300dp"
-            android:layout_margin="15dp"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="12dp"
-            android:scaleType="centerInside"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/appbar"
-            app:riv_corner_radius="8dp" />
-
-        <ImageView
-            android:id="@+id/like"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:src="@drawable/ic_sharp_favorite_border_24"
-            android:tag="@string/nolike"
-            app:layout_constraintEnd_toEndOf="@+id/imageMovie"
-            app:layout_constraintTop_toTopOf="@+id/imageMovie" />
-
-        <TextView
-            android:id="@+id/textType"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/imageMovie"
-            app:layout_constraintTop_toBottomOf="@+id/appbar" />
-
-        <TextView
-            android:id="@+id/textRating1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            app:layout_constraintStart_toStartOf="@+id/textType"
-            app:layout_constraintTop_toBottomOf="@+id/textType" />
-
-        <TextView
-            android:id="@+id/textRating2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            app:layout_constraintEnd_toEndOf="@+id/textType"
-            app:layout_constraintStart_toEndOf="@+id/textRating1"
-            app:layout_constraintTop_toBottomOf="@+id/textType" />
-
-        <TextView
-            android:id="@+id/budget"
-            android:layout_width="0dp"
-            android:layout_marginTop="15dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="@+id/textType"
-            app:layout_constraintStart_toStartOf="@+id/textType"
-            app:layout_constraintTop_toBottomOf="@+id/textRating2" />
-
-        <TextView
-            android:id="@+id/revenue"
-            android:layout_width="0dp"
-            android:layout_marginTop="15dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="@+id/textType"
-            app:layout_constraintStart_toStartOf="@+id/textType"
-            app:layout_constraintTop_toBottomOf="@+id/budget" />
-
-        <TextView
-            android:id="@+id/runtime"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            app:layout_constraintEnd_toEndOf="@+id/textType"
-            app:layout_constraintStart_toStartOf="@+id/textType"
-            app:layout_constraintTop_toBottomOf="@+id/revenue" />
-
-        <TextView
-            android:id="@+id/date"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            app:layout_constraintEnd_toEndOf="@+id/textType"
-            app:layout_constraintStart_toStartOf="@+id/textType"
-            app:layout_constraintTop_toBottomOf="@+id/runtime" />
+                    android:fitsSystemWindows="true"
+                    app:layout_scrollFlags="noScroll"
+                    app:titleEnabled="false">
 
 
-        <TextView
-            android:id="@+id/country"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            app:layout_constraintEnd_toEndOf="@+id/imageMovie"
-            app:layout_constraintStart_toStartOf="@+id/imageMovie"
-            app:layout_constraintTop_toBottomOf="@+id/imageMovie" />
+                    <TextView
+                        android:id="@+id/textView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/_10sdp"
+                        android:textSize="@dimen/_30ssp" />
 
-        <TextView
-            android:id="@+id/textOverview"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            app:layout_constraintEnd_toEndOf="@+id/textType"
-            app:layout_constraintStart_toStartOf="@+id/imageMovie"
-            app:layout_constraintTop_toBottomOf="@+id/country" />
+                </com.google.android.material.appbar.CollapsingToolbarLayout>
+            </com.google.android.material.appbar.AppBarLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/imageMovie"
+                android:layout_width="168dp"
+                android:layout_height="240dp"
+                android:layout_margin="15dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/appbar"
+                app:riv_corner_radius="8dp" />
+
+            <ImageView
+                android:id="@+id/like"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:src="@drawable/ic_sharp_favorite_border_24"
+                android:tag="@string/nolike"
+                app:layout_constraintEnd_toEndOf="@+id/imageMovie"
+                app:layout_constraintTop_toTopOf="@+id/imageMovie" />
+
+            <TextView
+                android:id="@+id/textRating"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:textSize="@dimen/_13sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/country"
+                app:layout_constraintTop_toBottomOf="@+id/recyclerViewGenres" />
+
+
+            <TextView
+                android:id="@+id/budget"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:textSize="@dimen/_13sdp"
+                app:layout_constraintEnd_toEndOf="@+id/country"
+                app:layout_constraintStart_toStartOf="@+id/country"
+                app:layout_constraintTop_toBottomOf="@+id/country" />
+
+            <TextView
+                android:id="@+id/revenue"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:textSize="@dimen/_13sdp"
+                app:layout_constraintEnd_toEndOf="@+id/budget"
+                app:layout_constraintStart_toStartOf="@+id/budget"
+                app:layout_constraintTop_toBottomOf="@+id/budget" />
+
+            <TextView
+                android:id="@+id/runtime"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:textSize="@dimen/_13sdp"
+                app:layout_constraintEnd_toEndOf="@+id/textRating"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/textRating"
+                app:layout_constraintTop_toBottomOf="@+id/textRating" />
+
+            <TextView
+                android:id="@+id/date"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/_13sdp"
+                android:layout_marginTop="15dp"
+                app:layout_constraintEnd_toEndOf="@+id/runtime"
+                app:layout_constraintStart_toStartOf="@+id/runtime"
+                app:layout_constraintTop_toBottomOf="@+id/runtime" />
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewGenres"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imageMovie"
+                app:layout_constraintTop_toBottomOf="@+id/appbar" />
+
+            <TextView
+                android:id="@+id/country"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:textSize="@dimen/_13sdp"
+                app:layout_constraintEnd_toEndOf="@+id/imageMovie"
+                app:layout_constraintStart_toStartOf="@+id/imageMovie"
+                app:layout_constraintTop_toBottomOf="@+id/imageMovie" />
+
+            <TextView
+                android:id="@+id/textOverview"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/_13sdp"
+                android:layout_marginTop="15dp"
+                app:layout_constraintStart_toStartOf="@+id/revenue"
+                app:layout_constraintTop_toBottomOf="@+id/revenue" />
+
+            <TextView
+                android:id="@+id/textViewActors"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/_10sdp"
+                android:layout_marginTop="15dp"
+                android:text="@string/credits"
+                android:textSize="@dimen/_15ssp"
+                app:layout_constraintTop_toBottomOf="@+id/textOverview" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerActors"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:layout_marginTop="15dp"
+                android:clipToPadding="false"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/date"
+                app:layout_constraintStart_toStartOf="@+id/imageMovie"
+                app:layout_constraintTop_toBottomOf="@+id/textViewActors" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 </layout>

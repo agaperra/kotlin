@@ -8,10 +8,15 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.geekbrains.kotlin_lessons.Constants
 import com.geekbrains.kotlin_lessons.R
+import com.geekbrains.kotlin_lessons.adapters.ActorsAdapter
+import com.geekbrains.kotlin_lessons.adapters.GenresAdapter
 import com.geekbrains.kotlin_lessons.databinding.FragmentInfoBinding
 import com.geekbrains.kotlin_lessons.interactors.string.StringInteractorImpl
+import com.geekbrains.kotlin_lessons.models.Genres
 import com.geekbrains.kotlin_lessons.viewModels.InfoViewModel
 import com.squareup.picasso.Picasso
 
@@ -20,6 +25,8 @@ class InfoFragment : Fragment() {
     private lateinit var infoViewModel: InfoViewModel
     private lateinit var binding: FragmentInfoBinding
     private val args: InfoFragmentArgs by navArgs()
+    private lateinit var genresAdapter: GenresAdapter
+    private lateinit var actorsAdapter: ActorsAdapter
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -36,6 +43,21 @@ class InfoFragment : Fragment() {
         lifecycle.addObserver(infoViewModel)
         infoViewModel.getDetails(args.movieId)
         startObserve()
+        genresAdapter = GenresAdapter()
+
+        binding.recyclerViewGenres.apply {
+            adapter = genresAdapter
+            layoutManager =
+                    LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+        }
+
+        actorsAdapter = ActorsAdapter()
+
+        binding.recyclerActors.apply {
+            adapter = actorsAdapter
+            layoutManager =
+                    LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+        }
 
 
     }
@@ -51,7 +73,12 @@ class InfoFragment : Fragment() {
             setCountry(infoViewModel.getCountry(it.production_countries))
             setOverview(infoViewModel.getOverview(it.overview))
             setRuntime(infoViewModel.getRuntime(it.runtime))
-            //setGenres(it.genres)
+            setGenres(it.genres)
+        })
+
+        infoViewModel.getPeople().observe(viewLifecycleOwner, {
+            actorsAdapter.addItems(it.cast)
+            actorsAdapter.notifyDataSetChanged()
         })
     }
 
@@ -73,29 +100,36 @@ class InfoFragment : Fragment() {
 
     @SuppressLint("SetTextI18n")
     fun setRating(rating_average: Double, rating_count: Int) {
-        binding.textRating1.text = rating_average.toString()
-        binding.textRating2.text = "{$rating_count}"
+        binding.textRating.text = getString(R.string.rating)+"\n"+rating_average.toString()+ "{$rating_count}"
     }
 
+    @SuppressLint("SetTextI18n")
     private fun setDate(date: String) {
-        binding.date.text=date
+        binding.date.text=getString(R.string.releaseDate)+date
     }
     @SuppressLint("SetTextI18n")
     fun setBudget(budget:Int){
-        binding.budget.text= "$$budget"
+        binding.budget.text= getString(R.string.budget)+"$$budget"
     }
 
     @SuppressLint("SetTextI18n")
     fun setRevenue(revenue:Int){
-        binding.revenue.text="$$revenue"
+        binding.revenue.text=getString(R.string.revenue)+"$$revenue"
     }
 
+    @SuppressLint("SetTextI18n")
     private fun setRuntime(runtime: String) {
-        binding.runtime.text = runtime
+        binding.runtime.text = getString(R.string.runtime)+runtime
     }
 
+    @SuppressLint("SetTextI18n")
     private fun setCountry(name: String) {
-        binding.country.text = name
+        binding.country.text = getString(R.string.country)+"\n"+name
+    }
+
+    private fun setGenres(genres: List<Genres>) {
+        genresAdapter.setGenres(genres = genres)
+        genresAdapter.notifyDataSetChanged()
     }
 
 
