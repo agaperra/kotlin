@@ -12,12 +12,12 @@ import com.geekbrains.kotlin_lessons.R
 import com.geekbrains.kotlin_lessons.models.Movie
 import com.squareup.picasso.Picasso
 
-class SearchMovieAdapter(private val movies: ArrayList<Movie>) :
-    RecyclerView.Adapter<SearchMovieAdapter.MovieSearchViewHolder>() {
+class SearchMovieAdapter(private val movies: ArrayList<Movie>, var onItemViewClickListener: OnItemViewClickListener) :
+        RecyclerView.Adapter<SearchMovieAdapter.MovieSearchViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = MovieSearchViewHolder(
-        itemView = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_movie_list, parent, false)
+            itemView = LayoutInflater.from(parent.context)
+                    .inflate(R.layout.item_movie_list, parent, false)
     )
 
 
@@ -26,7 +26,7 @@ class SearchMovieAdapter(private val movies: ArrayList<Movie>) :
     fun clearItems() = this.movies.clear()
 
     override fun onBindViewHolder(holder: MovieSearchViewHolder, position: Int) =
-        holder.bindMovie(movies[position])
+            holder.bindMovie(movies[position])
 
     override fun getItemCount(): Int = movies.size
 
@@ -39,11 +39,14 @@ class SearchMovieAdapter(private val movies: ArrayList<Movie>) :
             itemView.findViewById<ImageView>(R.id.like).visibility = View.INVISIBLE
 
             Picasso.get().load("${imageURL}${movie.poster_path}")
-                .placeholder(R.drawable.ic_baseline_image_not_supported_24)
-                .into(poster)
+                    .placeholder(R.drawable.ic_baseline_image_not_supported_24)
+                    .into(poster)
 
             itemView.findViewById<TextView>(R.id.textName).text = movie.title
             itemView.findViewById<TextView>(R.id.textReleaseDate).text = movie.release_date
+            itemView.setOnClickListener {
+                onItemViewClickListener.onItemClick(movie = movie)
+            }
 
         }
 

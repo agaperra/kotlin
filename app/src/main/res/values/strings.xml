@@ -16,7 +16,7 @@
     <string name="title_favorites">Favorites</string>
     <string name="title_search">Search</string>
     <string name="search">Search</string>
-    <string name="releaseDate">Release year:</string>
+
     <string name="popular">Popular movies</string>
     <string name="looknow">Now playing</string>
     <string name="upcoming">Up coming</string>
@@ -25,4 +25,18 @@
     <string name="nolike" translatable="false">no like</string>
     <string name="like" translatable="false">like</string>
     <string name="pictures">Pictures</string>
+    <string name="noOverview">No description available</string>
+    <string name="unknownRuntime">Unknown runtime</string>
+    <string name="unknown">Unknown</string>
+    <string name="h">h</string>
+    <string name="min">min</string>
+    
+    <string name="budget">Budget: </string>
+    <string name="revenue">Revenue: </string>
+    <string name="rating">Rating: </string>
+    <string name="runtime">Runtime: </string>
+    <string name="releaseDate">Release year:</string>
+    <string name="country">Production country: </string>
+    <string name="credits">People</string>
+    <string name="genres" translatable="false">genres</string>
 </resources>

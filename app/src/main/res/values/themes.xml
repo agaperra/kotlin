@@ -8,13 +8,19 @@
         <!-- Secondary brand color. -->
         <item name="colorSecondary">#975C14</item>
         <item name="colorSecondaryVariant">#EFA74D</item>
-        <item name="colorOnSecondary">@color/black</item>
+        <item name="colorOnSecondary">#292727</item>
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:textColor">#FAC8C8</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimary</item>
         <!-- Customize your theme here. -->
         <item name="android:textColorHint">@color/bottom_nav_menu</item>
+    </style>
+
+
+    <style name="Widget.BottomNavigationView"
+        parent="Widget.Design.BottomNavigationView">
+        <item name="fontFamily">@font/medium</item>
     </style>
 
 

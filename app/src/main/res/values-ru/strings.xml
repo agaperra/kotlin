@@ -17,12 +17,25 @@
     <string name="title_favorites">Избранное</string>
     <string name="title_search">Поиск</string>
     <string name="search">Поиск</string>
-    <string name="releaseDate">Год релиза:</string>
     <string name="popular">Популярное</string>
     <string name="looknow">Сейчас смотрят</string>
     <string name="upcoming">Ожидаемые</string>
     <string name="top">В топе</string>
     <string name="edit_search">Введите название фильма</string>
     <string name="pictures">Картины</string>
+    <string name="noOverview">Описание отсутствует</string>
+    <string name="unknownRuntime">Длительноть неизвестна</string>
+    <string name="unknown">Неизвестно</string>
+    <string name="h">ч</string>
+    <string name="min">мин</string>
 
+
+
+    <string name="budget">Бюджет: </string>
+    <string name="revenue">Сборы: </string>
+    <string name="rating">Рейтинг: </string>
+    <string name="runtime">Длительность: </string>
+    <string name="releaseDate">Год релиза: </string>
+    <string name="country">Страна производства: </string>
+    <string name="credits">Люди</string>
 </resources>

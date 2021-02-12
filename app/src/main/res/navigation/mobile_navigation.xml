@@ -9,17 +9,40 @@
         android:id="@+id/navigation_movie"
         android:name="com.geekbrains.kotlin_lessons.fragments.MovieFragment"
         android:label="@string/title_movie"
-        tools:layout="@layout/fragment_movie" />
+        tools:layout="@layout/fragment_movie">
+        <action
+            android:id="@+id/openMovie"
+            app:destination="@id/infoFragment"
+            app:enterAnim="@anim/slide_from_bottom"
+            app:exitAnim="@anim/fragment_fade_exit" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_favorites"
         android:name="com.geekbrains.kotlin_lessons.fragments.FavoritesFragment"
         android:label="@string/title_favorites"
-        tools:layout="@layout/fragment_favorites"/>
+        tools:layout="@layout/fragment_favorites">
+        <action
+            android:id="@+id/action_navigation_favorites_to_infoFragment"
+            app:destination="@id/infoFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_search"
         android:name="com.geekbrains.kotlin_lessons.fragments.SearchFragment"
         android:label="@string/title_search"
-        tools:layout="@layout/fragment_search" />
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_navigation_search_to_infoFragment"
+            app:destination="@id/infoFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/infoFragment"
+        android:name="com.geekbrains.kotlin_lessons.fragments.InfoFragment"
+        android:label="InfoFragment" >
+        <argument
+            android:name="movieId"
+            app:argType="integer" />
+    </fragment>
 </navigation>
