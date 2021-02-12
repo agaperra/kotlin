@@ -17,5 +17,6 @@
     <color name="bottom_nav">#604728</color>
     <color name="bottom_nav_menu">#D1A874</color>
     <color name="border">#7C7777</color>
+    <color name="textColor_pink" >#FAC8C8</color>
 
 </resources>

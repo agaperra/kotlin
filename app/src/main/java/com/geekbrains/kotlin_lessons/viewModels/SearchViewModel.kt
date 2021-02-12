@@ -24,10 +24,16 @@ class SearchViewModel(private val stringInteractor: StringInteractor) : ViewMode
 
 
     fun textChanged(query: String) {
-        if (query == "") {
-            return
+        when (query) {
+            "" -> {
+                return
+            }
+            else -> {
+                searchRepository.searchMovies(query = query, _observingMovies)
+            }
         }
-        searchRepository.searchMovies(query = query, _observingMovies)
+
+
     }
 
 }

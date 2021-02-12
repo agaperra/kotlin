@@ -22,32 +22,41 @@ class MovieFragment : Fragment() {
 
     private lateinit var binding: FragmentMovieBinding
     private lateinit var movieViewModel: MovieViewModel
-    private var movieAdapterPopular = HorizontalRecyclerAdapter(onItemViewClickListener = object : OnItemViewClickListener {
-        override fun onItemClick(movie: Movie) {
-            val action = MovieFragmentDirections.openMovie(movieId = movie.id)
-            requireView().findNavController().navigate(action)
-        }
-    })
-    private var movieAdapterNowPlaying = HorizontalRecyclerAdapter(onItemViewClickListener = object : OnItemViewClickListener {
-        override fun onItemClick(movie: Movie) {
-            val action = MovieFragmentDirections.openMovie(movieId = movie.id)
-            requireView().findNavController().navigate(action)
-        }
-    })
+    private val movieAdapterPopular by lazy {
+        HorizontalRecyclerAdapter(onItemViewClickListener = object : OnItemViewClickListener {
+            override fun onItemClick(movie: Movie) {
+                val action = MovieFragmentDirections.openMovie(movieId = movie.id)
+                requireView().findNavController().navigate(action)
+            }
+        })
+    }
 
-    private var movieAdapterUpComing = HorizontalRecyclerAdapter(onItemViewClickListener = object : OnItemViewClickListener {
-        override fun onItemClick(movie: Movie) {
-            val action = MovieFragmentDirections.openMovie(movieId = movie.id)
-            requireView().findNavController().navigate(action)
-        }
-    })
+    private val movieAdapterNowPlaying by lazy {
+        HorizontalRecyclerAdapter(onItemViewClickListener = object : OnItemViewClickListener {
+            override fun onItemClick(movie: Movie) {
+                val action = MovieFragmentDirections.openMovie(movieId = movie.id)
+                requireView().findNavController().navigate(action)
+            }
+        })
+    }
 
-    private var movieAdapterTop = HorizontalRecyclerAdapter(onItemViewClickListener = object : OnItemViewClickListener {
-        override fun onItemClick(movie: Movie) {
-            val action = MovieFragmentDirections.openMovie(movieId = movie.id)
-            requireView().findNavController().navigate(action)
-        }
-    })
+    private val movieAdapterUpComing by lazy {
+        HorizontalRecyclerAdapter(onItemViewClickListener = object : OnItemViewClickListener {
+            override fun onItemClick(movie: Movie) {
+                val action = MovieFragmentDirections.openMovie(movieId = movie.id)
+                requireView().findNavController().navigate(action)
+            }
+        })
+    }
+
+    private val movieAdapterTop by lazy {
+        HorizontalRecyclerAdapter(onItemViewClickListener = object : OnItemViewClickListener {
+            override fun onItemClick(movie: Movie) {
+                val action = MovieFragmentDirections.openMovie(movieId = movie.id)
+                requireView().findNavController().navigate(action)
+            }
+        })
+    }
 
 
     override fun onCreateView(
@@ -102,51 +111,55 @@ class MovieFragment : Fragment() {
 
     private fun getPopularMovies() {
         binding.isLoading = true
-        movieViewModel.getObservedMoviesPopular().observe(viewLifecycleOwner, {
-            binding.isLoading = true
-            movieAdapterPopular.clearItems()
-            movieAdapterPopular.addItems(movies = it.results)
-            movieAdapterPopular.notifyDataSetChanged()
-            binding.isLoading = false
-        })
-        movieViewModel.popularMovie()
+        movieViewModel.apply {
+            getObservedMoviesPopular().observe(viewLifecycleOwner, {
+                movieAdapterPopular.clearItems()
+                movieAdapterPopular.addItems(movies = it.results)
+                movieAdapterPopular.notifyDataSetChanged()
+                binding.isLoading = false
+            })
+          popularMovie()
+        }
     }
 
 
     private fun getLookNowMovies() {
         binding.isLoading = true
-        movieViewModel.getObservedMoviesLookNow().observe(viewLifecycleOwner, {
-            binding.isLoading = true
-            movieAdapterNowPlaying.clearItems()
-            movieAdapterNowPlaying.addItems(movies = it.results)
-            movieAdapterNowPlaying.notifyDataSetChanged()
-            binding.isLoading = false
-        })
-        movieViewModel.lookNowMovie()
+        movieViewModel.apply {
+            getObservedMoviesLookNow().observe(viewLifecycleOwner, {
+                movieAdapterNowPlaying.clearItems()
+                movieAdapterNowPlaying.addItems(movies = it.results)
+                movieAdapterNowPlaying.notifyDataSetChanged()
+                binding.isLoading = false
+            })
+            lookNowMovie()
+        }
     }
 
     private fun getUpComingMovies() {
         binding.isLoading = true
-        movieViewModel.getObservedMoviesUpComing().observe(viewLifecycleOwner, {
-            binding.isLoading = true
-            movieAdapterUpComing.clearItems()
-            movieAdapterUpComing.addItems(movies = it.results)
-            movieAdapterUpComing.notifyDataSetChanged()
-            binding.isLoading = false
-        })
-        movieViewModel.upComingMovie()
+        movieViewModel.apply {
+            getObservedMoviesUpComing().observe(viewLifecycleOwner, {
+                movieAdapterUpComing.clearItems()
+                movieAdapterUpComing.addItems(movies = it.results)
+                movieAdapterUpComing.notifyDataSetChanged()
+                binding.isLoading = false
+            })
+           upComingMovie()
+        }
     }
 
     private fun getTopMovies() {
         binding.isLoading = true
-        movieViewModel.getObservedMoviesTop().observe(viewLifecycleOwner, {
-            binding.isLoading = true
-            movieAdapterTop.clearItems()
-            movieAdapterTop.addItems(movies = it.results)
-            movieAdapterTop.notifyDataSetChanged()
-            binding.isLoading = false
-        })
-        movieViewModel.topMovie()
+        movieViewModel.apply {
+            getObservedMoviesTop().observe(viewLifecycleOwner, {
+                movieAdapterTop.clearItems()
+                movieAdapterTop.addItems(movies = it.results)
+                movieAdapterTop.notifyDataSetChanged()
+                binding.isLoading = false
+            })
+         topMovie()
+        }
     }
 
 
