@@ -1,7 +1,9 @@
 package com.geekbrains.kotlin_lessons.fragments
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -16,7 +18,6 @@ import com.geekbrains.kotlin_lessons.databinding.FragmentMovieBinding
 import com.geekbrains.kotlin_lessons.interactors.string.StringInteractorImpl
 import com.geekbrains.kotlin_lessons.models.Movie
 import com.geekbrains.kotlin_lessons.viewModels.MovieViewModel
-import kotlin.collections.ArrayList
 
 class MovieFragment : Fragment() {
 

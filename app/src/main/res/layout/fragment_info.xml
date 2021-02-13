@@ -95,9 +95,9 @@
                             android:padding="@dimen/_10sdp"
                             android:textSize="@dimen/_16sdp"
                             android:textStyle="bold"
-                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintBottom_toBottomOf="@+id/star"
                             app:layout_constraintStart_toEndOf="@+id/star"
-                            app:layout_constraintTop_toBottomOf="@+id/textView" />
+                            app:layout_constraintTop_toTopOf="@+id/star" />
 
                         <ImageView
                             android:id="@+id/people"
@@ -112,14 +112,14 @@
                             android:id="@+id/textPeople"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
                             android:fontFamily="@font/normal"
                             android:padding="@dimen/_10sdp"
                             android:textSize="@dimen/_16sdp"
                             android:textStyle="bold"
-                            android:layout_marginStart="15dp"
-                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintBottom_toBottomOf="@+id/people"
                             app:layout_constraintStart_toEndOf="@+id/people"
-                            app:layout_constraintTop_toBottomOf="@+id/textView" />
+                            app:layout_constraintTop_toTopOf="@+id/people" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </com.google.android.material.appbar.CollapsingToolbarLayout>

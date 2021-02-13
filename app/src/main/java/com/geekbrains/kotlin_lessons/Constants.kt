@@ -12,7 +12,7 @@ class Constants {
         val locale: String = Locale.getDefault().language
 
         @SuppressLint("ConstantLocale")
-        var dateFormatYear = java.text.SimpleDateFormat("yyyy", Locale.forLanguageTag(locale))
+        const val dateFormatYear = "yyyy"
         const val basicURL = "https://api.themoviedb.org"
         const val imageURL = "https://image.tmdb.org/t/p/w400"
         const val popular_movies = "/3/movie/popular"

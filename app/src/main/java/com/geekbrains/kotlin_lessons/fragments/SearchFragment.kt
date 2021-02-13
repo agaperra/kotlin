@@ -74,15 +74,11 @@ class SearchFragment : Fragment() {
     private fun setObserver(viewModel: SearchViewModel, adapter: SearchMovieAdapter) {
         binding.isLoading = true
         viewModel.getMovies().observe(viewLifecycleOwner, { movieResponse ->
-            when (movieResponse) {
-                null -> {
-                }
-                else -> {
-                    adapter.clearItems()
-                    adapter.addItems(movieResponse.results)
-                    adapter.notifyDataSetChanged()
-                    binding.isLoading = false
-                }
+            movieResponse?.let {
+                adapter.clearItems()
+                adapter.addItems(movieResponse.results)
+                adapter.notifyDataSetChanged()
+                binding.isLoading = false
             }
         })
     }

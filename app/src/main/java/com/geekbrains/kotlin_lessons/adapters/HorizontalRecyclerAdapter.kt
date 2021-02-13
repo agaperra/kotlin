@@ -1,19 +1,22 @@
 package com.geekbrains.kotlin_lessons.adapters
 
 import android.annotation.SuppressLint
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.databinding.DataBindingUtil
+import androidx.core.graphics.toColor
 import androidx.recyclerview.widget.RecyclerView
 import com.geekbrains.kotlin_lessons.Constants
 import com.geekbrains.kotlin_lessons.R
 import com.geekbrains.kotlin_lessons.adapters.HorizontalRecyclerAdapter.MovieViewHolder
-import com.geekbrains.kotlin_lessons.databinding.ItemMovieListBinding
 import com.geekbrains.kotlin_lessons.models.Movie
+import com.geekbrains.kotlin_lessons.models.showSnackBar
+import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
+import java.util.*
 
 
 class HorizontalRecyclerAdapter(var onItemViewClickListener: OnItemViewClickListener) :
@@ -36,7 +39,8 @@ class HorizontalRecyclerAdapter(var onItemViewClickListener: OnItemViewClickList
     override fun getItemCount() = moviesList.size
 
     inner class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        @SuppressLint("Recycle")
+
+        @SuppressLint("Recycle", "SimpleDateFormat", "InflateParams")
         fun bindMovie(movie: Movie) {
 
             itemView.apply {
@@ -49,6 +53,8 @@ class HorizontalRecyclerAdapter(var onItemViewClickListener: OnItemViewClickList
                 findViewById<TextView>(R.id.textReleaseDate).text = movie.release_date.substring(0, 4)
 
                 val itemLike = findViewById<ImageView>(R.id.like)
+                itemLike.tag = R.string.nolike
+                lateinit var snackbar: Snackbar
 
                 itemLike.setOnClickListener {
 
@@ -56,12 +62,17 @@ class HorizontalRecyclerAdapter(var onItemViewClickListener: OnItemViewClickList
                         R.string.nolike -> {
                             itemLike.setImageResource(R.drawable.ic_baseline_favorite_24)
                             itemLike.tag = R.string.like
+                            snackbar=showSnackBar(R.string.add_to_favorites, Snackbar.LENGTH_SHORT)
                         }
                         else -> {
                             itemLike.setImageResource(R.drawable.ic_sharp_favorite_border_24)
                             itemLike.tag = R.string.nolike
+                            snackbar=showSnackBar(R.string.remove_from_favorites, Snackbar.LENGTH_SHORT)
                         }
                     }
+                    snackbar.view.setBackgroundColor(resources.getColor(R.color.low_pink))
+                   snackbar.view.setPadding(20, 20, 20, 20)
+                    snackbar.show()
                 }
 
                 setOnClickListener {
@@ -70,6 +81,7 @@ class HorizontalRecyclerAdapter(var onItemViewClickListener: OnItemViewClickList
             }
         }
     }
+
 
     override fun onClick(v: View?) {}
 
