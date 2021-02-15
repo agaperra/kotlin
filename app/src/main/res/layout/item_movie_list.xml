@@ -5,10 +5,6 @@
 
     <data>
 
-        <variable
-            name="movie"
-            type="com.geekbrains.kotlin_lessons.models.Movie" />
-
 
     </data>
 
@@ -17,18 +13,6 @@
         android:layout_height="wrap_content"
         android:layout_margin="5dp">
 
-
-        <!--        <View-->
-        <!--            android:id="@+id/viewBackground"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="0dp"-->
-        <!--            android:layout_margin="5dp"-->
-        <!--            android:background="@drawable/backgrounf_item"-->
-        <!--            android:padding="10dp"-->
-        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--            app:layout_constraintEnd_toEndOf="parent"-->
-        <!--            app:layout_constraintStart_toStartOf="parent"-->
-        <!--            app:layout_constraintTop_toTopOf="parent" />-->
 
 
         <com.makeramen.roundedimageview.RoundedImageView
@@ -62,7 +46,6 @@
             android:fontFamily="@font/normal"
             android:ellipsize="end"
             android:singleLine="true"
-            android:text="@{movie.title}"
             android:textSize="13sp"
             app:layout_constraintEnd_toEndOf="@+id/imageMovie"
             app:layout_constraintStart_toStartOf="@+id/imageMovie"
@@ -75,7 +58,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            android:text="@{movie.release_date.substring(0,4)}"
             android:textSize="12sp"
             android:lines="1"
             android:ellipsize="end"

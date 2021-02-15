@@ -12,8 +12,10 @@ import com.geekbrains.kotlin_lessons.R
 import com.geekbrains.kotlin_lessons.models.Movie
 import com.squareup.picasso.Picasso
 
-class SearchMovieAdapter(private val movies: ArrayList<Movie>, var onItemViewClickListener: OnItemViewClickListener) :
+class SearchMovieAdapter(var onItemViewClickListener: OnItemViewClickListener) :
         RecyclerView.Adapter<SearchMovieAdapter.MovieSearchViewHolder>() {
+
+    private val movies = arrayListOf<Movie>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = MovieSearchViewHolder(
             itemView = LayoutInflater.from(parent.context)
@@ -32,21 +34,25 @@ class SearchMovieAdapter(private val movies: ArrayList<Movie>, var onItemViewCli
 
     inner class MovieSearchViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        private val poster: ImageView = itemView.findViewById(R.id.imageMovie)
+        private lateinit var poster: ImageView
 
 
         fun bindMovie(movie: Movie) {
-            itemView.findViewById<ImageView>(R.id.like).visibility = View.INVISIBLE
+            itemView.apply {
+                findViewById<ImageView>(R.id.like).visibility = View.INVISIBLE
+                poster = findViewById(R.id.imageMovie)
 
-            Picasso.get().load("${imageURL}${movie.poster_path}")
-                    .placeholder(R.drawable.ic_baseline_image_not_supported_24)
-                    .into(poster)
+                Picasso.get().load("${imageURL}${movie.poster_path}")
+                        .placeholder(R.drawable.ic_baseline_image_not_supported_24)
+                        .into(poster)
 
-            itemView.findViewById<TextView>(R.id.textName).text = movie.title
-            itemView.findViewById<TextView>(R.id.textReleaseDate).text = movie.release_date
-            itemView.setOnClickListener {
-                onItemViewClickListener.onItemClick(movie = movie)
+                findViewById<TextView>(R.id.textName).text = movie.title
+                findViewById<TextView>(R.id.textReleaseDate).text = movie.release_date.substring(0, 4)
+                setOnClickListener {
+                    onItemViewClickListener.onItemClick(movie = movie)
+                }
             }
+
 
         }
 

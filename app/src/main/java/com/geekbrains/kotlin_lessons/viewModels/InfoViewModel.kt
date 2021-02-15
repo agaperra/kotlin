@@ -21,15 +21,19 @@ class InfoViewModel(private val stringInteractor: StringInteractor) : ViewModel(
 
 
     fun getOverview(overview: String?): String {
-        if (overview == null) return stringInteractor.textNoOverview
-        return overview
+        overview?.let {
+            return overview
+        }?:return stringInteractor.textNoOverview
+
     }
 
     fun getRuntime(runtime: Int?): String {
-        if (runtime == null) return stringInteractor.textUnknownRuntime
-        val hours = runtime / 60
-        val minutes = runtime % 60
-        return (String.format("%d", hours) + stringInteractor.textHour + String.format("%02d", minutes) + stringInteractor.textMinute)
+        runtime?.let {
+            val hours = runtime / 60
+            val minutes = runtime % 60
+            return (String.format("%d", hours) + stringInteractor.textHour + String.format("%02d", minutes) + stringInteractor.textMinute)
+        } ?: return stringInteractor.textUnknownRuntime
+
     }
 
     fun getDetails(movieId: Int) {
@@ -37,9 +41,10 @@ class InfoViewModel(private val stringInteractor: StringInteractor) : ViewModel(
         movieDetailsRepository.getPeople(id = movieId, _observingPeople)
     }
 
-    fun getCountry(productionCountries: List<ProductionCountries>): String {
-        if (productionCountries.isEmpty()) return stringInteractor.textUnknown
-        return productionCountries[0].name
+    fun getCountry(productionCountries: List<ProductionCountries>?): String {
+        productionCountries?.let {
+            return productionCountries[0].name
+        } ?: return stringInteractor.textUnknown
     }
 
     fun getDate(date: String) = date.substring(0, 4)
