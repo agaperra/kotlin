@@ -103,14 +103,15 @@ class InfoFragment : Fragment() {
     fun setRating(rating_average: Double) {
         binding.textRating.text = "$rating_average"
     }
+
     @SuppressLint("SetTextI18n")
-    fun setRatingCount( rating_count: Int) {
+    fun setRatingCount(rating_count: Int) {
         binding.textPeople.text = "$rating_count"
     }
 
     @SuppressLint("SetTextI18n")
     private fun setDate(date: String) {
-        binding.date.text =  date
+        binding.date.text = date
     }
 
     @SuppressLint("SetTextI18n")

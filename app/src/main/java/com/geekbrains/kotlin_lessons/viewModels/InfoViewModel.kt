@@ -23,7 +23,7 @@ class InfoViewModel(private val stringInteractor: StringInteractor) : ViewModel(
     fun getOverview(overview: String?): String {
         overview?.let {
             return overview
-        }?:return stringInteractor.textNoOverview
+        } ?: return stringInteractor.textNoOverview
 
     }
 

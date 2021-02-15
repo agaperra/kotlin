@@ -119,7 +119,7 @@ class MovieFragment : Fragment() {
                 movieAdapterPopular.notifyDataSetChanged()
                 binding.isLoading = false
             })
-          popularMovie()
+            popularMovie()
         }
     }
 
@@ -146,7 +146,7 @@ class MovieFragment : Fragment() {
                 movieAdapterUpComing.notifyDataSetChanged()
                 binding.isLoading = false
             })
-           upComingMovie()
+            upComingMovie()
         }
     }
 
@@ -159,7 +159,7 @@ class MovieFragment : Fragment() {
                 movieAdapterTop.notifyDataSetChanged()
                 binding.isLoading = false
             })
-         topMovie()
+            topMovie()
         }
     }
 

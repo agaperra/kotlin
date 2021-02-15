@@ -62,16 +62,16 @@ class HorizontalRecyclerAdapter(var onItemViewClickListener: OnItemViewClickList
                         R.string.nolike -> {
                             itemLike.setImageResource(R.drawable.ic_baseline_favorite_24)
                             itemLike.tag = R.string.like
-                            snackbar=showSnackBar(R.string.add_to_favorites, Snackbar.LENGTH_SHORT)
+                            snackbar = showSnackBar(R.string.add_to_favorites, Snackbar.LENGTH_SHORT)
                         }
                         else -> {
                             itemLike.setImageResource(R.drawable.ic_sharp_favorite_border_24)
                             itemLike.tag = R.string.nolike
-                            snackbar=showSnackBar(R.string.remove_from_favorites, Snackbar.LENGTH_SHORT)
+                            snackbar = showSnackBar(R.string.remove_from_favorites, Snackbar.LENGTH_SHORT)
                         }
                     }
                     snackbar.view.setBackgroundColor(resources.getColor(R.color.low_pink))
-                   snackbar.view.setPadding(20, 20, 20, 20)
+                    snackbar.view.setPadding(20, 20, 20, 20)
                     snackbar.show()
                 }
 

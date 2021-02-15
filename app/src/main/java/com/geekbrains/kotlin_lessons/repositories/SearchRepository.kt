@@ -28,7 +28,7 @@ class SearchRepository {
                     }
 
                     override fun onFailure(call: Call<MovieResponse>, t: Throwable) {
-                        _observingMovies.value=null
+                        _observingMovies.value = null
                     }
                 })
     }

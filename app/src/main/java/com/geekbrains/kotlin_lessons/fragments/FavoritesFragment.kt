@@ -13,12 +13,12 @@ class FavoritesFragment : Fragment() {
 
     private lateinit var favoritesViewModel: FavoritesViewModel
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         favoritesViewModel =
-            ViewModelProvider(this).get(FavoritesViewModel::class.java)
+                ViewModelProvider(this).get(FavoritesViewModel::class.java)
         return inflater.inflate(R.layout.fragment_favorites, container, false)
     }
 
