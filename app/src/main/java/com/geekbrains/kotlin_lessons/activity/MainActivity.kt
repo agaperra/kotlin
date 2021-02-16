@@ -5,12 +5,15 @@ package com.geekbrains.kotlin_lessons.activity
 import android.os.Bundle
 
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.findNavController
 import com.geekbrains.kotlin_lessons.databinding.ActivityMainBinding
 
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 
 import com.geekbrains.kotlin_lessons.R
+import com.geekbrains.kotlin_lessons.fragments.MovieFragmentDirections
+import com.geekbrains.kotlin_lessons.receivers.NetworkConnectionReceiver
 
 
 class MainActivity : AppCompatActivity() {
@@ -20,12 +23,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setNavigation()
+    }
 
+    private fun setNavigation() {
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val navController = navHostFragment.navController
         binding.navView.setupWithNavController(navController)
-
     }
 
 }

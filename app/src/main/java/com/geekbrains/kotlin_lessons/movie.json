@@ -1,0 +1,93 @@
+{
+  "adult": false,
+  "backdrop_path": "/srYya1ZlI97Au4jUYAktDe3avyA.jpg",
+  "belongs_to_collection": {
+    "id": 468552,
+    "name": "Чудо-женщина (Коллекция)",
+    "poster_path": "/193h7DSOl2WS7V3AgSr50dzG4wx.jpg",
+    "backdrop_path": "/n9KlvCOBFDmSyw3BgNrkUkxMFva.jpg"
+  },
+  "budget": 200000000,
+  "genres": [
+    {
+      "id": 14,
+      "name": "фэнтези"
+    },
+    {
+      "id": 28,
+      "name": "боевик"
+    },
+    {
+      "id": 12,
+      "name": "приключения"
+    }
+  ],
+  "homepage": "https://www.warnerbros.com/movies/wonder-woman-1984",
+  "id": 464052,
+  "imdb_id": "tt7126948",
+  "original_language": "en",
+  "original_title": "Wonder Woman 1984",
+  "overview": "Влиятельный бизнесмен Максвелл Лорд ищет магические артефакты, которые помогли бы ему обрести силу и могущество подобно богу. Однажды он встречает археолога Барбару Энн Минерву и просит у неё помощи в достижении его цели. Их отношения портятся, когда один из артефактов превращает Минерву в Гепарду, вне себя от ярости она желает ему отомстить за то, что с ней случилось. Лорд просит защиты у Дианы Принс, взамен он обещает, что воскресит Стива Тревора с помощью одного из артефактов.",
+  "popularity": 2614.604,
+  "poster_path": "/1B2YJCYyRudISmfSWCRfc95gAtq.jpg",
+  "production_companies": [
+    {
+      "id": 9993,
+      "logo_path": "/2Tc1P3Ac8M479naPp1kYT3izLS5.png",
+      "name": "DC Entertainment",
+      "origin_country": "US"
+    },
+    {
+      "id": 174,
+      "logo_path": "/ky0xOc5OrhzkZ1N6KyUxacfQsCk.png",
+      "name": "Warner Bros. Pictures",
+      "origin_country": "US"
+    },
+    {
+      "id": 114152,
+      "logo_path": null,
+      "name": "The Stone Quarry",
+      "origin_country": "US"
+    },
+    {
+      "id": 128064,
+      "logo_path": "/13F3Jf7EFAcREU0xzZqJnVnyGXu.png",
+      "name": "DC Films",
+      "origin_country": "US"
+    },
+    {
+      "id": 507,
+      "logo_path": "/z7H707qUWigbjHnJDMfj6QITEpb.png",
+      "name": "Atlas Entertainment",
+      "origin_country": "US"
+    },
+    {
+      "id": 429,
+      "logo_path": "/2Tc1P3Ac8M479naPp1kYT3izLS5.png",
+      "name": "DC Comics",
+      "origin_country": "US"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "US",
+      "name": "United States of America"
+    }
+  ],
+  "release_date": "2020-12-16",
+  "revenue": 154600000,
+  "runtime": 151,
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Released",
+  "tagline": "Новая эра чудес начинается",
+  "title": "Чудо-женщина: 1984",
+  "video": false,
+  "vote_average": 7.0,
+  "vote_count": 3604
+}

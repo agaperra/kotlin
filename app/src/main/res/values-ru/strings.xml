@@ -30,6 +30,7 @@
     <string name="min">мин</string>
     <string name="add_to_favorites">Фильм добавлен в избранное</string>
     <string name="remove_from_favorites">Фильм удалён из избранного</string>
+    <string name="connection_lost">Соединение потеряно</string>
 
 
 

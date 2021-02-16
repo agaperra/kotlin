@@ -20,288 +20,301 @@
 
     </data>
 
-    <androidx.core.widget.NestedScrollView
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/refresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:animateLayoutChanges="true"
-            tools:context=".fragments.InfoFragment">
+            android:layout_height="match_parent">
 
-            <ProgressBar
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:visibility="@{isLoading ? View.VISIBLE : View.GONE, default=gone}"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-
-            <com.google.android.material.appbar.AppBarLayout
-                android:id="@+id/appbar"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                android:layout_height="match_parent"
+                android:animateLayoutChanges="true"
+                tools:context=".fragments.InfoFragment">
 
-                <com.google.android.material.appbar.CollapsingToolbarLayout
-                    android:id="@+id/collapsing_toolbar"
+                <ProgressBar
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:visibility="@{isLoading ? View.VISIBLE : View.GONE, default=gone}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <com.google.android.material.appbar.AppBarLayout
+                    android:id="@+id/appbar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fitsSystemWindows="true"
-                    app:layout_scrollFlags="noScroll"
-                    app:titleEnabled="false">
+                    android:background="@android:color/transparent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
+                    <com.google.android.material.appbar.CollapsingToolbarLayout
+                        android:id="@+id/collapsing_toolbar"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="wrap_content"
+                        android:fitsSystemWindows="true"
+                        app:layout_scrollFlags="noScroll"
+                        app:titleEnabled="false">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
 
 
-                        <TextView
-                            android:id="@+id/textView"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/medium"
-                            android:paddingStart="@dimen/_15sdp"
-                            android:paddingEnd="@dimen/_15sdp"
-                            android:paddingTop="@dimen/_10sdp"
-                            android:paddingBottom="@dimen/_10sdp"
-                            android:textSize="@dimen/_30ssp"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.0"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            <TextView
+                                android:id="@+id/textView"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/medium"
+                                android:paddingStart="@dimen/_15sdp"
+                                android:paddingTop="@dimen/_10sdp"
+                                android:paddingEnd="@dimen/_15sdp"
+                                android:paddingBottom="@dimen/_10sdp"
+                                android:textSize="@dimen/_30ssp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintHorizontal_bias="0.0"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
 
-                        <ImageView
-                            android:id="@+id/star"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="15dp"
-                            android:src="@drawable/star"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/textView" />
+                            <ImageView
+                                android:id="@+id/star"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="15dp"
+                                android:src="@drawable/star"
+                                android:visibility="@{isLoading ? View.GONE : View.VISIBLE, default=visible}"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/textView" />
 
-                        <TextView
-                            android:id="@+id/textRating"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="15dp"
-                            android:fontFamily="@font/normal"
-                            android:padding="@dimen/_10sdp"
-                            android:textSize="@dimen/_16sdp"
-                            android:textStyle="bold"
-                            app:layout_constraintBottom_toBottomOf="@+id/star"
-                            app:layout_constraintStart_toEndOf="@+id/star"
-                            app:layout_constraintTop_toTopOf="@+id/star" />
+                            <TextView
+                                android:id="@+id/textRating"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="15dp"
+                                android:fontFamily="@font/normal"
+                                android:padding="@dimen/_10sdp"
+                                android:textSize="@dimen/_16sdp"
+                                android:textStyle="bold"
+                                app:layout_constraintBottom_toBottomOf="@+id/star"
+                                app:layout_constraintStart_toEndOf="@+id/star"
+                                app:layout_constraintTop_toTopOf="@+id/star" />
 
-                        <ImageView
-                            android:id="@+id/people"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="15dp"
-                            android:src="@drawable/people"
-                            app:layout_constraintStart_toEndOf="@+id/textRating"
-                            app:layout_constraintTop_toBottomOf="@id/textView" />
+                            <ImageView
+                                android:id="@+id/people"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="15dp"
+                                android:src="@drawable/people"
+                                android:visibility="@{isLoading ? View.GONE : View.VISIBLE, default=visible}"
+                                app:layout_constraintStart_toEndOf="@+id/textRating"
+                                app:layout_constraintTop_toBottomOf="@id/textView" />
 
-                        <TextView
-                            android:id="@+id/textPeople"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="15dp"
-                            android:fontFamily="@font/normal"
-                            android:padding="@dimen/_10sdp"
-                            android:textSize="@dimen/_16sdp"
-                            android:textStyle="bold"
-                            app:layout_constraintBottom_toBottomOf="@+id/people"
-                            app:layout_constraintStart_toEndOf="@+id/people"
-                            app:layout_constraintTop_toTopOf="@+id/people" />
+                            <TextView
+                                android:id="@+id/textPeople"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="15dp"
+                                android:fontFamily="@font/normal"
+                                android:padding="@dimen/_10sdp"
+                                android:textSize="@dimen/_16sdp"
+                                android:textStyle="bold"
+                                app:layout_constraintBottom_toBottomOf="@+id/people"
+                                app:layout_constraintStart_toEndOf="@+id/people"
+                                app:layout_constraintTop_toTopOf="@+id/people" />
 
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-                </com.google.android.material.appbar.CollapsingToolbarLayout>
-            </com.google.android.material.appbar.AppBarLayout>
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </com.google.android.material.appbar.CollapsingToolbarLayout>
+                </com.google.android.material.appbar.AppBarLayout>
 
-            <com.makeramen.roundedimageview.RoundedImageView
-                android:id="@+id/imageMovie"
-                android:layout_width="168dp"
-                android:layout_height="240dp"
-                android:layout_margin="15dp"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="15dp"
-                android:scaleType="centerCrop"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/appbar"
-                app:riv_corner_radius="8dp" />
+                <com.makeramen.roundedimageview.RoundedImageView
+                    android:id="@+id/imageMovie"
+                    android:layout_width="168dp"
+                    android:layout_height="240dp"
+                    android:layout_margin="15dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="15dp"
+                    android:scaleType="centerCrop"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/appbar"
+                    app:riv_corner_radius="8dp" />
 
-            <ImageView
-                android:id="@+id/like"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:src="@drawable/ic_sharp_favorite_border_24"
-                android:tag="@string/nolike"
-                app:layout_constraintEnd_toEndOf="@+id/imageMovie"
-                app:layout_constraintTop_toTopOf="@+id/imageMovie" />
+                <ImageView
+                    android:id="@+id/like"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:src="@drawable/ic_sharp_favorite_border_24"
+                    android:tag="@string/nolike"
+                    android:visibility="@{isLoading ? View.GONE : View.VISIBLE, default=visible}"
+                    app:layout_constraintEnd_toEndOf="@+id/imageMovie"
+                    app:layout_constraintTop_toTopOf="@+id/imageMovie" />
 
-            <ImageView
-                android:id="@+id/imageBudget"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:src="@drawable/budget"
-                app:layout_constraintStart_toStartOf="@id/imageMovie"
-                app:layout_constraintTop_toBottomOf="@+id/imageCountry" />
+                <ImageView
+                    android:id="@+id/imageBudget"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:src="@drawable/budget"
+                    android:visibility="@{isLoading ? View.GONE : View.VISIBLE, default=visible}"
+                    app:layout_constraintStart_toStartOf="@id/imageMovie"
+                    app:layout_constraintTop_toBottomOf="@+id/imageCountry" />
 
-            <TextView
-                android:id="@+id/budget"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/normal"
-                android:textSize="@dimen/_13sdp"
-                app:layout_constraintBottom_toBottomOf="@+id/imageBudget"
-                app:layout_constraintEnd_toEndOf="@+id/country"
-                app:layout_constraintStart_toStartOf="@+id/country"
-                app:layout_constraintTop_toTopOf="@+id/imageBudget" />
+                <TextView
+                    android:id="@+id/budget"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/normal"
+                    android:textSize="@dimen/_13sdp"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageBudget"
+                    app:layout_constraintEnd_toEndOf="@+id/country"
+                    app:layout_constraintStart_toStartOf="@+id/country"
+                    app:layout_constraintTop_toTopOf="@+id/imageBudget" />
 
-            <ImageView
-                android:id="@+id/imageRevenue"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/revenue"
-                android:layout_marginTop="15dp"
-                app:layout_constraintStart_toStartOf="@id/imageMovie"
-                app:layout_constraintTop_toBottomOf="@+id/imageBudget"
-                />
+                <ImageView
+                    android:id="@+id/imageRevenue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:src="@drawable/revenue"
+                    android:visibility="@{isLoading ? View.GONE : View.VISIBLE, default=visible}"
+                    app:layout_constraintStart_toStartOf="@id/imageMovie"
+                    app:layout_constraintTop_toBottomOf="@+id/imageBudget" />
 
-            <TextView
-                android:id="@+id/revenue"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/normal"
-                android:textSize="@dimen/_13sdp"
-                app:layout_constraintBottom_toBottomOf="@+id/imageRevenue"
-                app:layout_constraintEnd_toEndOf="@+id/budget"
-                app:layout_constraintStart_toStartOf="@+id/budget"
-                app:layout_constraintTop_toTopOf="@+id/imageRevenue" />
+                <TextView
+                    android:id="@+id/revenue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/normal"
+                    android:textSize="@dimen/_13sdp"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageRevenue"
+                    app:layout_constraintEnd_toEndOf="@+id/budget"
+                    app:layout_constraintStart_toStartOf="@+id/budget"
+                    app:layout_constraintTop_toTopOf="@+id/imageRevenue" />
 
-            <ImageView
-                android:id="@+id/imageRuntime"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="15dp"
-                android:src="@drawable/runtime"
-                app:layout_constraintStart_toEndOf="@+id/imageMovie"
-                app:layout_constraintTop_toBottomOf="@id/recyclerViewGenres" />
+                <ImageView
+                    android:id="@+id/imageRuntime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:src="@drawable/runtime"
+                    android:visibility="@{isLoading ? View.GONE : View.VISIBLE, default=visible}"
+                    app:layout_constraintStart_toEndOf="@+id/imageMovie"
+                    app:layout_constraintTop_toBottomOf="@id/recyclerViewGenres" />
 
-            <TextView
-                android:id="@+id/runtime"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginEnd="15dp"
-                android:fontFamily="@font/normal"
-                android:textSize="@dimen/_13sdp"
-                app:layout_constraintBottom_toBottomOf="@+id/imageRuntime"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.517"
-                app:layout_constraintStart_toEndOf="@+id/imageRuntime"
-                app:layout_constraintTop_toTopOf="@+id/imageRuntime" />
-
-
-            <ImageView
-                android:id="@+id/imageDate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="15dp"
-                android:src="@drawable/date"
-                app:layout_constraintStart_toEndOf="@+id/imageMovie"
-                app:layout_constraintTop_toBottomOf="@+id/imageRuntime" />
-
-            <TextView
-                android:id="@+id/date"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/normal"
-                android:textSize="@dimen/_13sdp"
-                app:layout_constraintBottom_toBottomOf="@+id/imageDate"
-                app:layout_constraintEnd_toEndOf="@+id/runtime"
-                app:layout_constraintStart_toStartOf="@+id/runtime"
-                app:layout_constraintTop_toTopOf="@+id/imageDate" />
+                <TextView
+                    android:id="@+id/runtime"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:fontFamily="@font/normal"
+                    android:textSize="@dimen/_13sdp"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageRuntime"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.517"
+                    app:layout_constraintStart_toEndOf="@+id/imageRuntime"
+                    app:layout_constraintTop_toTopOf="@+id/imageRuntime" />
 
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerViewGenres"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="15dp"
+                <ImageView
+                    android:id="@+id/imageDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:src="@drawable/date"
+                    android:visibility="@{isLoading ? View.GONE : View.VISIBLE, default=visible}"
+                    app:layout_constraintStart_toEndOf="@+id/imageMovie"
+                    app:layout_constraintTop_toBottomOf="@+id/imageRuntime" />
 
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/imageMovie"
-                app:layout_constraintTop_toBottomOf="@+id/appbar" />
+                <TextView
+                    android:id="@+id/date"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/normal"
+                    android:textSize="@dimen/_13sdp"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageDate"
+                    app:layout_constraintEnd_toEndOf="@+id/runtime"
+                    app:layout_constraintStart_toStartOf="@+id/runtime"
+                    app:layout_constraintTop_toTopOf="@+id/imageDate" />
 
 
-            <ImageView
-                android:id="@+id/imageCountry"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:src="@drawable/country"
-                app:layout_constraintStart_toStartOf="@id/imageMovie"
-                app:layout_constraintTop_toBottomOf="@+id/imageMovie" />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerViewGenres"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
 
-            <TextView
-                android:id="@+id/country"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/normal"
-                android:textSize="@dimen/_13sdp"
-                android:layout_marginStart="15dp"
-                app:layout_constraintBottom_toBottomOf="@+id/imageCountry"
-                app:layout_constraintEnd_toEndOf="@+id/imageMovie"
-                app:layout_constraintStart_toEndOf="@+id/imageCountry"
-                app:layout_constraintTop_toTopOf="@+id/imageCountry" />
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/imageMovie"
+                    app:layout_constraintTop_toBottomOf="@+id/appbar" />
 
-            <TextView
-                android:id="@+id/textOverview"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
 
-                android:fontFamily="@font/normal"
-                android:textSize="@dimen/_13sdp"
-                app:layout_constraintEnd_toEndOf="@+id/date"
-                app:layout_constraintStart_toStartOf="@+id/imageCountry"
-                app:layout_constraintTop_toBottomOf="@+id/revenue" />
+                <ImageView
+                    android:id="@+id/imageCountry"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:src="@drawable/country"
+                    android:visibility="@{isLoading ? View.GONE : View.VISIBLE, default=visible}"
+                    app:layout_constraintStart_toStartOf="@id/imageMovie"
+                    app:layout_constraintTop_toBottomOf="@+id/imageMovie" />
 
-            <TextView
-                android:id="@+id/textViewActors"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:fontFamily="@font/medium"
-                android:padding="@dimen/_10sdp"
-                android:text="@string/credits"
-                android:textSize="@dimen/_15ssp"
-                app:layout_constraintTop_toBottomOf="@+id/textOverview" />
+                <TextView
+                    android:id="@+id/country"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:fontFamily="@font/normal"
+                    android:textSize="@dimen/_13sdp"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageCountry"
+                    app:layout_constraintEnd_toEndOf="@+id/imageMovie"
+                    app:layout_constraintStart_toEndOf="@+id/imageCountry"
+                    app:layout_constraintTop_toTopOf="@+id/imageCountry" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerActors"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:layout_marginBottom="15dp"
-                android:clipToPadding="false"
-                android:orientation="horizontal"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/date"
-                app:layout_constraintStart_toStartOf="@+id/imageMovie"
-                app:layout_constraintTop_toBottomOf="@+id/textViewActors" />
+                <TextView
+                    android:id="@+id/textOverview"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.core.widget.NestedScrollView>
+                    android:fontFamily="@font/normal"
+                    android:textSize="@dimen/_13sdp"
+                    app:layout_constraintEnd_toEndOf="@+id/date"
+                    app:layout_constraintStart_toStartOf="@+id/imageCountry"
+                    app:layout_constraintTop_toBottomOf="@+id/revenue" />
+
+                <TextView
+                    android:id="@+id/textViewActors"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:fontFamily="@font/medium"
+                    android:padding="@dimen/_10sdp"
+                    android:text="@string/credits"
+                    android:textSize="@dimen/_15ssp"
+                    app:layout_constraintTop_toBottomOf="@+id/textOverview" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerActors"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:clipToPadding="false"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/date"
+                    app:layout_constraintStart_toStartOf="@+id/imageMovie"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewActors" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </layout>

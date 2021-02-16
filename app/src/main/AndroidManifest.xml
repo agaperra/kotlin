@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.geekbrains.kotlin_lessons">
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <application
         android:allowBackup="true"
         android:usesCleartextTraffic="true"
@@ -29,6 +30,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <receiver android:name=".receivers.NetworkConnectionReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.CONNECTIVITY_CHANGED"/>
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

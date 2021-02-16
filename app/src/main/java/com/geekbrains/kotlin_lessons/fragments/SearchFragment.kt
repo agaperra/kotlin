@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.geekbrains.kotlin_lessons.R
 import com.geekbrains.kotlin_lessons.activity.MainActivity
 import com.geekbrains.kotlin_lessons.adapters.HorizontalRecyclerAdapter
@@ -22,6 +23,7 @@ import com.geekbrains.kotlin_lessons.adapters.SearchMovieAdapter
 import com.geekbrains.kotlin_lessons.databinding.FragmentSearchBinding
 import com.geekbrains.kotlin_lessons.interactors.string.StringInteractorImpl
 import com.geekbrains.kotlin_lessons.models.Movie
+import com.geekbrains.kotlin_lessons.receivers.NetworkConnectionReceiver
 import com.geekbrains.kotlin_lessons.viewModels.SearchViewModel
 import okhttp3.internal.Util
 
@@ -30,21 +32,40 @@ class SearchFragment : Fragment() {
 
     private lateinit var searchViewModel: SearchViewModel
     private lateinit var binding: FragmentSearchBinding
+    private lateinit var networkConnectionReceiver: NetworkConnectionReceiver
 
     private val movieAdapterSearch by lazy {
         SearchMovieAdapter(onItemViewClickListener = object : OnItemViewClickListener {
             override fun onItemClick(movie: Movie) {
-                val action = SearchFragmentDirections.actionNavigationSearchToInfoFragment(movieId = movie.id)
+                val action =
+                    SearchFragmentDirections.actionNavigationSearchToInfoFragment(movieId = movie.id)
                 requireView().findNavController().navigate(action)
             }
         })
     }
     private var data = ""
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        binding.refresh.setOnRefreshListener {
+            refresh(binding.refresh)
+        }
+        doInitialization()
+        super.onViewCreated(view, savedInstanceState)
+    }
+
+    private fun refresh(swipeRefreshLayout: SwipeRefreshLayout) {
+        swipeRefreshLayout.isRefreshing = true
+        swipeRefreshLayout.postOnAnimationDelayed({
+            doInitialization()
+            swipeRefreshLayout.isRefreshing = false
+        }, 2000)
+    }
+
+
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_search, container, false)
         searchViewModel = SearchViewModel(StringInteractorImpl(requireContext()))
@@ -53,20 +74,29 @@ class SearchFragment : Fragment() {
     }
 
     private fun doInitialization() {
-        binding.searchMovie.visibility = View.VISIBLE
 
-        searchViewModel = SearchViewModel(StringInteractorImpl(requireContext()))
-        searchViewModel.liveDataPictures.observe(
-                viewLifecycleOwner,
-                { binding.textViewMovie.text = it })
-        binding.viewModelSearch = searchViewModel
+        networkConnectionReceiver = NetworkConnectionReceiver()
+        when (networkConnectionReceiver.checkInternet(requireContext())) {
+            false -> {
+                requireView().findNavController().navigate(R.id.disconnectSearch)
+            }
+            true -> {
+                binding.searchMovie.visibility = View.VISIBLE
 
-        binding.movieRecycler.apply {
-            adapter = movieAdapterSearch
-            layoutManager =
-                    LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+                searchViewModel = SearchViewModel(StringInteractorImpl(requireContext()))
+                searchViewModel.liveDataPictures.observe(
+                    viewLifecycleOwner,
+                    { binding.textViewMovie.text = it })
+                binding.viewModelSearch = searchViewModel
+
+                binding.movieRecycler.apply {
+                    adapter = movieAdapterSearch
+                    layoutManager =
+                        LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+                }
+                setObserver(searchViewModel, movieAdapterSearch)
+            }
         }
-        setObserver(searchViewModel, movieAdapterSearch)
 
 
     }
@@ -88,8 +118,8 @@ class SearchFragment : Fragment() {
         binding.searchView.apply {
 
             var id = context
-                    .resources
-                    .getIdentifier("android:id/search_src_text", null, null)
+                .resources
+                .getIdentifier("android:id/search_src_text", null, null)
             val textView = findViewById<View>(id) as TextView
             //использование resources.getColor(id: Int, theme: Resources.Theme!) возможно с API 23, а у меня минимальная версия API 21
             textView.setTextColor(resources.getColor(R.color.bottom_nav_menu))
@@ -97,14 +127,14 @@ class SearchFragment : Fragment() {
             textView.typeface = typeface
 
             id = context
-                    .resources
-                    .getIdentifier("android:id/search_close_btn", null, null)
+                .resources
+                .getIdentifier("android:id/search_close_btn", null, null)
             var imageView = findViewById<View>(id) as ImageView
             imageView.setImageResource(R.drawable.ic_baseline_close_24)
 
             id = context
-                    .resources
-                    .getIdentifier("android:id/search_button", null, null)
+                .resources
+                .getIdentifier("android:id/search_button", null, null)
             imageView = findViewById<View>(id) as ImageView
             imageView.setImageResource(R.drawable.searcview_icon)
 

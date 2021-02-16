@@ -41,4 +41,5 @@
     <string name="genres" translatable="false">genres</string>
     <string name="add_to_favorites">Movie added to favorites</string>
     <string name="remove_from_favorites">Movie removed from favorites</string>
+    <string name="connection_lost">Connection lost</string>
 </resources>
