@@ -51,7 +51,7 @@ class HorizontalRecyclerAdapter(var onItemViewClickListener: OnItemViewClickList
 
                 findViewById<TextView>(R.id.textName).text = movie.title
                 findViewById<TextView>(R.id.textReleaseDate).text =
-                    movie.release_date.substring(0, 4)
+                    movie.release_date.take(4)
 
                 val itemLike = findViewById<ImageView>(R.id.like)
                 itemLike.tag = R.string.nolike
@@ -73,8 +73,13 @@ class HorizontalRecyclerAdapter(var onItemViewClickListener: OnItemViewClickList
                                 showSnackBar(R.string.remove_from_favorites, Snackbar.LENGTH_SHORT)
                         }
                     }
-                    snackbar.view.setBackgroundColor(resources.getColor(R.color.low_pink))
-                    snackbar.view.setPadding(20, 20, 20, 20)
+                    @SuppressLint("InflateParams") val customSnackView: View =
+                        LayoutInflater.from(context).inflate(R.layout.rounded, null)
+                    snackbar.view.setBackgroundColor(Color.TRANSPARENT)
+                    val snackbarLayout = snackbar.view as Snackbar.SnackbarLayout
+
+                    snackbarLayout.setPadding(20, 20, 20, 20)
+                    snackbarLayout.addView(customSnackView, 0)
                     snackbar.show()
                 }
 

@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -47,6 +48,15 @@ class InfoFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.refresh.setOnRefreshListener {
             refresh(binding.refresh)
+        }
+        when (activity?.supportFragmentManager?.findFragmentByTag("info")) {
+            is InfoFragment -> {
+            }
+            else -> {
+                val ft: FragmentTransaction? = activity?.supportFragmentManager?.beginTransaction()
+                ft?.addToBackStack("info")
+                ft?.commit()
+            }
         }
         doInitialization()
         super.onViewCreated(view, savedInstanceState)

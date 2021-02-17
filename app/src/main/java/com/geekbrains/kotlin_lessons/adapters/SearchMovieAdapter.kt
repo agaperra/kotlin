@@ -47,8 +47,12 @@ class SearchMovieAdapter(var onItemViewClickListener: OnItemViewClickListener) :
                     .into(poster)
 
                 findViewById<TextView>(R.id.textName).text = movie.title
-                findViewById<TextView>(R.id.textReleaseDate).text =
-                    movie.release_date.substring(0, 4)
+
+                movie.release_date.let {
+                    findViewById<TextView>(R.id.textReleaseDate).text =
+                        movie.release_date.take(4)
+                }
+
                 setOnClickListener {
                     onItemViewClickListener.onItemClick(movie = movie)
                 }

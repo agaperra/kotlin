@@ -1,5 +1,9 @@
 package com.geekbrains.kotlin_lessons.fragments
 
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import android.graphics.Typeface
 import android.graphics.fonts.FontFamily
 import android.os.Bundle
@@ -11,6 +15,8 @@ import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -24,6 +30,8 @@ import com.geekbrains.kotlin_lessons.databinding.FragmentSearchBinding
 import com.geekbrains.kotlin_lessons.interactors.string.StringInteractorImpl
 import com.geekbrains.kotlin_lessons.models.Movie
 import com.geekbrains.kotlin_lessons.receivers.NetworkConnectionReceiver
+import com.geekbrains.kotlin_lessons.responses.MovieResponse
+import com.geekbrains.kotlin_lessons.services.MoviesService
 import com.geekbrains.kotlin_lessons.viewModels.SearchViewModel
 import okhttp3.internal.Util
 
@@ -33,6 +41,15 @@ class SearchFragment : Fragment() {
     private lateinit var searchViewModel: SearchViewModel
     private lateinit var binding: FragmentSearchBinding
     private lateinit var networkConnectionReceiver: NetworkConnectionReceiver
+
+    private val movieReceiver: BroadcastReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            val movieResponse = intent?.getSerializableExtra("movieResponse") as MovieResponse
+            movieAdapterSearch.clearItems()
+            movieAdapterSearch.addItems(movieResponse.results)
+            movieAdapterSearch.notifyDataSetChanged()
+        }
+    }
 
     private val movieAdapterSearch by lazy {
         SearchMovieAdapter(onItemViewClickListener = object : OnItemViewClickListener {
@@ -45,23 +62,6 @@ class SearchFragment : Fragment() {
     }
     private var data = ""
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        binding.refresh.setOnRefreshListener {
-            refresh(binding.refresh)
-        }
-        doInitialization()
-        super.onViewCreated(view, savedInstanceState)
-    }
-
-    private fun refresh(swipeRefreshLayout: SwipeRefreshLayout) {
-        swipeRefreshLayout.isRefreshing = true
-        swipeRefreshLayout.postOnAnimationDelayed({
-            doInitialization()
-            swipeRefreshLayout.isRefreshing = false
-        }, 2000)
-    }
-
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -73,30 +73,29 @@ class SearchFragment : Fragment() {
         return binding.root
     }
 
-    private fun doInitialization() {
-
-        networkConnectionReceiver = NetworkConnectionReceiver()
-        when (networkConnectionReceiver.checkInternet(requireContext())) {
-            false -> {
-                requireView().findNavController().navigate(R.id.disconnectSearch)
-            }
-            true -> {
-                binding.searchMovie.visibility = View.VISIBLE
-
-                searchViewModel = SearchViewModel(StringInteractorImpl(requireContext()))
-                searchViewModel.liveDataPictures.observe(
-                    viewLifecycleOwner,
-                    { binding.textViewMovie.text = it })
-                binding.viewModelSearch = searchViewModel
-
-                binding.movieRecycler.apply {
-                    adapter = movieAdapterSearch
-                    layoutManager =
-                        LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
-                }
-                setObserver(searchViewModel, movieAdapterSearch)
-            }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        context?.let {
+            LocalBroadcastManager.getInstance(it)
+                .registerReceiver(movieReceiver, IntentFilter("INTENT FILTER"))
         }
+    }
+
+    private fun doInitialization() {
+        binding.searchMovie.visibility = View.VISIBLE
+
+        searchViewModel = SearchViewModel(StringInteractorImpl(requireContext()))
+        searchViewModel.liveDataPictures.observe(
+            viewLifecycleOwner,
+            { binding.textViewMovie.text = it })
+        binding.viewModelSearch = searchViewModel
+
+        binding.movieRecycler.apply {
+            adapter = movieAdapterSearch
+            layoutManager =
+                LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+        }
+        setObserver(searchViewModel, movieAdapterSearch)
 
 
     }
@@ -139,27 +138,54 @@ class SearchFragment : Fragment() {
             imageView.setImageResource(R.drawable.searcview_icon)
 
             setOnClickListener { isIconified = false }
-            setOnQueryTextListener(object : android.widget.SearchView.OnQueryTextListener {
-                override fun onQueryTextSubmit(query: String): Boolean {
-                    return when (data.trim()) {
-                        "" -> false
-                        else -> {
-                            doInitialization()
-                            searchViewModel.textChanged(data)
-                            onActionViewCollapsed()
-                            true
+
+            networkConnectionReceiver = NetworkConnectionReceiver()
+            when (networkConnectionReceiver.checkInternet(requireContext())) {
+                false -> {
+                    requireView().findNavController().navigate(R.id.disconnectMovie)
+                }
+                true -> {
+                    setOnQueryTextListener(object : android.widget.SearchView.OnQueryTextListener {
+                        override fun onQueryTextSubmit(query: String): Boolean {
+                            return when (data.trim()) {
+                                "" -> false
+                                else -> {
+                                    context?.let { context ->
+                                        context.startService(
+                                            Intent(
+                                                context,
+                                                MoviesService::class.java
+                                            ).apply {
+                                                putExtra("Movie", data)
+                                            })
+                                    }
+                                    doInitialization()
+
+                                    //searchViewModel.textChanged(data)
+                                    onActionViewCollapsed()
+                                    true
+                                }
+                            }
                         }
-                    }
 
+                        override fun onQueryTextChange(newText: String): Boolean {
+                            data = newText
+                            context?.let { context ->
+                                context.startService(
+                                    Intent(
+                                        context,
+                                        MoviesService::class.java
+                                    ).apply {
+                                        putExtra("Movie", newText)
+                                    })
+                            }
+                            doInitialization()
+                            //searchViewModel.textChanged(data)
+                            return true
+                        }
+                    })
                 }
-
-                override fun onQueryTextChange(newText: String): Boolean {
-                    data = newText
-                    doInitialization()
-                    searchViewModel.textChanged(data)
-                    return true
-                }
-            })
+            }
 
         }
 
