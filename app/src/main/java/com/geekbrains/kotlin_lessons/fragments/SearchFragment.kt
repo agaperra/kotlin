@@ -69,8 +69,12 @@ class SearchFragment : Fragment() {
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_search, container, false)
         searchViewModel = SearchViewModel(StringInteractorImpl(requireContext()))
-        setUpSearchView()
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        setUpSearchView()
+        super.onViewCreated(view, savedInstanceState)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -142,7 +146,7 @@ class SearchFragment : Fragment() {
             networkConnectionReceiver = NetworkConnectionReceiver()
             when (networkConnectionReceiver.checkInternet(requireContext())) {
                 false -> {
-                    requireView().findNavController().navigate(R.id.disconnectMovie)
+                    requireView().findNavController().navigate(R.id.disconnectSearch)
                 }
                 true -> {
                     setOnQueryTextListener(object : android.widget.SearchView.OnQueryTextListener {
