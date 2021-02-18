@@ -2,7 +2,7 @@ package com.geekbrains.kotlin_lessons.repositories
 
 import androidx.lifecycle.MutableLiveData
 import com.geekbrains.kotlin_lessons.BuildConfig
-import com.geekbrains.kotlin_lessons.Constants
+import com.geekbrains.kotlin_lessons.utils.Constants
 import com.geekbrains.kotlin_lessons.models.MovieFull
 import com.geekbrains.kotlin_lessons.network.ApiClient
 import com.geekbrains.kotlin_lessons.network.ApiService

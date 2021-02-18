@@ -6,8 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.geekbrains.kotlin_lessons.Constants
-import com.geekbrains.kotlin_lessons.Constants.Companion.imageURL
+import com.geekbrains.kotlin_lessons.utils.Constants.Companion.imageURL
 import com.geekbrains.kotlin_lessons.R
 import com.geekbrains.kotlin_lessons.models.Movie
 import com.squareup.picasso.Picasso

@@ -18,6 +18,7 @@ import com.geekbrains.kotlin_lessons.databinding.FragmentMovieBinding
 import com.geekbrains.kotlin_lessons.interactors.string.StringInteractorImpl
 import com.geekbrains.kotlin_lessons.models.Movie
 import com.geekbrains.kotlin_lessons.receivers.NetworkConnectionReceiver
+import com.geekbrains.kotlin_lessons.utils.Constants
 import com.geekbrains.kotlin_lessons.viewModels.MovieViewModel
 
 
@@ -29,6 +30,7 @@ class MovieFragment : Fragment() {
     private val movieAdapterPopular by lazy {
         HorizontalRecyclerAdapter(onItemViewClickListener = object : OnItemViewClickListener {
             override fun onItemClick(movie: Movie) {
+                Constants.boolean = true
                 val action = MovieFragmentDirections.openMovie(movieId = movie.id)
                 requireView().findNavController().navigate(action)
             }
@@ -38,6 +40,7 @@ class MovieFragment : Fragment() {
     private val movieAdapterNowPlaying by lazy {
         HorizontalRecyclerAdapter(onItemViewClickListener = object : OnItemViewClickListener {
             override fun onItemClick(movie: Movie) {
+                Constants.boolean = true
                 val action = MovieFragmentDirections.openMovie(movieId = movie.id)
                 requireView().findNavController().navigate(action)
             }
@@ -47,6 +50,7 @@ class MovieFragment : Fragment() {
     private val movieAdapterUpComing by lazy {
         HorizontalRecyclerAdapter(onItemViewClickListener = object : OnItemViewClickListener {
             override fun onItemClick(movie: Movie) {
+                Constants.boolean = true
                 val action = MovieFragmentDirections.openMovie(movieId = movie.id)
                 requireView().findNavController().navigate(action)
             }
@@ -56,6 +60,7 @@ class MovieFragment : Fragment() {
     private val movieAdapterTop by lazy {
         HorizontalRecyclerAdapter(onItemViewClickListener = object : OnItemViewClickListener {
             override fun onItemClick(movie: Movie) {
+                Constants.boolean = true
                 val action = MovieFragmentDirections.openMovie(movieId = movie.id)
                 requireView().findNavController().navigate(action)
             }
@@ -64,11 +69,11 @@ class MovieFragment : Fragment() {
 
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View {
-
+        Constants.boolean = false
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_movie, container, false)
         return binding.root
     }
@@ -101,25 +106,25 @@ class MovieFragment : Fragment() {
                 binding.mainRecycler.apply {
                     adapter = movieAdapterPopular
                     layoutManager =
-                        LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+                            LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
                 }
 
                 binding.lookingRecycler.apply {
                     adapter = movieAdapterNowPlaying
                     layoutManager =
-                        LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+                            LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
                 }
 
                 binding.upcomingRecycler.apply {
                     adapter = movieAdapterUpComing
                     layoutManager =
-                        LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+                            LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
                 }
 
                 binding.topRecycler.apply {
                     adapter = movieAdapterTop
                     layoutManager =
-                        LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+                            LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
                 }
 
                 movieViewModel = MovieViewModel(StringInteractorImpl(requireContext()))
@@ -195,11 +200,11 @@ class MovieFragment : Fragment() {
     private fun setUpLiveData() {
         movieViewModel.liveDataPopular.observe(viewLifecycleOwner, { binding.textView2.text = it })
         movieViewModel.liveDataNowPlaying.observe(
-            viewLifecycleOwner,
-            { binding.textLookNow.text = it })
+                viewLifecycleOwner,
+                { binding.textLookNow.text = it })
         movieViewModel.liveDataUpComing.observe(
-            viewLifecycleOwner,
-            { binding.textUpComingNow.text = it })
+                viewLifecycleOwner,
+                { binding.textUpComingNow.text = it })
         movieViewModel.liveDataTop.observe(viewLifecycleOwner, { binding.textTop.text = it })
     }
 

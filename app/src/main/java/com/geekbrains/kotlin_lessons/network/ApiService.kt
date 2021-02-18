@@ -1,6 +1,6 @@
 package com.geekbrains.kotlin_lessons.network
 
-import com.geekbrains.kotlin_lessons.Constants
+import com.geekbrains.kotlin_lessons.utils.Constants
 import com.geekbrains.kotlin_lessons.models.MovieFull
 import com.geekbrains.kotlin_lessons.responses.ActorsResponse
 import com.geekbrains.kotlin_lessons.responses.MovieResponse

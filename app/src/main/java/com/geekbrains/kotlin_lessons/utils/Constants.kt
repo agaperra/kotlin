@@ -1,4 +1,4 @@
-package com.geekbrains.kotlin_lessons
+package com.geekbrains.kotlin_lessons.utils
 
 import android.annotation.SuppressLint
 import java.util.*
@@ -7,6 +7,8 @@ import java.util.*
 class Constants {
 
     companion object {
+
+         var boolean: Boolean = false
 
         @SuppressLint("ConstantLocale")
         val locale: String = Locale.getDefault().language

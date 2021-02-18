@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.geekbrains.kotlin_lessons.Constants
+import com.geekbrains.kotlin_lessons.utils.Constants
 import com.geekbrains.kotlin_lessons.R
 import com.geekbrains.kotlin_lessons.models.Actor
 import com.makeramen.roundedimageview.RoundedImageView

@@ -2,31 +2,25 @@ package com.geekbrains.kotlin_lessons.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.geekbrains.kotlin_lessons.IOBackPressed
 import com.geekbrains.kotlin_lessons.R
 import com.geekbrains.kotlin_lessons.viewModels.DisconnectViewModel
-import java.util.*
 
 class DisconnectFragment : Fragment() {
 
     private lateinit var disconnectViewModel: DisconnectViewModel
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View {
         disconnectViewModel =
-            ViewModelProvider(this).get(DisconnectViewModel::class.java)
+                ViewModelProvider(this).get(DisconnectViewModel::class.java)
         return inflater.inflate(R.layout.connection_lost, container, false)
     }
 
