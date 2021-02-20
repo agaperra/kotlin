@@ -15,6 +15,11 @@
             app:destination="@id/infoFragment"
             app:enterAnim="@anim/slide_from_bottom"
             app:exitAnim="@anim/fragment_fade_exit" />
+        <action
+            android:id="@+id/disconnectMovie"
+            app:destination="@id/navigation_disconnect"
+            app:enterAnim="@anim/slide_from_bottom"
+            app:exitAnim="@anim/fragment_fade_exit" />
     </fragment>
 
     <fragment
@@ -25,6 +30,11 @@
         <action
             android:id="@+id/action_navigation_favorites_to_infoFragment"
             app:destination="@id/infoFragment" />
+        <action
+            android:id="@+id/disconnectFavorites"
+            app:destination="@id/navigation_disconnect"
+            app:enterAnim="@anim/slide_from_bottom"
+            app:exitAnim="@anim/fragment_fade_exit" />
     </fragment>
 
     <fragment
@@ -35,6 +45,11 @@
         <action
             android:id="@+id/action_navigation_search_to_infoFragment"
             app:destination="@id/infoFragment" />
+        <action
+            android:id="@+id/disconnectSearch"
+            app:destination="@id/navigation_disconnect"
+            app:enterAnim="@anim/slide_from_bottom"
+            app:exitAnim="@anim/fragment_fade_exit" />
     </fragment>
 
     <fragment
@@ -44,5 +59,19 @@
         <argument
             android:name="movieId"
             app:argType="integer" />
+
+        <action
+            android:id="@+id/disconnectInfo"
+            app:destination="@id/navigation_disconnect"
+            app:enterAnim="@anim/slide_from_bottom"
+            app:exitAnim="@anim/fragment_fade_exit" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/navigation_disconnect"
+        android:name="com.geekbrains.kotlin_lessons.fragments.DisconnectFragment"
+        tools:layout="@layout/connection_lost">
+
     </fragment>
 </navigation>

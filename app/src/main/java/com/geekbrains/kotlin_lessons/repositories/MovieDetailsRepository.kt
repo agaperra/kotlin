@@ -23,7 +23,7 @@ class MovieDetailsRepository {
             }
 
             override fun onFailure(call: Call<MovieFull>, t: Throwable) {
-                _observingMovie.value=null
+                _observingMovie.value = null
             }
         })
     }
@@ -36,7 +36,7 @@ class MovieDetailsRepository {
             }
 
             override fun onFailure(call: Call<ActorsResponse>, t: Throwable) {
-                _observingMovie.value=null
+                _observingMovie.value = null
             }
         })
     }

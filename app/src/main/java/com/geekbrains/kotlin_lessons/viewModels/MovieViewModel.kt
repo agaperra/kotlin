@@ -1,10 +1,9 @@
 package com.geekbrains.kotlin_lessons.viewModels
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.geekbrains.kotlin_lessons.interactors.string.StringInteractor
-import com.geekbrains.kotlin_lessons.models.Movie
 import com.geekbrains.kotlin_lessons.repositories.MovieRepository
 import com.geekbrains.kotlin_lessons.responses.MovieResponse
 
@@ -69,5 +68,6 @@ class MovieViewModel(private val stringInteractor: StringInteractor) : ViewModel
     private fun setTop() {
         liveDataTop.value = stringInteractor.textTop
     }
+
 
 }
