@@ -118,7 +118,6 @@ class SearchFragment : Fragment() {
     }
 
 
-
     private fun setUpSearchView() {
         binding.searchView.apply {
 

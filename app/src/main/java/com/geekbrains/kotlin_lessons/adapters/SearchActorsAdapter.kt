@@ -44,7 +44,7 @@ class SearchActorsAdapter :
                         .placeholder(R.drawable.ic_baseline_no_photography_48)
                         .into(poster)
 
-                actorName.text=actors.name?.replace(" ", "\n")
+                actorName.text = actors.name?.replace(" ", "\n")
 
             }
 
