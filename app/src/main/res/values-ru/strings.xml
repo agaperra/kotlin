@@ -42,4 +42,5 @@
     <string name="releaseDate">Год релиза: </string>
     <string name="country">Страна производства: </string>
     <string name="credits">Люди</string>
+    <string name="actor">Люди</string>
 </resources>

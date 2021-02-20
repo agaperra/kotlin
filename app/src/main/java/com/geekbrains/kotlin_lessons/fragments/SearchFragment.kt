@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.geekbrains.kotlin_lessons.R
 import com.geekbrains.kotlin_lessons.adapters.OnItemViewClickListener
+import com.geekbrains.kotlin_lessons.adapters.SearchActorsAdapter
 import com.geekbrains.kotlin_lessons.adapters.SearchMovieAdapter
 import com.geekbrains.kotlin_lessons.databinding.FragmentSearchBinding
 import com.geekbrains.kotlin_lessons.interactors.string.StringInteractorImpl
@@ -40,6 +41,10 @@ class SearchFragment : Fragment() {
             }
         })
     }
+
+    private val actorAdapterSearch by lazy {
+        SearchActorsAdapter()
+    }
     private var data = ""
 
     override fun onCreateView(
@@ -60,11 +65,14 @@ class SearchFragment : Fragment() {
 
     private fun doInitialization() {
         binding.searchMovie.visibility = View.VISIBLE
-
+        binding.searchActor.visibility = View.VISIBLE
         searchViewModel = SearchViewModel(StringInteractorImpl(requireContext()))
         searchViewModel.liveDataPictures.observe(
                 viewLifecycleOwner,
                 { binding.textViewMovie.text = it })
+        searchViewModel.liveDataActors.observe(
+                viewLifecycleOwner,
+                { binding.textViewActors.text = it })
         binding.viewModelSearch = searchViewModel
 
         binding.movieRecycler.apply {
@@ -72,7 +80,14 @@ class SearchFragment : Fragment() {
             layoutManager =
                     LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
         }
+
+        binding.actorRecycler.apply {
+            adapter = actorAdapterSearch
+            layoutManager =
+                    LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+        }
         setObserver(searchViewModel, movieAdapterSearch)
+        setObserverActor(searchViewModel, actorAdapterSearch)
 
 
     }
@@ -88,6 +103,20 @@ class SearchFragment : Fragment() {
             }
         })
     }
+
+
+    private fun setObserverActor(viewModel: SearchViewModel, adapter: SearchActorsAdapter) {
+        binding.isLoading = true
+        viewModel.getActors().observe(viewLifecycleOwner, { actorsResponse ->
+            actorsResponse?.let {
+                adapter.clearItems()
+                adapter.addItems(actorsResponse.results)
+                adapter.notifyDataSetChanged()
+                binding.isLoading = false
+            }
+        })
+    }
+
 
 
     private fun setUpSearchView() {

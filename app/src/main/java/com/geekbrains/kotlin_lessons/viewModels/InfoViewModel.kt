@@ -8,13 +8,13 @@ import com.geekbrains.kotlin_lessons.interactors.string.StringInteractor
 import com.geekbrains.kotlin_lessons.models.MovieFull
 import com.geekbrains.kotlin_lessons.models.ProductionCountries
 import com.geekbrains.kotlin_lessons.repositories.MovieDetailsRepository
-import com.geekbrains.kotlin_lessons.responses.ActorsResponse
+import com.geekbrains.kotlin_lessons.responses.CastResponse
 
 class InfoViewModel(private val stringInteractor: StringInteractor) : ViewModel(),
     LifecycleObserver, View.OnClickListener {
 
     private val _observingMovie = MutableLiveData<MovieFull>()
-    private val _observingPeople = MutableLiveData<ActorsResponse>()
+    private val _observingPeople = MutableLiveData<CastResponse>()
     private val movieDetailsRepository: MovieDetailsRepository = MovieDetailsRepository()
 
     fun getObservedMovie() = _observingMovie

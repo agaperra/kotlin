@@ -28,6 +28,6 @@ class Constants {
         const val on_the_air_tv = "/3/tv/on-the-air"
         const val top_tv = "/3/tv/top-rated"
         const val search_tv = "/3/search/tv"
-        const val actors = "/3/search/person"
+        const val search_actors = "/3/search/person"
     }
 }

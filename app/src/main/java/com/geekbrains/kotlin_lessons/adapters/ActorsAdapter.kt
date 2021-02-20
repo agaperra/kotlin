@@ -22,7 +22,7 @@ class ActorsAdapter : RecyclerView.Adapter<ActorsAdapter.ActorsViewHolder>() {
 
         fun bindActor(actor: Actor) {
             Picasso.get().load("${Constants.imageURL}${actor.profile_path}")
-                    .placeholder(R.drawable.ic_baseline_no_photography_56)
+                    .placeholder(R.drawable.ic_baseline_no_photography_48)
                     .into(actorPhoto)
 
             actorName.text = actor.name?.replace(" ", "\n")

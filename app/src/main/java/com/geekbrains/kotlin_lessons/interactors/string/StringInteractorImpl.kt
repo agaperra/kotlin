@@ -14,4 +14,5 @@ class StringInteractorImpl(context: Context) : StringInteractor {
     override val textHour: String = context.getString(R.string.h)
     override val textMinute: String = context.getString(R.string.min)
     override val textUnknown: String = context.getString(R.string.unknown)
+    override val textActor: String = context.getString(R.string.actor)
 }
