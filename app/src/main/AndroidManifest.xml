@@ -36,7 +36,6 @@
                 <action android:name="android.intent.action.CONNECTIVITY_CHANGED"/>
             </intent-filter>
         </receiver>
-        <service android:name=".services.MoviesService"/>
     </application>
 
 </manifest>

@@ -6,6 +6,7 @@ interface StringInteractor {
     val textUpComing: String
     val textTop: String
     val textSearch: String
+    val textActor: String
     val textNoOverview: String
     val textUnknownRuntime: String
     val textHour: String

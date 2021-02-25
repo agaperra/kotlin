@@ -13,7 +13,7 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.geekbrains.kotlin_lessons.Constants
+import com.geekbrains.kotlin_lessons.utils.Constants
 import com.geekbrains.kotlin_lessons.R
 import com.geekbrains.kotlin_lessons.adapters.ActorsAdapter
 import com.geekbrains.kotlin_lessons.adapters.GenresAdapter
@@ -35,28 +35,19 @@ class InfoFragment : Fragment() {
     private var flag: Boolean = false
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_info, container, false)
         infoViewModel =
-            InfoViewModel(StringInteractorImpl(requireContext()))
+                InfoViewModel(StringInteractorImpl(requireContext()))
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.refresh.setOnRefreshListener {
             refresh(binding.refresh)
-        }
-        when (activity?.supportFragmentManager?.findFragmentByTag("info")) {
-            is InfoFragment -> {
-            }
-            else -> {
-                val ft: FragmentTransaction? = activity?.supportFragmentManager?.beginTransaction()
-                ft?.addToBackStack("info")
-                ft?.commit()
-            }
         }
         doInitialization()
         super.onViewCreated(view, savedInstanceState)
@@ -98,7 +89,7 @@ class InfoFragment : Fragment() {
                 binding.recyclerViewGenres.apply {
                     adapter = genresAdapter
                     layoutManager =
-                        LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+                            LinearLayoutManager(context, RecyclerView.VERTICAL, false)
                 }
 
                 actorsAdapter = ActorsAdapter()
@@ -106,7 +97,7 @@ class InfoFragment : Fragment() {
                 binding.recyclerActors.apply {
                     adapter = actorsAdapter
                     layoutManager =
-                        LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+                            LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
                 }
             }
         }
@@ -145,8 +136,8 @@ class InfoFragment : Fragment() {
     private fun setPoster(poster_path: String?) {
 
         Picasso.get().load("${Constants.imageURL}${poster_path}")
-            .placeholder(R.drawable.ic_baseline_image_not_supported_24)
-            .into(binding.imageMovie)
+                .placeholder(R.drawable.ic_baseline_image_not_supported_24)
+                .into(binding.imageMovie)
     }
 
     private fun setOverview(overview: String) {
