@@ -35,6 +35,23 @@
             app:destination="@id/navigation_disconnect"
             app:enterAnim="@anim/slide_from_bottom"
             app:exitAnim="@anim/fragment_fade_exit" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_history"
+        android:name="com.geekbrains.kotlin_lessons.fragments.HistoryFragment"
+        android:label="@string/title_history"
+        tools:layout="@layout/fragment_history">
+        <action
+            android:id="@+id/action_navigation_history_to_infoFragment"
+            app:destination="@id/infoFragment" />
+        <action
+            android:id="@+id/disconnectHistory"
+            app:destination="@id/navigation_disconnect"
+            app:enterAnim="@anim/slide_from_bottom"
+            app:exitAnim="@anim/fragment_fade_exit" />
+
     </fragment>
 
     <fragment
@@ -50,6 +67,7 @@
             app:destination="@id/navigation_disconnect"
             app:enterAnim="@anim/slide_from_bottom"
             app:exitAnim="@anim/fragment_fade_exit" />
+
     </fragment>
 
     <fragment
@@ -74,4 +92,5 @@
         tools:layout="@layout/connection_lost">
 
     </fragment>
+
 </navigation>

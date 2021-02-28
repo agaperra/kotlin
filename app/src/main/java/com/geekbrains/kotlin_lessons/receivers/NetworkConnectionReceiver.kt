@@ -4,7 +4,6 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.net.ConnectivityManager
-import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 
 
@@ -13,9 +12,6 @@ class NetworkConnectionReceiver : BroadcastReceiver() {
     companion object {
         private val flag: MutableLiveData<Boolean> = MutableLiveData()
     }
-
-    fun getState() = flag
-
 
     override fun onReceive(context: Context?, intent: Intent?) {
         when(checkInternet(context)){

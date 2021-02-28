@@ -18,7 +18,7 @@ class SearchActorsAdapter :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ActorSearchViewHolder(
             itemView = LayoutInflater.from(parent.context)
-                    .inflate(R.layout.actor_item, parent, false)
+                    .inflate(R.layout.item_actor, parent, false)
     )
 
 
@@ -40,7 +40,7 @@ class SearchActorsAdapter :
             itemView.apply {
                 poster = findViewById(R.id.actorPhoto)
 
-                Picasso.get().load("${Constants.imageURL}${actors.profile_path}")
+                Picasso.get().load("${Constants.IMAGE_URL}${actors.profile_path}")
                         .placeholder(R.drawable.ic_baseline_no_photography_48)
                         .into(poster)
 

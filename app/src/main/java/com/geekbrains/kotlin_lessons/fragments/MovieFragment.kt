@@ -1,12 +1,13 @@
 package com.geekbrains.kotlin_lessons.fragments
 
+import android.annotation.SuppressLint
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -19,7 +20,9 @@ import com.geekbrains.kotlin_lessons.interactors.string.StringInteractorImpl
 import com.geekbrains.kotlin_lessons.models.Movie
 import com.geekbrains.kotlin_lessons.receivers.NetworkConnectionReceiver
 import com.geekbrains.kotlin_lessons.utils.Constants
+import com.geekbrains.kotlin_lessons.utils.Constants.Companion.ADULT
 import com.geekbrains.kotlin_lessons.viewModels.MovieViewModel
+import com.google.android.material.snackbar.Snackbar
 
 
 class MovieFragment : Fragment() {
@@ -27,10 +30,11 @@ class MovieFragment : Fragment() {
     private lateinit var binding: FragmentMovieBinding
     private lateinit var movieViewModel: MovieViewModel
     private lateinit var networkConnectionReceiver: NetworkConnectionReceiver
+
     private val movieAdapterPopular by lazy {
         HorizontalRecyclerAdapter(onItemViewClickListener = object : OnItemViewClickListener {
             override fun onItemClick(movie: Movie) {
-                Constants.boolean = true
+                Constants.BOOLEAN = true
                 val action = MovieFragmentDirections.openMovie(movieId = movie.id)
                 requireView().findNavController().navigate(action)
             }
@@ -40,7 +44,7 @@ class MovieFragment : Fragment() {
     private val movieAdapterNowPlaying by lazy {
         HorizontalRecyclerAdapter(onItemViewClickListener = object : OnItemViewClickListener {
             override fun onItemClick(movie: Movie) {
-                Constants.boolean = true
+                Constants.BOOLEAN = true
                 val action = MovieFragmentDirections.openMovie(movieId = movie.id)
                 requireView().findNavController().navigate(action)
             }
@@ -50,7 +54,7 @@ class MovieFragment : Fragment() {
     private val movieAdapterUpComing by lazy {
         HorizontalRecyclerAdapter(onItemViewClickListener = object : OnItemViewClickListener {
             override fun onItemClick(movie: Movie) {
-                Constants.boolean = true
+                Constants.BOOLEAN = true
                 val action = MovieFragmentDirections.openMovie(movieId = movie.id)
                 requireView().findNavController().navigate(action)
             }
@@ -60,7 +64,7 @@ class MovieFragment : Fragment() {
     private val movieAdapterTop by lazy {
         HorizontalRecyclerAdapter(onItemViewClickListener = object : OnItemViewClickListener {
             override fun onItemClick(movie: Movie) {
-                Constants.boolean = true
+                Constants.BOOLEAN = true
                 val action = MovieFragmentDirections.openMovie(movieId = movie.id)
                 requireView().findNavController().navigate(action)
             }
@@ -73,8 +77,16 @@ class MovieFragment : Fragment() {
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View {
-        Constants.boolean = false
+        Constants.BOOLEAN = false
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_movie, container, false)
+
+        movieViewModel = MovieViewModel(StringInteractorImpl(requireContext()))
+
+        ADULT = movieViewModel.getPref()
+        when (ADULT) {
+            true -> binding.adultContent.isChecked = true
+            false -> binding.adultContent.isChecked = false
+        }
         return binding.root
     }
 
@@ -102,6 +114,30 @@ class MovieFragment : Fragment() {
                 requireView().findNavController().navigate(R.id.disconnectMovie)
             }
             true -> {
+                binding.adultContent.setOnCheckedChangeListener { _, _ ->
+
+                    when (binding.adultContent.isChecked) {
+                        true -> {
+                            ADULT = true
+                            movieViewModel.setPref(ADULT)
+                        }
+                        false -> {
+                            ADULT = false
+                            movieViewModel.setPref(ADULT)
+                        }
+                    }
+                    val snackbar =
+                        Snackbar.make(binding.root, getString(R.string.adult), Snackbar.LENGTH_LONG)
+                    @SuppressLint("InflateParams")
+                    val customSnackView: View =
+                        layoutInflater.inflate(R.layout.rounded, null)
+                    snackbar.view.setBackgroundColor(Color.TRANSPARENT)
+                    val snackbarLayout = snackbar.view as Snackbar.SnackbarLayout
+
+                    snackbarLayout.setPadding(20, 20, 20, 20)
+                    snackbarLayout.addView(customSnackView, 0)
+                    snackbar.show()
+                }
 
                 binding.mainRecycler.apply {
                     adapter = movieAdapterPopular
@@ -127,12 +163,8 @@ class MovieFragment : Fragment() {
                             LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
                 }
 
-                movieViewModel = MovieViewModel(StringInteractorImpl(requireContext()))
                 setUpLiveData()
-
                 binding.viewModel = movieViewModel
-
-
                 getPopularMovies()
                 getLookNowMovies()
                 getUpComingMovies()
@@ -146,11 +178,13 @@ class MovieFragment : Fragment() {
     private fun getPopularMovies() {
         binding.isLoading = true
         movieViewModel.apply {
-            getObservedMoviesPopular().observe(viewLifecycleOwner, {
+            getObservedMoviesPopular().observe(viewLifecycleOwner, { movieResponse ->
                 movieAdapterPopular.clearItems()
-                movieAdapterPopular.addItems(movies = it.results)
-                movieAdapterPopular.notifyDataSetChanged()
-                binding.isLoading = false
+                movieResponse.results.let {
+                    movieAdapterPopular.addItems(it)
+                    movieAdapterPopular.notifyDataSetChanged()
+                    binding.isLoading = false }
+
             })
             popularMovie()
         }
@@ -160,11 +194,13 @@ class MovieFragment : Fragment() {
     private fun getLookNowMovies() {
         binding.isLoading = true
         movieViewModel.apply {
-            getObservedMoviesLookNow().observe(viewLifecycleOwner, {
+            getObservedMoviesLookNow().observe(viewLifecycleOwner, { movieResponse ->
                 movieAdapterNowPlaying.clearItems()
-                movieAdapterNowPlaying.addItems(movies = it.results)
-                movieAdapterNowPlaying.notifyDataSetChanged()
-                binding.isLoading = false
+                movieResponse.results.let {
+                    movieAdapterNowPlaying.addItems(it)
+                    movieAdapterNowPlaying.notifyDataSetChanged()
+                    binding.isLoading = false
+                }
             })
             lookNowMovie()
         }
@@ -173,11 +209,13 @@ class MovieFragment : Fragment() {
     private fun getUpComingMovies() {
         binding.isLoading = true
         movieViewModel.apply {
-            getObservedMoviesUpComing().observe(viewLifecycleOwner, {
+            getObservedMoviesUpComing().observe(viewLifecycleOwner, { movieResponse ->
                 movieAdapterUpComing.clearItems()
-                movieAdapterUpComing.addItems(movies = it.results)
-                movieAdapterUpComing.notifyDataSetChanged()
-                binding.isLoading = false
+                movieResponse.results.let {
+                    movieAdapterUpComing.addItems(it)
+                    movieAdapterUpComing.notifyDataSetChanged()
+                    binding.isLoading = false
+                }
             })
             upComingMovie()
         }
@@ -186,11 +224,14 @@ class MovieFragment : Fragment() {
     private fun getTopMovies() {
         binding.isLoading = true
         movieViewModel.apply {
-            getObservedMoviesTop().observe(viewLifecycleOwner, {
+            getObservedMoviesTop().observe(viewLifecycleOwner, { movieResponse ->
                 movieAdapterTop.clearItems()
-                movieAdapterTop.addItems(movies = it.results)
-                movieAdapterTop.notifyDataSetChanged()
-                binding.isLoading = false
+                movieResponse.results.let {
+                    movieAdapterTop.addItems(it)
+                    movieAdapterTop.notifyDataSetChanged()
+                    binding.isLoading = false
+
+                }
             })
             topMovie()
         }

@@ -7,11 +7,21 @@ import androidx.lifecycle.ViewModel
 import com.geekbrains.kotlin_lessons.interactors.string.StringInteractor
 import com.geekbrains.kotlin_lessons.models.MovieFull
 import com.geekbrains.kotlin_lessons.models.ProductionCountries
+import com.geekbrains.kotlin_lessons.repositories.LocalRepository
+import com.geekbrains.kotlin_lessons.repositories.LocalRepositoryImpl
 import com.geekbrains.kotlin_lessons.repositories.MovieDetailsRepository
 import com.geekbrains.kotlin_lessons.responses.CastResponse
+import com.geekbrains.kotlin_lessons.App
 
-class InfoViewModel(private val stringInteractor: StringInteractor) : ViewModel(),
+class InfoViewModel(
+    private val stringInteractor: StringInteractor,
+    private val historyRepository: LocalRepository = LocalRepositoryImpl(App.getHistoryDao())
+) : ViewModel(),
     LifecycleObserver, View.OnClickListener {
+
+    fun saveMovieToDB(movie: MovieFull) {
+        historyRepository.saveEntity(movie)
+    }
 
     private val _observingMovie = MutableLiveData<MovieFull>()
     private val _observingPeople = MutableLiveData<CastResponse>()
@@ -27,6 +37,7 @@ class InfoViewModel(private val stringInteractor: StringInteractor) : ViewModel(
         } ?: return stringInteractor.textNoOverview
 
     }
+
 
     fun getRuntime(runtime: Int?): String {
         runtime?.let {
@@ -47,7 +58,10 @@ class InfoViewModel(private val stringInteractor: StringInteractor) : ViewModel(
 
     fun getCountry(productionCountries: List<ProductionCountries>?): String {
         productionCountries?.let {
-            return productionCountries.first().name
+            return when (productionCountries.size) {
+                0 -> stringInteractor.textUnknown
+                else -> productionCountries.first().name
+            }
         } ?: return stringInteractor.textUnknown
     }
 

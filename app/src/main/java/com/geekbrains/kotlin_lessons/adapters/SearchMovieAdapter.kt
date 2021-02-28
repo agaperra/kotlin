@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.geekbrains.kotlin_lessons.utils.Constants.Companion.imageURL
+import com.geekbrains.kotlin_lessons.utils.Constants.Companion.IMAGE_URL
 import com.geekbrains.kotlin_lessons.R
 import com.geekbrains.kotlin_lessons.models.Movie
 import com.squareup.picasso.Picasso
@@ -41,7 +41,7 @@ class SearchMovieAdapter(var onItemViewClickListener: OnItemViewClickListener) :
                 findViewById<ImageView>(R.id.like).visibility = View.INVISIBLE
                 poster = findViewById(R.id.imageMovie)
 
-                Picasso.get().load("${imageURL}${movie.poster_path}")
+                Picasso.get().load("${IMAGE_URL}${movie.poster_path}")
                         .placeholder(R.drawable.ic_baseline_image_not_supported_24)
                         .into(poster)
 

@@ -21,6 +21,7 @@ import com.geekbrains.kotlin_lessons.interactors.string.StringInteractorImpl
 import com.geekbrains.kotlin_lessons.models.Movie
 import com.geekbrains.kotlin_lessons.receivers.NetworkConnectionReceiver
 import com.geekbrains.kotlin_lessons.utils.Constants
+import com.geekbrains.kotlin_lessons.utils.Constants.Companion.ADULT
 import com.geekbrains.kotlin_lessons.viewModels.SearchViewModel
 
 
@@ -34,7 +35,7 @@ class SearchFragment : Fragment() {
     private val movieAdapterSearch by lazy {
         SearchMovieAdapter(onItemViewClickListener = object : OnItemViewClickListener {
             override fun onItemClick(movie: Movie) {
-                Constants.boolean = true
+                Constants.BOOLEAN = true
                 val action =
                         SearchFragmentDirections.actionNavigationSearchToInfoFragment(movieId = movie.id)
                 requireView().findNavController().navigate(action)
@@ -52,21 +53,39 @@ class SearchFragment : Fragment() {
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View {
-        Constants.boolean = false
+        Constants.BOOLEAN = false
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_search, container, false)
         searchViewModel = SearchViewModel(StringInteractorImpl(requireContext()))
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        searchViewModel = SearchViewModel(StringInteractorImpl(requireContext()))
+        binding.adultContent.setOnCheckedChangeListener { _, _ ->
+            when (binding.adultContent.isChecked) {
+                true -> {
+                    ADULT = true
+                    searchViewModel.setPref(ADULT)
+                }
+                false -> {
+                    ADULT = false
+                    searchViewModel.setPref(ADULT)
+                }
+            }
+        }
+        ADULT = searchViewModel.getPref()
+        when (ADULT) {
+            true -> binding.adultContent.isChecked = true
+            false -> binding.adultContent.isChecked = false
+        }
         setUpSearchView()
         super.onViewCreated(view, savedInstanceState)
     }
 
     private fun doInitialization() {
+
         binding.searchMovie.visibility = View.VISIBLE
         binding.searchActor.visibility = View.VISIBLE
-        searchViewModel = SearchViewModel(StringInteractorImpl(requireContext()))
         searchViewModel.liveDataPictures.observe(
                 viewLifecycleOwner,
                 { binding.textViewMovie.text = it })
@@ -140,7 +159,7 @@ class SearchFragment : Fragment() {
                     .resources
                     .getIdentifier("android:id/search_button", null, null)
             imageView = findViewById<View>(id) as ImageView
-            imageView.setImageResource(R.drawable.searcview_icon)
+            imageView.setImageResource(R.drawable.ic_searcview)
 
             setOnClickListener { isIconified = false }
 

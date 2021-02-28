@@ -8,6 +8,7 @@
     <string name="nav_header_subtitle">https://www.instagram.com/agaperra/</string>
     <string name="nav_header_desc">Главная</string>
     <string name="action_settings">Настройки</string>
+    <string name="note">Заметка</string>
 
     <string name="menu_favorites">Избранное</string>
     <string name="menu_search">Поиск</string>
@@ -15,10 +16,12 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="title_movie">Главная</string>
     <string name="title_favorites">Избранное</string>
+    <string name="title_settings">Настройки</string>
     <string name="title_search">Поиск</string>
+    <string name="title_history">История</string>
     <string name="search">Поиск</string>
     <string name="popular">Популярное</string>
-    <string name="looknow">Сейчас смотрят</string>
+    <string name="look_now">Сейчас смотрят</string>
     <string name="upcoming">Ожидаемые</string>
     <string name="top">В топе</string>
     <string name="edit_search">Введите название фильма</string>
@@ -29,11 +32,15 @@
     <string name="h">ч</string>
     <string name="min">мин</string>
     <string name="add_to_favorites">Фильм добавлен в избранное</string>
+    <string name="add_to_watched">Фильм добавлен в просмотренные</string>
+    <string name="add_to_watched_later">Фильм добавлен в отложенные</string>
+    <string name="remove_from_watched">Фильм удалён из просмотренных</string>
+    <string name="remove_from_watched_later">Фильм удалён из отложенных</string>
     <string name="remove_from_favorites">Фильм удалён из избранного</string>
     <string name="connection_lost">Соединение потеряно</string>
     <string name="try_exit">Нажмите ещё раз, чтобы выйти</string>
 
-
+    <string name="adult">Доступ к контенту для взрослых изменён</string>
 
     <string name="budget">Бюджет: </string>
     <string name="revenue">Сборы: </string>

@@ -13,16 +13,24 @@
     <string name="ok">OK</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_movie">Main page</string>
+    <string name="title_settings">Settings</string>
     <string name="title_favorites">Favorites</string>
     <string name="title_search">Search</string>
+    <string name="title_history">History</string>
     <string name="search">Search</string>
+    <string name="note">Note</string>
+
 
     <string name="popular">Popular movies</string>
-    <string name="looknow">Now playing</string>
+    <string name="look_now">Now playing</string>
     <string name="upcoming">Up coming</string>
     <string name="top">Top movies</string>
     <string name="edit_search">Enter the movie name</string>
-    <string name="nolike" translatable="false">no like</string>
+    <string name="no_like" translatable="false">no like</string>
+    <string name="watched" translatable="false">watched</string>
+    <string name="no_watched" translatable="false">no watched</string>
+    <string name="watched_later" translatable="false">watched later</string>
+    <string name="no_watched_later" translatable="false">no watched later</string>
     <string name="like" translatable="false">like</string>
     <string name="pictures">Movies</string>
     <string name="noOverview">No description available</string>
@@ -41,7 +49,12 @@
     <string name="credits">People</string>
     <string name="genres" translatable="false">genres</string>
     <string name="add_to_favorites">Movie added to favorites</string>
+    <string name="add_to_watched">Movie added to watched</string>
+    <string name="add_to_watched_later">Movie added to watched later</string>
     <string name="remove_from_favorites">Movie removed from favorites</string>
+    <string name="remove_from_watched">Movie removed from watched</string>
+    <string name="remove_from_watched_later">Movie removed from watched later</string>
     <string name="connection_lost">Connection lost</string>
     <string name="try_exit">Click again to exit</string>
+    <string name="adult">Access to adult content changed</string>
 </resources>

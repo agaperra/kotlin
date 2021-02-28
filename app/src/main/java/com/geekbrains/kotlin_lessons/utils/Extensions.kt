@@ -1,4 +1,4 @@
-package com.geekbrains.kotlin_lessons.models
+package com.geekbrains.kotlin_lessons.utils
 
 import android.view.View
 import com.google.android.material.snackbar.Snackbar

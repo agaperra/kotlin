@@ -8,7 +8,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.geekbrains.kotlin_lessons.R
+import com.geekbrains.kotlin_lessons.utils.SharedPreferencesManager
 import com.geekbrains.kotlin_lessons.databinding.ActivityMainBinding
+import com.geekbrains.kotlin_lessons.App
 import com.geekbrains.kotlin_lessons.utils.Constants
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.snackbar.Snackbar.SnackbarLayout
@@ -21,8 +23,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        Constants.sPrefs = SharedPreferencesManager(this)
         setNavigation()
     }
+
 
     private fun setNavigation() {
         val navHostFragment =
@@ -34,15 +38,16 @@ class MainActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
 
-        if (Constants.boolean) {
+        if (Constants.BOOLEAN) {
             super.onBackPressed()
         } else {
-            if (backPress + 2000 > System.currentTimeMillis()) {
+            if (backPress + Constants.TIME_EXIT > System.currentTimeMillis()) {
                 finish()
             } else {
                 val snackbar =
                         Snackbar.make(binding.root, getString(R.string.try_exit), Snackbar.LENGTH_LONG)
-                @SuppressLint("InflateParams") val customSnackView: View =
+                @SuppressLint("InflateParams")
+                val customSnackView: View =
                         layoutInflater.inflate(R.layout.rounded, null)
                 snackbar.view.setBackgroundColor(Color.TRANSPARENT)
                 val snackbarLayout = snackbar.view as SnackbarLayout

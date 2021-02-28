@@ -1,13 +1,13 @@
 package com.geekbrains.kotlin_lessons.fragments
 
 import android.annotation.SuppressLint
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,8 +20,13 @@ import com.geekbrains.kotlin_lessons.adapters.GenresAdapter
 import com.geekbrains.kotlin_lessons.databinding.FragmentInfoBinding
 import com.geekbrains.kotlin_lessons.interactors.string.StringInteractorImpl
 import com.geekbrains.kotlin_lessons.models.Genres
+import com.geekbrains.kotlin_lessons.models.Movie
+import com.geekbrains.kotlin_lessons.models.MovieFull
+import com.geekbrains.kotlin_lessons.models.ProductionCountries
 import com.geekbrains.kotlin_lessons.receivers.NetworkConnectionReceiver
+import com.geekbrains.kotlin_lessons.utils.showSnackBar
 import com.geekbrains.kotlin_lessons.viewModels.InfoViewModel
+import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
 
 class InfoFragment : Fragment() {
@@ -31,8 +36,10 @@ class InfoFragment : Fragment() {
     private val args: InfoFragmentArgs by navArgs()
     private lateinit var genresAdapter: GenresAdapter
     private lateinit var actorsAdapter: ActorsAdapter
+
     private lateinit var networkConnectionReceiver: NetworkConnectionReceiver
     private var flag: Boolean = false
+
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -63,7 +70,7 @@ class InfoFragment : Fragment() {
 
     private fun goBack() {
         networkConnectionReceiver = NetworkConnectionReceiver()
-        when (networkConnectionReceiver.checkInternet(requireContext())) {
+        when (networkConnectionReceiver.checkInternet(context)) {
             false -> {
                 when (flag) {
                     false -> requireView().findNavController().navigate(R.id.disconnectInfo)
@@ -72,9 +79,29 @@ class InfoFragment : Fragment() {
         }
     }
 
+    private fun saveMovie(movie: MovieFull) {
+        infoViewModel.saveMovieToDB(
+           MovieFull(movie.id,
+               "",
+               "",
+               movie.poster_path,
+               movie.release_date,
+               movie.title,
+               0.0,
+               0,
+               ArrayList<Genres>(),
+               ArrayList<ProductionCountries>(),
+               0,
+               0,
+               0,
+               "",
+               0.0)
+        )
+    }
+
     private fun doInitialization() {
         networkConnectionReceiver = NetworkConnectionReceiver()
-        when (networkConnectionReceiver.checkInternet(requireContext())) {
+        when (networkConnectionReceiver.checkInternet(context)) {
             false -> {
                 flag = true
                 requireView().findNavController().navigate(R.id.disconnectInfo)
@@ -119,6 +146,7 @@ class InfoFragment : Fragment() {
             setOverview(infoViewModel.getOverview(it.overview))
             setRuntime(infoViewModel.getRuntime(it.runtime))
             setGenres(it.genres)
+            saveMovie(it)
             binding.isLoading = false
         })
 
@@ -135,7 +163,7 @@ class InfoFragment : Fragment() {
 
     private fun setPoster(poster_path: String?) {
 
-        Picasso.get().load("${Constants.imageURL}${poster_path}")
+        Picasso.get().load("${Constants.IMAGE_URL}${poster_path}")
                 .placeholder(R.drawable.ic_baseline_image_not_supported_24)
                 .into(binding.imageMovie)
     }

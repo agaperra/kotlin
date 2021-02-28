@@ -2,10 +2,10 @@ package com.geekbrains.kotlin_lessons.viewModels
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.geekbrains.kotlin_lessons.interactors.string.StringInteractor
 import com.geekbrains.kotlin_lessons.repositories.MovieRepository
 import com.geekbrains.kotlin_lessons.responses.MovieResponse
+import com.geekbrains.kotlin_lessons.utils.Constants
 
 class MovieViewModel(private val stringInteractor: StringInteractor) : ViewModel() {
 
@@ -40,6 +40,14 @@ class MovieViewModel(private val stringInteractor: StringInteractor) : ViewModel
     fun topMovie() {
         movieRepository.getTopMovies(_observingMoviesTop)
     }
+
+
+    fun setPref(param: Boolean){
+        Constants.sPrefs.editor.putBoolean(Constants.PREF_ADULT, param).apply()
+    }
+
+    fun getPref()= Constants.sPrefs.retrieveBoolean(Constants.PREF_ADULT, Constants.ADULT)
+
 
     val liveDataPopular = MutableLiveData<String>()
     val liveDataNowPlaying = MutableLiveData<String>()

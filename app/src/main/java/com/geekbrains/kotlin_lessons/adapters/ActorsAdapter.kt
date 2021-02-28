@@ -21,7 +21,7 @@ class ActorsAdapter : RecyclerView.Adapter<ActorsAdapter.ActorsViewHolder>() {
         private val actorName = itemView.findViewById<TextView>(R.id.actorName)
 
         fun bindActor(actor: Actor) {
-            Picasso.get().load("${Constants.imageURL}${actor.profile_path}")
+            Picasso.get().load("${Constants.IMAGE_URL}${actor.profile_path}")
                     .placeholder(R.drawable.ic_baseline_no_photography_48)
                     .into(actorPhoto)
 
@@ -31,7 +31,7 @@ class ActorsAdapter : RecyclerView.Adapter<ActorsAdapter.ActorsViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ActorsViewHolder(
             itemView = LayoutInflater.from(parent.context)
-                    .inflate(R.layout.actor_item, parent, false)
+                    .inflate(R.layout.item_actor, parent, false)
     )
 
     override fun onBindViewHolder(holder: ActorsViewHolder, position: Int) =

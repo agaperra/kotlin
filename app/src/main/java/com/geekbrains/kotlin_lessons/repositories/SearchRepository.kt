@@ -18,7 +18,8 @@ class SearchRepository {
     fun searchMovies(query: String, _observingMovies: MutableLiveData<MovieResponse>) {
         apiService.searchMovie(
                 key = BuildConfig.FILM_API_KEY,
-                lang = Constants.locale,
+                lang = Constants.LOCALE,
+                Constants.ADULT,
                 query = query
         )
                 .enqueue(object : retrofit2.Callback<MovieResponse> {
@@ -37,7 +38,7 @@ class SearchRepository {
     fun searchActors(query: String, _observingActors: MutableLiveData<ActorsResponse>) {
         apiService.searchActor(
                 key = BuildConfig.FILM_API_KEY,
-                lang = Constants.locale,
+                lang = Constants.LOCALE,
                 query = query
         )
                 .enqueue(object : retrofit2.Callback<ActorsResponse> {

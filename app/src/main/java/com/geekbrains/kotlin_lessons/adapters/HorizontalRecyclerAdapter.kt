@@ -12,7 +12,8 @@ import com.geekbrains.kotlin_lessons.utils.Constants
 import com.geekbrains.kotlin_lessons.R
 import com.geekbrains.kotlin_lessons.adapters.HorizontalRecyclerAdapter.MovieViewHolder
 import com.geekbrains.kotlin_lessons.models.Movie
-import com.geekbrains.kotlin_lessons.models.showSnackBar
+import com.geekbrains.kotlin_lessons.room.dao.FavoriteDao
+import com.geekbrains.kotlin_lessons.utils.showSnackBar
 import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
 import java.util.*
@@ -44,7 +45,7 @@ class HorizontalRecyclerAdapter(var onItemViewClickListener: OnItemViewClickList
 
             itemView.apply {
                 val poster: ImageView = findViewById(R.id.imageMovie)
-                Picasso.get().load("${Constants.imageURL}${movie.poster_path}")
+                Picasso.get().load("${Constants.IMAGE_URL}${movie.poster_path}")
                         .placeholder(R.drawable.ic_baseline_image_not_supported_24)
                         .into(poster)
 
@@ -53,21 +54,22 @@ class HorizontalRecyclerAdapter(var onItemViewClickListener: OnItemViewClickList
                         movie.release_date.take(4)
 
                 val itemLike = findViewById<ImageView>(R.id.like)
-                itemLike.tag = R.string.nolike
+                itemLike.tag = R.string.no_like
                 lateinit var snackbar: Snackbar
 
                 itemLike.setOnClickListener {
 
                     when (itemLike.tag) {
-                        R.string.nolike -> {
+                        R.string.no_like -> {
                             itemLike.setImageResource(R.drawable.ic_baseline_favorite_24)
                             itemLike.tag = R.string.like
+
                             snackbar =
                                     showSnackBar(R.string.add_to_favorites, Snackbar.LENGTH_SHORT)
                         }
                         else -> {
                             itemLike.setImageResource(R.drawable.ic_sharp_favorite_border_24)
-                            itemLike.tag = R.string.nolike
+                            itemLike.tag = R.string.no_like
                             snackbar =
                                     showSnackBar(R.string.remove_from_favorites, Snackbar.LENGTH_SHORT)
                         }
