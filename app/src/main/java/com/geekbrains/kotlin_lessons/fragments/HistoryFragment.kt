@@ -1,5 +1,7 @@
 package com.geekbrains.kotlin_lessons.fragments
 
+import android.annotation.SuppressLint
+import android.graphics.Color
 import com.geekbrains.kotlin_lessons.adapters.HistoryAdapter
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -20,6 +22,7 @@ import com.geekbrains.kotlin_lessons.receivers.NetworkConnectionReceiver
 import com.geekbrains.kotlin_lessons.utils.AppState
 import com.geekbrains.kotlin_lessons.utils.Constants
 import com.geekbrains.kotlin_lessons.viewModels.HistoryViewModel
+import com.google.android.material.snackbar.Snackbar
 
 class HistoryFragment : Fragment() {
 
@@ -29,12 +32,13 @@ class HistoryFragment : Fragment() {
     private lateinit var networkConnectionReceiver: NetworkConnectionReceiver
     private val historyAdapter: HistoryAdapter by lazy {
         HistoryAdapter(onItemViewClickListener = object : OnItemViewClickListener {
-        override fun onItemClick(movie: Movie) {
-            Constants.BOOLEAN = true
-            val action = HistoryFragmentDirections.actionNavigationHistoryToInfoFragment(movieId = movie.id)
-            requireView().findNavController().navigate(action)
-        }
-    })
+            override fun onItemClick(movie: Movie) {
+                Constants.BOOLEAN = true
+                val action =
+                    HistoryFragmentDirections.actionNavigationHistoryToInfoFragment(movieId = movie.id)
+                requireView().findNavController().navigate(action)
+            }
+        })
     }
 
     override fun onCreateView(
@@ -45,6 +49,11 @@ class HistoryFragment : Fragment() {
         Constants.BOOLEAN = false
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_history, container, false)
         historyViewModel = HistoryViewModel()
+        Constants.ADULT = historyViewModel.getPref()
+        when (Constants.ADULT) {
+            true -> binding.adultContent.isChecked = true
+            false -> binding.adultContent.isChecked = false
+        }
         return binding.root
     }
 
@@ -67,13 +76,15 @@ class HistoryFragment : Fragment() {
         }, 2000)
     }
 
-    private fun doInitialization(){
+    private fun doInitialization() {
         networkConnectionReceiver = NetworkConnectionReceiver()
         when (networkConnectionReceiver.checkInternet(requireContext())) {
             false -> {
                 requireView().findNavController().navigate(R.id.disconnectMovie)
             }
             true -> {
+
+
                 binding.adultContent.setOnCheckedChangeListener { _, _ ->
                     when (binding.adultContent.isChecked) {
                         true -> {
@@ -85,23 +96,34 @@ class HistoryFragment : Fragment() {
                             historyViewModel.setPref(Constants.ADULT)
                         }
                     }
+
+                    val snackbar =
+                        Snackbar.make(binding.root, getString(R.string.adult), Snackbar.LENGTH_LONG)
+                    @SuppressLint("InflateParams")
+                    val customSnackView: View =
+                        layoutInflater.inflate(R.layout.rounded, null)
+                    snackbar.view.setBackgroundColor(Color.TRANSPARENT)
+                    val snackbarLayout = snackbar.view as Snackbar.SnackbarLayout
+
+                    snackbarLayout.setPadding(20, 20, 20, 20)
+                    snackbarLayout.addView(customSnackView, 0)
+                    snackbar.show()
                 }
-                Constants.ADULT = historyViewModel.getPref()
-                when (Constants.ADULT) {
-                    true -> binding.adultContent.isChecked = true
-                    false -> binding.adultContent.isChecked = false
-                }
+
 
                 binding.history.apply {
                     adapter = historyAdapter
                     layoutManager =
                         LinearLayoutManager(context, RecyclerView.VERTICAL, false)
                 }
-                historyViewModel.historyLiveData.observe(viewLifecycleOwner,{
+                historyViewModel.historyLiveData.observe(viewLifecycleOwner, {
                     renderData(it)
-                    historyAdapter.notifyDataSetChanged()})
+                    historyAdapter.notifyDataSetChanged()
+                })
                 historyViewModel.getAllHistory()
                 binding.viewModel = historyViewModel
+
+
             }
         }
     }
@@ -118,7 +140,7 @@ class HistoryFragment : Fragment() {
             }
             is AppState.Error -> {
                 binding.history.visibility = View.VISIBLE
-               historyViewModel.getAllHistory()
+                historyViewModel.getAllHistory()
             }
         }
     }

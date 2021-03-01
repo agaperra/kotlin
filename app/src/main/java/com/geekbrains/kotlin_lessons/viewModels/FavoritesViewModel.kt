@@ -1,25 +1,26 @@
 package com.geekbrains.kotlin_lessons.viewModels
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.geekbrains.kotlin_lessons.App
+import com.geekbrains.kotlin_lessons.repositories.FavoriteRepository
+import com.geekbrains.kotlin_lessons.repositories.FavoriteRepositoryImpl
+import com.geekbrains.kotlin_lessons.utils.AppState
 import com.geekbrains.kotlin_lessons.utils.Constants
 
-class FavoritesViewModel: ViewModel() {
+class FavoritesViewModel(
+    val favoriteLiveData: MutableLiveData<AppState> = MutableLiveData(),
+    private val favoriteRepository: FavoriteRepository = FavoriteRepositoryImpl(App.getFavoriteDao())
+) : ViewModel() {
 
-//    private val favoriteDao: FavoriteDao=  App.getFavoriteDao()
-//
-//    private lateinit var favoriteRepository: FavoriteRepository
-//
-//    private val _observingMoviesFavorites = MutableLiveData<MovieResponse>()
-//    fun getObservedMoviesFavorites() = _observingMoviesFavorites
-//
-//    fun favoritesMovie() {
-//        favoriteRepository.getAllFavorite()
-//    }
+    fun getAllFavorite() {
+        favoriteLiveData.value = AppState.Loading
+        favoriteLiveData.value = AppState.Success(favoriteRepository.getAllFavorite())
+    }
 
-    fun setPref(param: Boolean){
+    fun setPref(param: Boolean) {
         Constants.sPrefs.editor.putBoolean(Constants.PREF_ADULT, param).apply()
     }
 
-    fun getPref()= Constants.sPrefs.retrieveBoolean(Constants.PREF_ADULT, Constants.ADULT)
-
+    fun getPref() = Constants.sPrefs.retrieveBoolean(Constants.PREF_ADULT, Constants.ADULT)
 }

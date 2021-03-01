@@ -1,5 +1,7 @@
 package com.geekbrains.kotlin_lessons.fragments
 
+import android.annotation.SuppressLint
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -23,6 +25,7 @@ import com.geekbrains.kotlin_lessons.receivers.NetworkConnectionReceiver
 import com.geekbrains.kotlin_lessons.utils.Constants
 import com.geekbrains.kotlin_lessons.utils.Constants.Companion.ADULT
 import com.geekbrains.kotlin_lessons.viewModels.SearchViewModel
+import com.google.android.material.snackbar.Snackbar
 
 
 class SearchFragment : Fragment() {
@@ -56,11 +59,23 @@ class SearchFragment : Fragment() {
         Constants.BOOLEAN = false
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_search, container, false)
         searchViewModel = SearchViewModel(StringInteractorImpl(requireContext()))
+
+        ADULT = searchViewModel.getPref()
+        when (ADULT) {
+            true -> binding.adultContent.isChecked = true
+            false -> binding.adultContent.isChecked = false
+        }
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        searchViewModel = SearchViewModel(StringInteractorImpl(requireContext()))
+
+        setUpSearchView()
+        super.onViewCreated(view, savedInstanceState)
+    }
+
+    private fun doInitialization() {
         binding.adultContent.setOnCheckedChangeListener { _, _ ->
             when (binding.adultContent.isChecked) {
                 true -> {
@@ -72,18 +87,18 @@ class SearchFragment : Fragment() {
                     searchViewModel.setPref(ADULT)
                 }
             }
-        }
-        ADULT = searchViewModel.getPref()
-        when (ADULT) {
-            true -> binding.adultContent.isChecked = true
-            false -> binding.adultContent.isChecked = false
-        }
-        setUpSearchView()
-        super.onViewCreated(view, savedInstanceState)
-    }
+            val snackbar =
+                Snackbar.make(binding.root, getString(R.string.adult), Snackbar.LENGTH_LONG)
+            @SuppressLint("InflateParams")
+            val customSnackView: View =
+                layoutInflater.inflate(R.layout.rounded, null)
+            snackbar.view.setBackgroundColor(Color.TRANSPARENT)
+            val snackbarLayout = snackbar.view as Snackbar.SnackbarLayout
 
-    private fun doInitialization() {
-
+            snackbarLayout.setPadding(20, 20, 20, 20)
+            snackbarLayout.addView(customSnackView, 0)
+            snackbar.show()
+        }
         binding.searchMovie.visibility = View.VISIBLE
         binding.searchActor.visibility = View.VISIBLE
         searchViewModel.liveDataPictures.observe(

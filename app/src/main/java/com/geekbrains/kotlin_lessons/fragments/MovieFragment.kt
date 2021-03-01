@@ -17,12 +17,16 @@ import com.geekbrains.kotlin_lessons.adapters.HorizontalRecyclerAdapter
 import com.geekbrains.kotlin_lessons.adapters.OnItemViewClickListener
 import com.geekbrains.kotlin_lessons.databinding.FragmentMovieBinding
 import com.geekbrains.kotlin_lessons.interactors.string.StringInteractorImpl
+import com.geekbrains.kotlin_lessons.models.Genres
 import com.geekbrains.kotlin_lessons.models.Movie
+import com.geekbrains.kotlin_lessons.models.MovieFull
+import com.geekbrains.kotlin_lessons.models.ProductionCountries
 import com.geekbrains.kotlin_lessons.receivers.NetworkConnectionReceiver
 import com.geekbrains.kotlin_lessons.utils.Constants
 import com.geekbrains.kotlin_lessons.utils.Constants.Companion.ADULT
 import com.geekbrains.kotlin_lessons.viewModels.MovieViewModel
 import com.google.android.material.snackbar.Snackbar
+import java.util.ArrayList
 
 
 class MovieFragment : Fragment() {
@@ -70,6 +74,7 @@ class MovieFragment : Fragment() {
             }
         })
     }
+
 
 
     override fun onCreateView(
@@ -137,6 +142,7 @@ class MovieFragment : Fragment() {
                     snackbarLayout.setPadding(20, 20, 20, 20)
                     snackbarLayout.addView(customSnackView, 0)
                     snackbar.show()
+
                 }
 
                 binding.mainRecycler.apply {

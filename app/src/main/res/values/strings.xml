@@ -28,6 +28,8 @@
     <string name="edit_search">Enter the movie name</string>
     <string name="no_like" translatable="false">no like</string>
     <string name="watched" translatable="false">watched</string>
+    <string name="note_true" translatable="false">true</string>
+    <string name="note_false" translatable="false">false</string>
     <string name="no_watched" translatable="false">no watched</string>
     <string name="watched_later" translatable="false">watched later</string>
     <string name="no_watched_later" translatable="false">no watched later</string>

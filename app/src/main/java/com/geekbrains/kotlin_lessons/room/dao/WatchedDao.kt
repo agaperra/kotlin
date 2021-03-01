@@ -8,8 +8,11 @@ interface WatchedDao {
     @Query("SELECT * FROM Watched")
     fun all(): List<Watched>
 
-    @Query("SELECT * FROM Watched WHERE id LIKE :id")
-    fun getDataById(id: Long): Watched
+    @Query("SELECT COUNT (id) FROM Watched WHERE id LIKE :id")
+    fun getDataById(id: Int): Int
+
+    @Query("DELETE FROM Watched WHERE id LIKE :id")
+    fun drop(id: Int): Int
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(entity: Watched)

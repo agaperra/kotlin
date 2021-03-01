@@ -1,8 +1,10 @@
 package com.geekbrains.kotlin_lessons.repositories
 
-import com.geekbrains.kotlin_lessons.models.Movie
+import com.geekbrains.kotlin_lessons.models.MovieFull
 
 interface FavoriteRepository {
-    fun getAllFavorite(): List<Movie>
-    fun saveEntity(movie: Movie)
+    fun getAllFavorite(): List<MovieFull>
+    fun getFavoriteMovie(id: Int): Int
+    fun saveEntity(movie: MovieFull)
+    fun deleteEntity(id: Int)
 }

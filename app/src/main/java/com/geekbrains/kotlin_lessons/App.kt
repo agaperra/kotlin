@@ -30,6 +30,7 @@ class App : Application() {
                             MovieDataBase::class.java,
                             DB_NAME
                         )
+                            .fallbackToDestructiveMigration()
                             .allowMainThreadQueries()
                             .build()
                     }
@@ -37,6 +38,66 @@ class App : Application() {
             }
 
             return db!!.historyDao()
+        }
+
+        fun getFavoriteDao(): FavoriteDao {
+            if (db == null) {
+                synchronized(MovieDataBase::class.java) {
+                    if (db == null) {
+                        if (app == null) throw IllegalStateException("Application is null while creating DataBase")
+                        db = Room.databaseBuilder(
+                            app!!.applicationContext,
+                            MovieDataBase::class.java,
+                            DB_NAME
+                        )
+                            .fallbackToDestructiveMigration()
+                            .allowMainThreadQueries()
+                            .build()
+                    }
+                }
+            }
+
+            return db!!.favoriteDao()
+        }
+
+        fun getWatchedDao(): WatchedDao {
+            if (db == null) {
+                synchronized(MovieDataBase::class.java) {
+                    if (db == null) {
+                        if (app == null) throw IllegalStateException("Application is null while creating DataBase")
+                        db = Room.databaseBuilder(
+                            app!!.applicationContext,
+                            MovieDataBase::class.java,
+                            DB_NAME
+                        )
+                            .fallbackToDestructiveMigration()
+                            .allowMainThreadQueries()
+                            .build()
+                    }
+                }
+            }
+
+            return db!!.watchedDao()
+        }
+
+        fun getNoteDao(): NoteDao {
+            if (db == null) {
+                synchronized(MovieDataBase::class.java) {
+                    if (db == null) {
+                        if (app == null) throw IllegalStateException("Application is null while creating DataBase")
+                        db = Room.databaseBuilder(
+                            app!!.applicationContext,
+                            MovieDataBase::class.java,
+                            DB_NAME
+                        )
+                            .fallbackToDestructiveMigration()
+                            .allowMainThreadQueries()
+                            .build()
+                    }
+                }
+            }
+
+            return db!!.noteDao()
         }
     }
 }

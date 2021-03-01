@@ -77,9 +77,8 @@
                                 android:paddingTop="@dimen/_10sdp"
                                 android:paddingEnd="@dimen/_15sdp"
                                 android:paddingBottom="@dimen/_10sdp"
-                                android:layout_marginEnd="15dp"
                                 android:textSize="@dimen/_30ssp"
-                                app:layout_constraintEnd_toStartOf="@+id/watched"
+                                app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -87,22 +86,12 @@
                                 android:id="@+id/watched"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginEnd="7dp"
+                                android:layout_marginEnd="15dp"
                                 android:src="@drawable/ic_baseline_remove_red_eye_24"
                                 android:visibility="@{isLoading ? View.GONE : View.VISIBLE, default=visible}"
-                                app:layout_constraintEnd_toStartOf="@+id/watchLater"
-                                app:layout_constraintTop_toTopOf="@+id/watchLater" />
-
-                            <ImageView
-                                android:id="@+id/watchLater"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginEnd="15dp"
-                                android:src="@drawable/ic_baseline_watch_later_24"
-                                android:visibility="@{isLoading ? View.GONE : View.VISIBLE, default=visible}"
-                                app:layout_constraintBottom_toBottomOf="@id/textView"
+                                app:layout_constraintBottom_toBottomOf="@+id/textPeople"
                                 app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintTop_toTopOf="@+id/textView" />
+                                app:layout_constraintTop_toTopOf="@+id/textPeople" />
 
                             <ImageView
                                 android:id="@+id/star"
@@ -144,11 +133,13 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="15dp"
+                                android:layout_marginEnd="15dp"
                                 android:fontFamily="@font/normal"
                                 android:padding="@dimen/_10sdp"
                                 android:textSize="@dimen/_16sdp"
                                 android:textStyle="bold"
                                 app:layout_constraintBottom_toBottomOf="@+id/people"
+                                app:layout_constraintEnd_toStartOf="@+id/watched"
                                 app:layout_constraintStart_toEndOf="@+id/people"
                                 app:layout_constraintTop_toTopOf="@+id/people" />
 
@@ -163,7 +154,7 @@
                     android:layout_margin="15dp"
                     android:layout_marginStart="15dp"
                     android:layout_marginTop="15dp"
-                    android:scaleType="centerInside"
+                    android:scaleType="fitCenter"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/appbar"
                     app:riv_corner_radius="8dp" />
@@ -312,25 +303,25 @@
                     android:id="@+id/textAdd"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginEnd="15dp"
+                    android:layout_marginTop="12dp"
                     android:fontFamily="@font/normal"
-                    android:textSize="@dimen/_13sdp"
-                    android:textColor="#80FAC8C8"
                     android:text="@string/note"
-                    app:layout_constraintEnd_toStartOf="@+id/imageView"
+                    android:textColor="#80FAC8C8"
+                    android:textSize="@dimen/_13sdp"
+                    android:visibility="@{isLoading ? View.GONE : View.VISIBLE, default=visible}"
+                    app:layout_constraintEnd_toStartOf="@+id/imageAdd"
+                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="@+id/imageCountry"
                     app:layout_constraintTop_toBottomOf="@+id/revenue" />
 
                 <ImageView
-                    android:id="@+id/imageView"
+                    android:id="@+id/imageAdd"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
+                    android:src="@drawable/ic_baseline_add_24"
                     app:layout_constraintBottom_toBottomOf="@+id/textAdd"
                     app:layout_constraintEnd_toEndOf="@+id/date"
-                    app:layout_constraintTop_toBottomOf="@id/revenue"
-                    android:src="@drawable/ic_baseline_add_24"/>
+                    app:layout_constraintTop_toTopOf="@+id/textAdd" />
 
                 <TextView
                     android:id="@+id/textOverview"
@@ -349,6 +340,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
                     android:fontFamily="@font/medium"
+                    android:visibility="@{isLoading ? View.GONE : View.VISIBLE, default=visible}"
                     android:padding="@dimen/_10sdp"
                     android:text="@string/credits"
                     android:textSize="@dimen/_15ssp"
@@ -362,6 +354,7 @@
                     android:layout_marginBottom="15dp"
                     android:clipToPadding="false"
                     android:orientation="horizontal"
+                    android:visibility="@{isLoading ? View.GONE : View.VISIBLE, default=visible}"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/date"

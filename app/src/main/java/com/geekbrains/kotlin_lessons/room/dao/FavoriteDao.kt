@@ -8,8 +8,15 @@ interface FavoriteDao {
     @Query("SELECT * FROM Favorite")
     fun all(): List<Favorite>
 
+
+    @Query("SELECT COUNT (id) FROM Favorite WHERE id LIKE :id")
+    fun find(id: Int): Int
+
+    @Query("DELETE FROM Favorite WHERE id LIKE :id")
+    fun drop(id: Int): Int
+
     @Query("SELECT * FROM Favorite WHERE id LIKE :id")
-    fun getDataById(id: Long): Favorite
+    fun getDataById(id:Int): Favorite
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(entity: Favorite)
