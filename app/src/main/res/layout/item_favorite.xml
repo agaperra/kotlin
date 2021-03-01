@@ -8,8 +8,8 @@
 
     <com.makeramen.roundedimageview.RoundedImageView
         android:id="@+id/imageMovie"
-        android:layout_width="182dp"
-        android:layout_height="260dp"
+        android:layout_width="140dp"
+        android:layout_height="200dp"
         android:layout_marginTop="15dp"
         android:layout_marginStart="15dp"
         android:scaleType="fitCenter"
@@ -34,7 +34,7 @@
         android:id="@+id/textName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="15dp"
+        android:layout_margin="5dp"
         android:ellipsize="end"
         android:fontFamily="@font/normal"
         android:lines="1"
