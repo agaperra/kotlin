@@ -35,16 +35,16 @@ class HistoryFragment : Fragment() {
             override fun onItemClick(movie: Movie) {
                 Constants.BOOLEAN = true
                 val action =
-                    HistoryFragmentDirections.actionNavigationHistoryToInfoFragment(movieId = movie.id)
+                        HistoryFragmentDirections.actionNavigationHistoryToInfoFragment(movieId = movie.id)
                 requireView().findNavController().navigate(action)
             }
         })
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View {
         Constants.BOOLEAN = false
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_history, container, false)
@@ -98,10 +98,11 @@ class HistoryFragment : Fragment() {
                     }
 
                     val snackbar =
-                        Snackbar.make(binding.root, getString(R.string.adult), Snackbar.LENGTH_LONG)
+                            Snackbar.make(binding.root, getString(R.string.adult), Snackbar.LENGTH_LONG)
+
                     @SuppressLint("InflateParams")
                     val customSnackView: View =
-                        layoutInflater.inflate(R.layout.rounded, null)
+                            layoutInflater.inflate(R.layout.rounded, null)
                     snackbar.view.setBackgroundColor(Color.TRANSPARENT)
                     val snackbarLayout = snackbar.view as Snackbar.SnackbarLayout
 
@@ -114,7 +115,7 @@ class HistoryFragment : Fragment() {
                 binding.history.apply {
                     adapter = historyAdapter
                     layoutManager =
-                        LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+                            LinearLayoutManager(context, RecyclerView.VERTICAL, false)
                 }
                 historyViewModel.historyLiveData.observe(viewLifecycleOwner, {
                     renderData(it)

@@ -10,8 +10,8 @@ import com.geekbrains.kotlin_lessons.responses.MovieResponse
 import com.geekbrains.kotlin_lessons.utils.Constants
 
 class MovieViewModel(
-    private val stringInteractor: StringInteractor,
-    private val favoriteRepository: FavoriteRepository = FavoriteRepositoryImpl(App.getFavoriteDao())
+        private val stringInteractor: StringInteractor,
+        private val favoriteRepository: FavoriteRepository = FavoriteRepositoryImpl(App.getFavoriteDao())
 ) : ViewModel() {
 
 
@@ -19,7 +19,7 @@ class MovieViewModel(
         favoriteRepository.saveEntity(movie)
     }
 
-    fun findFavorite(id: Int):Int {
+    fun findFavorite(id: Int): Int {
         return favoriteRepository.getFavoriteMovie(id)
     }
 

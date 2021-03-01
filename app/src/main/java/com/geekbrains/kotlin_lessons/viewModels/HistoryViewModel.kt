@@ -9,8 +9,8 @@ import com.geekbrains.kotlin_lessons.utils.AppState
 import com.geekbrains.kotlin_lessons.utils.Constants
 
 class HistoryViewModel(
-    val historyLiveData: MutableLiveData<AppState> = MutableLiveData(),
-    private val historyRepository: LocalRepository = LocalRepositoryImpl(getHistoryDao())
+        val historyLiveData: MutableLiveData<AppState> = MutableLiveData(),
+        private val historyRepository: LocalRepository = LocalRepositoryImpl(getHistoryDao())
 ) : ViewModel() {
 
     fun getAllHistory() {

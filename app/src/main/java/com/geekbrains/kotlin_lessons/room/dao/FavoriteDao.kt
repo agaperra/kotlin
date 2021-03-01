@@ -16,7 +16,7 @@ interface FavoriteDao {
     fun drop(id: Int): Int
 
     @Query("SELECT * FROM Favorite WHERE id LIKE :id")
-    fun getDataById(id:Int): Favorite
+    fun getDataById(id: Int): Favorite
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(entity: Favorite)

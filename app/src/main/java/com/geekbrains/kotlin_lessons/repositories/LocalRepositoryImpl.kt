@@ -17,31 +17,31 @@ class LocalRepositoryImpl(private val localDataSource: HistoryDao) : LocalReposi
     }
 
     private fun convertHistoryEntityToMovie(entityList: List<HistoryEntity>): List<MovieFull> =
-        entityList.map {
-            MovieFull(
-                it.id,
-                "",
-                it.overview,
-                it.poster_path,
-                it.release_date,
-                it.title,
-                0.0,
-                0,
-                ArrayList<Genres>(),
-                ArrayList<ProductionCountries>(),
-                0,
-                0,
-                0,
-                "",
-                0.0
-            )
-        }
+            entityList.map {
+                MovieFull(
+                        it.id,
+                        "",
+                        it.overview,
+                        it.poster_path,
+                        it.release_date,
+                        it.title,
+                        0.0,
+                        0,
+                        ArrayList<Genres>(),
+                        ArrayList<ProductionCountries>(),
+                        0,
+                        0,
+                        0,
+                        "",
+                        0.0
+                )
+            }
 
     private fun convertMovieToEntity(movie: MovieFull): HistoryEntity = HistoryEntity(
-        id = movie.id,
-        overview = movie.overview,
-        poster_path = movie.poster_path,
-        release_date = movie.release_date,
-        title = movie.title
+            id = movie.id,
+            overview = movie.overview,
+            poster_path = movie.poster_path,
+            release_date = movie.release_date,
+            title = movie.title
     )
 }

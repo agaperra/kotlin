@@ -76,7 +76,6 @@ class MovieFragment : Fragment() {
     }
 
 
-
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
@@ -132,10 +131,11 @@ class MovieFragment : Fragment() {
                         }
                     }
                     val snackbar =
-                        Snackbar.make(binding.root, getString(R.string.adult), Snackbar.LENGTH_LONG)
+                            Snackbar.make(binding.root, getString(R.string.adult), Snackbar.LENGTH_LONG)
+
                     @SuppressLint("InflateParams")
                     val customSnackView: View =
-                        layoutInflater.inflate(R.layout.rounded, null)
+                            layoutInflater.inflate(R.layout.rounded, null)
                     snackbar.view.setBackgroundColor(Color.TRANSPARENT)
                     val snackbarLayout = snackbar.view as Snackbar.SnackbarLayout
 
@@ -189,7 +189,8 @@ class MovieFragment : Fragment() {
                 movieResponse.results.let {
                     movieAdapterPopular.addItems(it)
                     movieAdapterPopular.notifyDataSetChanged()
-                    binding.isLoading = false }
+                    binding.isLoading = false
+                }
 
             })
             popularMovie()

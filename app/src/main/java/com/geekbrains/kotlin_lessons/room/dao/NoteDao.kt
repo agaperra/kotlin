@@ -20,6 +20,7 @@ interface NoteDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(entity: Note)
+
     @Update
     fun update(entity: Note)
 

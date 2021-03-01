@@ -5,7 +5,7 @@ import com.geekbrains.kotlin_lessons.room.dao.WatchedDao
 import com.geekbrains.kotlin_lessons.room.data.Note
 import com.geekbrains.kotlin_lessons.room.data.Watched
 
-class WatchedRepositoryImpl (private val localDataSource: WatchedDao) : WatchedRepository {
+class WatchedRepositoryImpl(private val localDataSource: WatchedDao) : WatchedRepository {
 
     override fun getWatched(id: Int): Int {
         return localDataSource.getDataById(id)

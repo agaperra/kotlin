@@ -88,10 +88,11 @@ class SearchFragment : Fragment() {
                 }
             }
             val snackbar =
-                Snackbar.make(binding.root, getString(R.string.adult), Snackbar.LENGTH_LONG)
+                    Snackbar.make(binding.root, getString(R.string.adult), Snackbar.LENGTH_LONG)
+
             @SuppressLint("InflateParams")
             val customSnackView: View =
-                layoutInflater.inflate(R.layout.rounded, null)
+                    layoutInflater.inflate(R.layout.rounded, null)
             snackbar.view.setBackgroundColor(Color.TRANSPARENT)
             val snackbarLayout = snackbar.view as Snackbar.SnackbarLayout
 

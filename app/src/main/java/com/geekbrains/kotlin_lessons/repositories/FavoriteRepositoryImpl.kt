@@ -28,21 +28,21 @@ class FavoriteRepositoryImpl(private val localDataSource: FavoriteDao) : Favorit
     private fun convertFavoriteEntityToMovie(entityList: List<Favorite>): List<MovieFull> {
         return entityList.map {
             MovieFull(
-                it.id,
-                "",
-                it.overview,
-                it.poster_path,
-                it.release_date,
-                it.title,
-                0.0,
-                0,
-                ArrayList(),
-                ArrayList(),
-                0,
-                0,
-                0,
-                "",
-                0.0
+                    it.id,
+                    "",
+                    it.overview,
+                    it.poster_path,
+                    it.release_date,
+                    it.title,
+                    0.0,
+                    0,
+                    ArrayList(),
+                    ArrayList(),
+                    0,
+                    0,
+                    0,
+                    "",
+                    0.0
             )
         }
     }

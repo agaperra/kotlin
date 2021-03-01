@@ -9,8 +9,8 @@ import com.geekbrains.kotlin_lessons.utils.AppState
 import com.geekbrains.kotlin_lessons.utils.Constants
 
 class FavoritesViewModel(
-    val favoriteLiveData: MutableLiveData<AppState> = MutableLiveData(),
-    private val favoriteRepository: FavoriteRepository = FavoriteRepositoryImpl(App.getFavoriteDao())
+        val favoriteLiveData: MutableLiveData<AppState> = MutableLiveData(),
+        private val favoriteRepository: FavoriteRepository = FavoriteRepositoryImpl(App.getFavoriteDao())
 ) : ViewModel() {
 
     fun getAllFavorite() {

@@ -9,7 +9,7 @@ import com.geekbrains.kotlin_lessons.room.dao.*
 class App : Application() {
 
     override fun onCreate() {
-        app =this
+        app = this
         super.onCreate()
     }
 
@@ -26,13 +26,13 @@ class App : Application() {
                     if (db == null) {
                         if (app == null) throw IllegalStateException("Application is null while creating DataBase")
                         db = Room.databaseBuilder(
-                            app!!.applicationContext,
-                            MovieDataBase::class.java,
-                            DB_NAME
+                                app!!.applicationContext,
+                                MovieDataBase::class.java,
+                                DB_NAME
                         )
-                            .fallbackToDestructiveMigration()
-                            .allowMainThreadQueries()
-                            .build()
+                                .fallbackToDestructiveMigration()
+                                .allowMainThreadQueries()
+                                .build()
                     }
                 }
             }
@@ -46,13 +46,13 @@ class App : Application() {
                     if (db == null) {
                         if (app == null) throw IllegalStateException("Application is null while creating DataBase")
                         db = Room.databaseBuilder(
-                            app!!.applicationContext,
-                            MovieDataBase::class.java,
-                            DB_NAME
+                                app!!.applicationContext,
+                                MovieDataBase::class.java,
+                                DB_NAME
                         )
-                            .fallbackToDestructiveMigration()
-                            .allowMainThreadQueries()
-                            .build()
+                                .fallbackToDestructiveMigration()
+                                .allowMainThreadQueries()
+                                .build()
                     }
                 }
             }
@@ -66,13 +66,13 @@ class App : Application() {
                     if (db == null) {
                         if (app == null) throw IllegalStateException("Application is null while creating DataBase")
                         db = Room.databaseBuilder(
-                            app!!.applicationContext,
-                            MovieDataBase::class.java,
-                            DB_NAME
+                                app!!.applicationContext,
+                                MovieDataBase::class.java,
+                                DB_NAME
                         )
-                            .fallbackToDestructiveMigration()
-                            .allowMainThreadQueries()
-                            .build()
+                                .fallbackToDestructiveMigration()
+                                .allowMainThreadQueries()
+                                .build()
                     }
                 }
             }
@@ -86,13 +86,13 @@ class App : Application() {
                     if (db == null) {
                         if (app == null) throw IllegalStateException("Application is null while creating DataBase")
                         db = Room.databaseBuilder(
-                            app!!.applicationContext,
-                            MovieDataBase::class.java,
-                            DB_NAME
+                                app!!.applicationContext,
+                                MovieDataBase::class.java,
+                                DB_NAME
                         )
-                            .fallbackToDestructiveMigration()
-                            .allowMainThreadQueries()
-                            .build()
+                                .fallbackToDestructiveMigration()
+                                .allowMainThreadQueries()
+                                .build()
                     }
                 }
             }

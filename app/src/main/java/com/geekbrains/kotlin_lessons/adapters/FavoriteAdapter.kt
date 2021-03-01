@@ -20,7 +20,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
 
 class FavoriteAdapter(
-    var onItemViewClickListener: OnItemViewClickListener
+        var onItemViewClickListener: OnItemViewClickListener
 ) : RecyclerView.Adapter<FavoriteAdapter.RecyclerItemViewHolder>() {
 
     private var data: List<MovieFull> = arrayListOf()
@@ -31,7 +31,7 @@ class FavoriteAdapter(
         favoriteRepository.saveEntity(movie)
     }
 
-    fun findFavorite(id: Int):Int {
+    fun findFavorite(id: Int): Int {
         return favoriteRepository.getFavoriteMovie(id)
     }
 
@@ -46,8 +46,8 @@ class FavoriteAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerItemViewHolder {
         return RecyclerItemViewHolder(
-            LayoutInflater.from(parent.context)
-                .inflate(R.layout.item_favorite, parent, false) as View
+                LayoutInflater.from(parent.context)
+                        .inflate(R.layout.item_favorite, parent, false) as View
         )
     }
 
@@ -67,24 +67,24 @@ class FavoriteAdapter(
                 findViewById<TextView>(R.id.textOverview).text = data.overview
                 val poster: ImageView = findViewById(R.id.imageMovie)
                 Picasso.get().load("${Constants.IMAGE_URL}${data.poster_path}")
-                    .placeholder(R.drawable.ic_baseline_image_not_supported_24)
-                    .into(poster)
+                        .placeholder(R.drawable.ic_baseline_image_not_supported_24)
+                        .into(poster)
 
                 setOnClickListener {
                     val movie = Movie(
-                        data.id,
-                        data.original_title,
-                        data.overview,
-                        data.poster_path,
-                        data.release_date,
-                        data.title
+                            data.id,
+                            data.original_title,
+                            data.overview,
+                            data.poster_path,
+                            data.release_date,
+                            data.title
                     )
                     onItemViewClickListener.onItemClick(movie)
                 }
 
                 val like: ImageView = findViewById(R.id.like)
-                when(findFavorite(data.id)){
-                    0 ->{
+                when (findFavorite(data.id)) {
+                    0 -> {
                         like.setImageResource(R.drawable.ic_sharp_favorite_border_24)
                         like.tag = R.string.no_like
                     }
@@ -103,18 +103,18 @@ class FavoriteAdapter(
                             like.tag = R.string.like
                             saveFavoriteToDB(data)
                             snackbar =
-                                showSnackBar(R.string.add_to_favorites, Snackbar.LENGTH_SHORT)
+                                    showSnackBar(R.string.add_to_favorites, Snackbar.LENGTH_SHORT)
                         }
                         else -> {
                             like.setImageResource(R.drawable.ic_sharp_favorite_border_24)
                             like.tag = R.string.no_like
                             deleteFavoriteFromDB(data.id)
                             snackbar =
-                                showSnackBar(R.string.remove_from_favorites, Snackbar.LENGTH_SHORT)
+                                    showSnackBar(R.string.remove_from_favorites, Snackbar.LENGTH_SHORT)
                         }
                     }
                     @SuppressLint("InflateParams") val customSnackView: View =
-                        LayoutInflater.from(context).inflate(R.layout.rounded, null)
+                            LayoutInflater.from(context).inflate(R.layout.rounded, null)
                     snackbar.view.setBackgroundColor(Color.TRANSPARENT)
                     val snackbarLayout = snackbar.view as Snackbar.SnackbarLayout
 

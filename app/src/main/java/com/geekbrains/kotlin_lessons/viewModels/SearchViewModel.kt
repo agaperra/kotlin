@@ -28,11 +28,11 @@ class SearchViewModel(private val stringInteractor: StringInteractor) : ViewMode
         liveDataActors.value = stringInteractor.textActor
     }
 
-    fun setPref(param: Boolean){
+    fun setPref(param: Boolean) {
         Constants.sPrefs.editor.putBoolean(Constants.PREF_ADULT, param).apply()
     }
 
-    fun getPref()= Constants.sPrefs.retrieveBoolean(Constants.PREF_ADULT, Constants.ADULT)
+    fun getPref() = Constants.sPrefs.retrieveBoolean(Constants.PREF_ADULT, Constants.ADULT)
 
 
     fun textChanged(query: String) {

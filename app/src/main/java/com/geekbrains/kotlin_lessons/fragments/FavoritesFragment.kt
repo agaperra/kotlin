@@ -38,16 +38,16 @@ class FavoritesFragment : Fragment() {
             override fun onItemClick(movie: Movie) {
                 Constants.BOOLEAN = true
                 val action =
-                    FavoritesFragmentDirections.actionNavigationFavoritesToInfoFragment(movieId = movie.id)
+                        FavoritesFragmentDirections.actionNavigationFavoritesToInfoFragment(movieId = movie.id)
                 requireView().findNavController().navigate(action)
             }
         })
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View {
         Constants.BOOLEAN = false
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_favorites, container, false)
@@ -99,10 +99,11 @@ class FavoritesFragment : Fragment() {
                     }
 
                     val snackbar =
-                        Snackbar.make(binding.root, getString(R.string.adult), Snackbar.LENGTH_LONG)
+                            Snackbar.make(binding.root, getString(R.string.adult), Snackbar.LENGTH_LONG)
+
                     @SuppressLint("InflateParams")
                     val customSnackView: View =
-                        layoutInflater.inflate(R.layout.rounded, null)
+                            layoutInflater.inflate(R.layout.rounded, null)
                     snackbar.view.setBackgroundColor(Color.TRANSPARENT)
                     val snackbarLayout = snackbar.view as Snackbar.SnackbarLayout
 
@@ -115,7 +116,7 @@ class FavoritesFragment : Fragment() {
                 binding.favoriteRecycler.apply {
                     adapter = favoriteAdapter
                     layoutManager =
-                        LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+                            LinearLayoutManager(context, RecyclerView.VERTICAL, false)
                 }
                 favoritesViewModel.favoriteLiveData.observe(viewLifecycleOwner, {
                     renderData(it)

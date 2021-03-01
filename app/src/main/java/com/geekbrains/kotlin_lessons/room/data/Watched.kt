@@ -5,6 +5,6 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class Watched(
-    @PrimaryKey
-    val id: Int
+        @PrimaryKey
+        val id: Int
 )
