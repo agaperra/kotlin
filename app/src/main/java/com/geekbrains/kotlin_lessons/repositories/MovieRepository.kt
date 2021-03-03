@@ -13,7 +13,7 @@ class MovieRepository {
     private var apiService: ApiService = ApiClient.api
 
     fun getPopularMovies(_observingMovies: MutableLiveData<MovieResponse>) {
-        apiService.getPopular(BuildConfig.FILM_API_KEY, Constants.locale).enqueue(object :
+        apiService.getPopular(BuildConfig.FILM_API_KEY, Constants.LOCALE, Constants.ADULT).enqueue(object :
                 retrofit2.Callback<MovieResponse> {
             override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
                 _observingMovies.value = response.body()
@@ -26,7 +26,7 @@ class MovieRepository {
     }
 
     fun getLookNowMovies(_observingMovies: MutableLiveData<MovieResponse>) {
-        apiService.getLookNow(BuildConfig.FILM_API_KEY, Constants.locale).enqueue(object :
+        apiService.getLookNow(BuildConfig.FILM_API_KEY, Constants.LOCALE, Constants.ADULT).enqueue(object :
                 retrofit2.Callback<MovieResponse> {
             override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
                 _observingMovies.value = response.body()
@@ -39,7 +39,7 @@ class MovieRepository {
     }
 
     fun getUpComingMovies(_observingMovies: MutableLiveData<MovieResponse>) {
-        apiService.getUpComing(BuildConfig.FILM_API_KEY, Constants.locale).enqueue(object :
+        apiService.getUpComing(BuildConfig.FILM_API_KEY, Constants.LOCALE, Constants.ADULT).enqueue(object :
                 retrofit2.Callback<MovieResponse> {
             override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
                 _observingMovies.value = response.body()
@@ -54,7 +54,7 @@ class MovieRepository {
 
 
     fun getTopMovies(_observingMovies: MutableLiveData<MovieResponse>) {
-        apiService.getTop(BuildConfig.FILM_API_KEY, Constants.locale).enqueue(object :
+        apiService.getTop(BuildConfig.FILM_API_KEY, Constants.LOCALE, Constants.ADULT).enqueue(object :
                 retrofit2.Callback<MovieResponse> {
             override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
                 _observingMovies.value = response.body()

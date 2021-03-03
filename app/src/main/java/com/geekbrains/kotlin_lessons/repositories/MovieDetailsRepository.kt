@@ -16,7 +16,7 @@ class MovieDetailsRepository {
 
 
     fun getDetailsMovie(id: Int, _observingMovie: MutableLiveData<MovieFull>) {
-        apiService.showDetails(id, BuildConfig.FILM_API_KEY, Constants.locale).enqueue(object :
+        apiService.showDetails(id, BuildConfig.FILM_API_KEY, Constants.LOCALE).enqueue(object :
                 retrofit2.Callback<MovieFull> {
             override fun onResponse(call: Call<MovieFull>, response: Response<MovieFull>) {
                 _observingMovie.value = response.body()
@@ -29,7 +29,7 @@ class MovieDetailsRepository {
     }
 
     fun getPeople(id: Int, _observingMovie: MutableLiveData<CastResponse>) {
-        apiService.showDetailsPeople(id, BuildConfig.FILM_API_KEY, Constants.locale).enqueue(object :
+        apiService.showDetailsPeople(id, BuildConfig.FILM_API_KEY, Constants.LOCALE).enqueue(object :
                 retrofit2.Callback<CastResponse> {
             override fun onResponse(call: Call<CastResponse>, response: Response<CastResponse>) {
                 _observingMovie.value = response.body()

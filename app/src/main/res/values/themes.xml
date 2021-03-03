@@ -10,11 +10,16 @@
         <item name="colorSecondaryVariant">#EFA74D</item>
         <item name="colorOnSecondary">#000000</item>
         <item name="android:windowBackground">@android:color/transparent</item>
-        <item name="android:textColor">#FAC8C8</item>
+        <item name="android:textColor">@color/textColor_pink</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimary</item>
         <!-- Customize your theme here. -->
         <item name="android:textColorHint">@color/bottom_nav_menu</item>
+    </style>
+
+    <style name="SwitchStyle" >
+        <item name="android:thumb">@drawable/switch_thumb</item>
+        <item name="trackTint">@color/selector_color</item>
     </style>
 
 

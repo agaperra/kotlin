@@ -1,3 +1,0 @@
-package com.geekbrains.kotlin_lessons.adapters
-
-class FavoritesAdapter

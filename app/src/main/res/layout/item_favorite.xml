@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="5dp">
@@ -9,9 +10,9 @@
         android:id="@+id/imageMovie"
         android:layout_width="140dp"
         android:layout_height="200dp"
-        android:layout_margin="15dp"
-        android:scaleType="centerInside"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="15dp"
+        android:scaleType="fitCenter"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:riv_corner_radius="8dp" />
@@ -23,22 +24,24 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
         android:src="@drawable/ic_sharp_favorite_border_24"
-        android:tag="@string/nolike"
+        android:tag="@string/no_like"
         app:layout_constraintEnd_toEndOf="@+id/imageMovie"
-        app:layout_constraintTop_toTopOf="@+id/imageMovie" />
+        app:layout_constraintTop_toTopOf="@+id/imageMovie"
+        android:contentDescription="@string/like"
+        tools:ignore="HardcodedText" />
 
     <TextView
         android:id="@+id/textName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
+        android:layout_margin="5dp"
         android:ellipsize="end"
         android:fontFamily="@font/normal"
         android:lines="1"
         android:singleLine="true"
         android:textSize="13sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/imageMovie"
         app:layout_constraintTop_toTopOf="@+id/imageMovie" />
 
@@ -55,5 +58,18 @@
         app:layout_constraintEnd_toEndOf="@+id/textName"
         app:layout_constraintStart_toStartOf="@+id/textName"
         app:layout_constraintTop_toBottomOf="@id/textName" />
+
+    <TextView
+        android:id="@+id/textOverview"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:lines="12"
+        android:fontFamily="@font/normal"
+        android:layout_marginTop="15dp"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="@+id/textName"
+        app:layout_constraintStart_toStartOf="@+id/textName"
+        app:layout_constraintTop_toBottomOf="@+id/textReleaseDate" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -29,14 +29,16 @@
 
         <ImageView
             android:id="@+id/like"
-            android:tag="@string/nolike"
+            android:tag="@string/no_like"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_sharp_favorite_border_24"
             android:layout_marginEnd="10dp"
             android:layout_marginTop="10dp"
             app:layout_constraintEnd_toEndOf="@+id/imageMovie"
-            app:layout_constraintTop_toTopOf="@+id/imageMovie" />
+            app:layout_constraintTop_toTopOf="@+id/imageMovie"
+            android:contentDescription="@string/like"
+            tools:ignore="ContentDescription,HardcodedText" />
         <TextView
             android:id="@+id/textName"
             android:layout_width="0dp"

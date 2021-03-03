@@ -21,7 +21,7 @@ class GenresAdapter : RecyclerView.Adapter<GenresAdapter.GenresViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = GenresViewHolder(
             itemView = LayoutInflater.from(parent.context)
-                    .inflate(R.layout.genre_item, parent, false)
+                    .inflate(R.layout.item_genre, parent, false)
     )
 
     override fun onBindViewHolder(holder: GenresViewHolder, position: Int) =
