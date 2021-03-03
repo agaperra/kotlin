@@ -51,10 +51,7 @@ class HistoryFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_history, container, false)
         historyViewModel = HistoryViewModel()
         Variables.ADULT = historyViewModel.getPref()
-        when (Variables.ADULT) {
-            true -> binding.adultContent.isChecked = true
-            false -> binding.adultContent.isChecked = false
-        }
+        binding.adultContent.isChecked=Variables.ADULT
         return binding.root
     }
 

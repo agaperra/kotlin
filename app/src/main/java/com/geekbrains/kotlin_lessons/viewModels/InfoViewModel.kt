@@ -102,9 +102,10 @@ class InfoViewModel(
 
     fun getCountry(productionCountries: List<ProductionCountries>?): String {
         productionCountries?.let {
-            return when (productionCountries.size) {
-                0 -> stringInteractor.textUnknown
-                else -> productionCountries.first().name
+            return if (productionCountries.isEmpty()) {
+                stringInteractor.textUnknown
+            } else {
+                productionCountries.first().name
             }
         } ?: return stringInteractor.textUnknown
     }

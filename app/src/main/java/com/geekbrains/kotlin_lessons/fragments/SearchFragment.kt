@@ -61,10 +61,7 @@ class SearchFragment : Fragment() {
         searchViewModel = SearchViewModel(StringInteractorImpl(requireContext()))
 
         Variables.ADULT = searchViewModel.getPref()
-        when (Variables.ADULT) {
-            true -> binding.adultContent.isChecked = true
-            false -> binding.adultContent.isChecked = false
-        }
+        binding.adultContent.isChecked = Variables.ADULT
 
         return binding.root
     }

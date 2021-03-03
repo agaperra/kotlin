@@ -87,10 +87,7 @@ class MovieFragment : Fragment() {
         movieViewModel = MovieViewModel(StringInteractorImpl(requireContext()))
 
         Variables.ADULT = movieViewModel.getPref()
-        when (Variables.ADULT) {
-            true -> binding.adultContent.isChecked = true
-            false -> binding.adultContent.isChecked = false
-        }
+        binding.adultContent.isChecked = Variables.ADULT
         return binding.root
     }
 

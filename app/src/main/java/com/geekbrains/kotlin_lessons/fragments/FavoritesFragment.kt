@@ -54,11 +54,7 @@ class FavoritesFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_favorites, container, false)
         favoritesViewModel = FavoritesViewModel()
         Variables.ADULT = favoritesViewModel.getPref()
-        when (Variables.ADULT) {
-            true -> binding.adultContent.isChecked = true
-            false -> binding.adultContent.isChecked = false
-        }
-
+        binding.adultContent.isChecked = Variables.ADULT
         return binding.root
     }
 
@@ -88,31 +84,30 @@ class FavoritesFragment : Fragment() {
             }
             true -> {
                 binding.adultContent.setOnCheckedChangeListener { _, _ ->
-                    when (binding.adultContent.isChecked) {
-                        true -> {
-                            Variables.ADULT = true
-                            favoritesViewModel.setPref(Variables.ADULT)
-                        }
-                        false -> {
-                            Variables.ADULT = false
-                            favoritesViewModel.setPref(Variables.ADULT)
-                        }
+                    if (binding.adultContent.isChecked) {
+                        Variables.ADULT = true
+                        favoritesViewModel.setPref(Variables.ADULT)
+                    } else {
+                        Variables.ADULT = false
+                        favoritesViewModel.setPref(Variables.ADULT)
                     }
 
-                    val snackbar =
-                            Snackbar.make(binding.root, getString(R.string.adult), Snackbar.LENGTH_LONG)
-
-                    @SuppressLint("InflateParams")
-                    val customSnackView: View =
-                            layoutInflater.inflate(R.layout.rounded, null)
-                    snackbar.view.setBackgroundColor(Color.TRANSPARENT)
-                    val snackbarLayout = snackbar.view as Snackbar.SnackbarLayout
-
-                    snackbarLayout.setPadding(R.dimen._20sdp, R.dimen._20sdp, R.dimen._20sdp, R.dimen._20sdp)
-                    snackbarLayout.addView(customSnackView, 0)
-                    snackbar.show()
-
                 }
+
+                val snackbar =
+                        Snackbar.make(binding.root, getString(R.string.adult), Snackbar.LENGTH_LONG)
+
+                @SuppressLint("InflateParams")
+                val customSnackView: View =
+                        layoutInflater.inflate(R.layout.rounded, null)
+                snackbar.view.setBackgroundColor(Color.TRANSPARENT)
+                val snackbarLayout = snackbar.view as Snackbar.SnackbarLayout
+
+                snackbarLayout.setPadding(R.dimen._20sdp, R.dimen._20sdp, R.dimen._20sdp, R.dimen._20sdp)
+                snackbarLayout.addView(customSnackView, 0)
+                snackbar.show()
+
+
 
                 binding.favoriteRecycler.apply {
                     adapter = favoriteAdapter
@@ -129,20 +124,21 @@ class FavoritesFragment : Fragment() {
         }
     }
 
-    private fun renderData(appState: AppState) {
-        when (appState) {
-            is AppState.Success -> {
-                binding.favoriteRecycler.visibility = View.VISIBLE
-                favoriteAdapter.setData(appState.movieData)
-            }
-            is AppState.Loading -> {
-                binding.favoriteRecycler.visibility = View.GONE
-            }
-            is AppState.Error -> {
-                binding.favoriteRecycler.visibility = View.VISIBLE
-                favoritesViewModel.getAllFavorite()
-            }
+
+private fun renderData(appState: AppState) {
+    when (appState) {
+        is AppState.Success -> {
+            binding.favoriteRecycler.visibility = View.VISIBLE
+            favoriteAdapter.setData(appState.movieData)
+        }
+        is AppState.Loading -> {
+            binding.favoriteRecycler.visibility = View.GONE
+        }
+        is AppState.Error -> {
+            binding.favoriteRecycler.visibility = View.VISIBLE
+            favoritesViewModel.getAllFavorite()
         }
     }
+}
 
 }
