@@ -71,6 +71,13 @@
     </fragment>
 
     <fragment
+        android:id="@+id/navigation_contacts"
+        android:name="com.geekbrains.kotlin_lessons.fragments.ContactsFragment"
+        android:label="@string/title_contacts"
+        tools:layout="@layout/fragment_search" >
+    </fragment>
+
+    <fragment
         android:id="@+id/infoFragment"
         android:name="com.geekbrains.kotlin_lessons.fragments.InfoFragment"
         android:label="InfoFragment" >

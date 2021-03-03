@@ -8,24 +8,11 @@ import com.geekbrains.kotlin_lessons.models.MovieFull
 import com.geekbrains.kotlin_lessons.repositories.*
 import com.geekbrains.kotlin_lessons.responses.MovieResponse
 import com.geekbrains.kotlin_lessons.utils.Constants
+import com.geekbrains.kotlin_lessons.utils.Variables
 
 class MovieViewModel(
         private val stringInteractor: StringInteractor,
-        private val favoriteRepository: FavoriteRepository = FavoriteRepositoryImpl(App.getFavoriteDao())
 ) : ViewModel() {
-
-
-    fun saveFavoriteToDB(movie: MovieFull) {
-        favoriteRepository.saveEntity(movie)
-    }
-
-    fun findFavorite(id: Int): Int {
-        return favoriteRepository.getFavoriteMovie(id)
-    }
-
-    fun deleteFavoriteFromDB(id: Int) {
-        favoriteRepository.deleteEntity(id)
-    }
 
     private val movieRepository: MovieRepository = MovieRepository()
 
@@ -64,7 +51,7 @@ class MovieViewModel(
         Constants.sPrefs.editor.putBoolean(Constants.PREF_ADULT, param).apply()
     }
 
-    fun getPref() = Constants.sPrefs.retrieveBoolean(Constants.PREF_ADULT, Constants.ADULT)
+    fun getPref() = Constants.sPrefs.retrieveBoolean(Constants.PREF_ADULT, Variables.ADULT)
 
 
     val liveDataPopular = MutableLiveData<String>()

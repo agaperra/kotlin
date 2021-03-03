@@ -12,13 +12,17 @@ import com.geekbrains.kotlin_lessons.utils.SharedPreferencesManager
 import com.geekbrains.kotlin_lessons.databinding.ActivityMainBinding
 import com.geekbrains.kotlin_lessons.App
 import com.geekbrains.kotlin_lessons.utils.Constants
+import com.geekbrains.kotlin_lessons.utils.Variables
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.snackbar.Snackbar.SnackbarLayout
 
 
 class MainActivity : AppCompatActivity() {
+
     private lateinit var binding: ActivityMainBinding
     private var backPress: Long = 0
+    private var TIME_EXIT: Int = 2000
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -38,10 +42,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
 
-        if (Constants.BOOLEAN) {
+        if (Variables.BOOLEAN) {
             super.onBackPressed()
         } else {
-            if (backPress + Constants.TIME_EXIT > System.currentTimeMillis()) {
+            if (backPress + TIME_EXIT > System.currentTimeMillis()) {
                 finish()
             } else {
                 val snackbar =

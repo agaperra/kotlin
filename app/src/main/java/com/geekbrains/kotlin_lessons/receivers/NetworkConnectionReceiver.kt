@@ -15,8 +15,8 @@ class NetworkConnectionReceiver : BroadcastReceiver() {
 
     override fun onReceive(context: Context?, intent: Intent?) {
         when(checkInternet(context)){
-            true-> flag.value=false
-            false->flag.value=true
+            true -> flag.value = false
+            false -> flag.value = true
         }
     }
 
@@ -24,9 +24,8 @@ class NetworkConnectionReceiver : BroadcastReceiver() {
         context?.let {
             val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
             val activeNetwork = cm.activeNetworkInfo
-            activeNetwork?.let {
-                return activeNetwork.isConnectedOrConnecting
-            } ?: return false
+            return activeNetwork!= null && activeNetwork.isConnectedOrConnecting
         }?: return false
     }
+
 }

@@ -13,7 +13,6 @@ class App : Application() {
         super.onCreate()
     }
 
-
     companion object {
 
         private var app: App? = null

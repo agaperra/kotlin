@@ -7,14 +7,7 @@ import java.util.*
 class Constants {
 
     companion object {
-
-        var BOOLEAN: Boolean = false
-
-        var TIME_EXIT: Int = 2000
-
         @SuppressLint("ConstantLocale")
-        val LOCALE: String = Locale.getDefault().language
-        var ADULT: Boolean = false
         lateinit var sPrefs: SharedPreferencesManager
         const val PREF_ADULT: String = "PREF_ADULT"
         const val BASIC_URL: String = "https://api.themoviedb.org"

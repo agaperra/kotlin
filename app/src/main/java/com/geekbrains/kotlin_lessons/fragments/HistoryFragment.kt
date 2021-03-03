@@ -21,6 +21,7 @@ import com.geekbrains.kotlin_lessons.models.Movie
 import com.geekbrains.kotlin_lessons.receivers.NetworkConnectionReceiver
 import com.geekbrains.kotlin_lessons.utils.AppState
 import com.geekbrains.kotlin_lessons.utils.Constants
+import com.geekbrains.kotlin_lessons.utils.Variables
 import com.geekbrains.kotlin_lessons.viewModels.HistoryViewModel
 import com.google.android.material.snackbar.Snackbar
 
@@ -33,7 +34,7 @@ class HistoryFragment : Fragment() {
     private val historyAdapter: HistoryAdapter by lazy {
         HistoryAdapter(onItemViewClickListener = object : OnItemViewClickListener {
             override fun onItemClick(movie: Movie) {
-                Constants.BOOLEAN = true
+                Variables.BOOLEAN = true
                 val action =
                         HistoryFragmentDirections.actionNavigationHistoryToInfoFragment(movieId = movie.id)
                 requireView().findNavController().navigate(action)
@@ -46,11 +47,11 @@ class HistoryFragment : Fragment() {
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View {
-        Constants.BOOLEAN = false
+        Variables.BOOLEAN = false
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_history, container, false)
         historyViewModel = HistoryViewModel()
-        Constants.ADULT = historyViewModel.getPref()
-        when (Constants.ADULT) {
+        Variables.ADULT = historyViewModel.getPref()
+        when (Variables.ADULT) {
             true -> binding.adultContent.isChecked = true
             false -> binding.adultContent.isChecked = false
         }
@@ -88,12 +89,12 @@ class HistoryFragment : Fragment() {
                 binding.adultContent.setOnCheckedChangeListener { _, _ ->
                     when (binding.adultContent.isChecked) {
                         true -> {
-                            Constants.ADULT = true
-                            historyViewModel.setPref(Constants.ADULT)
+                            Variables.ADULT = true
+                            historyViewModel.setPref(Variables.ADULT)
                         }
                         false -> {
-                            Constants.ADULT = false
-                            historyViewModel.setPref(Constants.ADULT)
+                            Variables.ADULT = false
+                            historyViewModel.setPref(Variables.ADULT)
                         }
                     }
 
@@ -106,7 +107,7 @@ class HistoryFragment : Fragment() {
                     snackbar.view.setBackgroundColor(Color.TRANSPARENT)
                     val snackbarLayout = snackbar.view as Snackbar.SnackbarLayout
 
-                    snackbarLayout.setPadding(20, 20, 20, 20)
+                    snackbarLayout.setPadding(R.dimen._20sdp, R.dimen._20sdp, R.dimen._20sdp, R.dimen._20sdp)
                     snackbarLayout.addView(customSnackView, 0)
                     snackbar.show()
                 }
