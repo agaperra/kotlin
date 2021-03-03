@@ -38,26 +38,6 @@ class ContactsFragment : Fragment() {
         checkPermissions()
     }
 
-    @SuppressLint("InflateParams")
-    override fun onRequestPermissionsResult(
-            requestCode: Int,
-            permissions: Array<out String>,
-            grantResults: IntArray
-    ) {
-        when (requestCode) {
-            request -> {
-                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    getContacts()
-                }
-                else{
-                    context?.let {
-                        Toast.makeText(context, R.string.contacts, Toast.LENGTH_SHORT).show()
-                    }
-                }
-            }
-        }
-    }
-
     private fun checkPermissions() {
         context?.let {
             if (ContextCompat.checkSelfPermission(
@@ -76,6 +56,26 @@ class ContactsFragment : Fragment() {
         requestPermissions(arrayOf(Manifest.permission.READ_CONTACTS), request)
     }
 
+    @SuppressLint("InflateParams")
+    override fun onRequestPermissionsResult(
+            requestCode: Int,
+            permissions: Array<out String>,
+            grantResults: IntArray
+    ) {
+        when (requestCode) {
+            request -> {
+                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    getContacts()
+                } else {
+                    context?.let {
+                        Toast.makeText(context, R.string.contacts, Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+        }
+    }
+
+
     private fun getContacts() {
         context?.let {
             val cursor = it.contentResolver.query(
@@ -83,15 +83,15 @@ class ContactsFragment : Fragment() {
             )
 
             cursor?.let {
-                    while (cursor.moveToNext()) {
-                        val number =
-                                cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER))
-                        val name =
-                                cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME))
-                        contacts.add("$name:\n$number")
-                    }
-                    cursor.close()
+                while (cursor.moveToNext()) {
+                    val number =
+                            cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER))
+                    val name =
+                            cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME))
+                    contacts.add("$name:\n$number")
                 }
+                cursor.close()
+            }
         }
         setNumbers()
     }
