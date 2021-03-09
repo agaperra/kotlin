@@ -44,7 +44,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             addMarker(
                 MarkerOptions()
                     .position(location)
-                    .title(intent.getStringExtra(Constants.ACTOR_NAME))
             )
             moveCamera(CameraUpdateFactory.newLatLngZoom(location, ZOOM))
         }

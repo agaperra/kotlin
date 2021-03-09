@@ -136,7 +136,6 @@ class ActorFragment : Fragment() {
 
                 Intent(activity, MapsActivity::class.java).also {
                     it.putExtra(Constants.ACTOR_PLACE_OF_BIRTH, currentActor.place_of_birth)
-                    it.putExtra(Constants.ACTOR_NAME, currentActor.name)
                     context.startActivity(it)
                 }
             }
