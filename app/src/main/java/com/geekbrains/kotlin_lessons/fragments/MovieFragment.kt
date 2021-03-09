@@ -1,11 +1,15 @@
 package com.geekbrains.kotlin_lessons.fragments
 
+import android.Manifest
 import android.annotation.SuppressLint
+import android.content.pm.PackageManager
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
@@ -34,6 +38,7 @@ class MovieFragment : Fragment() {
     private lateinit var binding: FragmentMovieBinding
     private lateinit var movieViewModel: MovieViewModel
     private lateinit var networkConnectionReceiver: NetworkConnectionReceiver
+    private val request = 1
 
     private val movieAdapterPopular by lazy {
         HorizontalRecyclerAdapter(onItemViewClickListener = object : OnItemViewClickListener {

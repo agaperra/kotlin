@@ -15,11 +15,10 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.geekbrains.kotlin_lessons.R
-import com.geekbrains.kotlin_lessons.adapters.OnItemViewClickListener
-import com.geekbrains.kotlin_lessons.adapters.SearchActorsAdapter
-import com.geekbrains.kotlin_lessons.adapters.SearchMovieAdapter
+import com.geekbrains.kotlin_lessons.adapters.*
 import com.geekbrains.kotlin_lessons.databinding.FragmentSearchBinding
 import com.geekbrains.kotlin_lessons.interactors.string.StringInteractorImpl
+import com.geekbrains.kotlin_lessons.models.Actor
 import com.geekbrains.kotlin_lessons.models.Movie
 import com.geekbrains.kotlin_lessons.receivers.NetworkConnectionReceiver
 import com.geekbrains.kotlin_lessons.utils.Constants
@@ -47,7 +46,13 @@ class SearchFragment : Fragment() {
     }
 
     private val actorAdapterSearch by lazy {
-        SearchActorsAdapter()
+        SearchActorsAdapter(onItemViewClickListener = object : OnActorViewClickListener {
+            override fun onItemClick(actor: Actor) {
+                Variables.BOOLEAN = true
+                val action = SearchFragmentDirections.actionNavigationSearchToActorFragment(actor.id)
+                requireView().findNavController().navigate(action)
+            }
+        })
     }
     private var data = ""
 

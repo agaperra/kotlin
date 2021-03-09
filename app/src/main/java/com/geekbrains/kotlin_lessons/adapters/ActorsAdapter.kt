@@ -11,7 +11,9 @@ import com.geekbrains.kotlin_lessons.models.Actor
 import com.makeramen.roundedimageview.RoundedImageView
 import com.squareup.picasso.Picasso
 
-class ActorsAdapter : RecyclerView.Adapter<ActorsAdapter.ActorsViewHolder>() {
+class ActorsAdapter (
+        var onItemViewClickListener: OnActorViewClickListener
+        ): RecyclerView.Adapter<ActorsAdapter.ActorsViewHolder>() {
 
     private val actor = arrayListOf<Actor>()
 
@@ -26,6 +28,9 @@ class ActorsAdapter : RecyclerView.Adapter<ActorsAdapter.ActorsViewHolder>() {
                     .into(actorPhoto)
 
             actorName.text = actor.name?.replace(" ", "\n")
+            itemView.setOnClickListener {
+                onItemViewClickListener.onItemClick(actor)
+            }
         }
     }
 

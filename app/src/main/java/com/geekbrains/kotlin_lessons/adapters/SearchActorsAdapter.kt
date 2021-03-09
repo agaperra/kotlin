@@ -11,7 +11,7 @@ import com.geekbrains.kotlin_lessons.models.Actor
 import com.geekbrains.kotlin_lessons.utils.Constants
 import com.squareup.picasso.Picasso
 
-class SearchActorsAdapter :
+class SearchActorsAdapter(var onItemViewClickListener: OnActorViewClickListener) :
         RecyclerView.Adapter<SearchActorsAdapter.ActorSearchViewHolder>() {
 
     private val actor = arrayListOf<Actor>()
@@ -45,6 +45,9 @@ class SearchActorsAdapter :
                         .into(poster)
 
                 actorName.text = actors.name?.replace(" ", "\n")
+                itemView.setOnClickListener {
+                    onItemViewClickListener.onItemClick(actors)
+                }
 
             }
 

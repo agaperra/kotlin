@@ -1,7 +1,9 @@
 package com.geekbrains.kotlin_lessons.fragments
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.graphics.Color
+import android.graphics.Paint
 import android.os.Bundle
 import android.text.Editable
 import android.view.LayoutInflater
@@ -10,6 +12,7 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
@@ -18,15 +21,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.geekbrains.kotlin_lessons.R
-import com.geekbrains.kotlin_lessons.adapters.ActorsAdapter
-import com.geekbrains.kotlin_lessons.adapters.GenresAdapter
+import com.geekbrains.kotlin_lessons.activity.MapsActivity
+import com.geekbrains.kotlin_lessons.adapters.*
 import com.geekbrains.kotlin_lessons.databinding.FragmentInfoBinding
 import com.geekbrains.kotlin_lessons.interactors.string.StringInteractorImpl
-import com.geekbrains.kotlin_lessons.models.Genres
-import com.geekbrains.kotlin_lessons.models.MovieFull
-import com.geekbrains.kotlin_lessons.models.ProductionCountries
+import com.geekbrains.kotlin_lessons.models.*
 import com.geekbrains.kotlin_lessons.receivers.NetworkConnectionReceiver
 import com.geekbrains.kotlin_lessons.utils.Constants
+import com.geekbrains.kotlin_lessons.utils.Variables
 import com.geekbrains.kotlin_lessons.viewModels.InfoViewModel
 import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
@@ -38,9 +40,17 @@ class InfoFragment : Fragment() {
     private lateinit var binding: FragmentInfoBinding
     private val args: InfoFragmentArgs by navArgs()
     private lateinit var genresAdapter: GenresAdapter
-    private lateinit var actorsAdapter: ActorsAdapter
     private lateinit var movieFavorite: MovieFull
 
+    private val actorsAdapter by lazy {
+        ActorsAdapter(onItemViewClickListener = object : OnActorViewClickListener {
+            override fun onItemClick(actor: Actor) {
+                Variables.BOOLEAN = true
+                val action = InfoFragmentDirections.actionNavigationInfoToActorFragment(actor.id)
+                requireView().findNavController().navigate(action)
+            }
+        })
+    }
     private lateinit var networkConnectionReceiver: NetworkConnectionReceiver
     private var flag: Boolean = false
 
@@ -72,6 +82,7 @@ class InfoFragment : Fragment() {
             swipeRefreshLayout.isRefreshing = false
         }, 2000)
     }
+
 
     private fun goBack() {
         networkConnectionReceiver = NetworkConnectionReceiver()
@@ -191,7 +202,6 @@ class InfoFragment : Fragment() {
                             LinearLayoutManager(context, RecyclerView.VERTICAL, false)
                 }
 
-                actorsAdapter = ActorsAdapter()
 
                 binding.recyclerActors.apply {
                     adapter = actorsAdapter

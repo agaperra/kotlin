@@ -1,5 +1,6 @@
 package com.geekbrains.kotlin_lessons.network
 
+import com.geekbrains.kotlin_lessons.models.ActorFull
 import com.geekbrains.kotlin_lessons.utils.Constants
 import com.geekbrains.kotlin_lessons.models.MovieFull
 import com.geekbrains.kotlin_lessons.responses.ActorsResponse
@@ -60,6 +61,12 @@ interface ApiService {
                     @Query("api_key") key: String,
                     @Query("language") lang: String
     ): Call<MovieFull>
+
+    @GET(value = "/3/person/{id}")
+    fun showDetailsActor(@Path("id") id: Int,
+                    @Query("api_key") key: String,
+                    @Query("language") lang: String
+    ): Call<ActorFull>
 
     @GET(value = "/3/movie/{id}/credits")
     fun showDetailsPeople(@Path("id") id: Int,

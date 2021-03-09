@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="isLoading"
+            type="Boolean" />
+
+        <variable
+            name="viewModel"
+            type="com.geekbrains.kotlin_lessons.viewModels.ActorsViewModel" />
+
+        <import type="android.view.View" />
+
+
+    </data>
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:animateLayoutChanges="true"
+                tools:context=".fragments.InfoFragment">
+
+                <ProgressBar
+                    android:id="@+id/progressBar"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:visibility="@{isLoading ? View.VISIBLE : View.GONE, default=gone}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <com.google.android.material.appbar.AppBarLayout
+                    android:id="@+id/appbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <com.google.android.material.appbar.CollapsingToolbarLayout
+                        android:id="@+id/collapsing_toolbar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fitsSystemWindows="true"
+                        app:layout_scrollFlags="noScroll"
+                        app:titleEnabled="false">
+
+
+                        <TextView
+                            android:id="@+id/textView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/medium"
+                            android:paddingStart="@dimen/_15sdp"
+                            android:visibility="@{isLoading ? View.GONE : View.VISIBLE, default=visible}"
+                            android:paddingTop="@dimen/_10sdp"
+                            android:paddingEnd="@dimen/_15sdp"
+                            android:paddingBottom="@dimen/_10sdp"
+                            android:textSize="@dimen/_30ssp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+
+                    </com.google.android.material.appbar.CollapsingToolbarLayout>
+                </com.google.android.material.appbar.AppBarLayout>
+
+                <com.makeramen.roundedimageview.RoundedImageView
+                    android:id="@+id/imageMovie"
+                    android:layout_width="168dp"
+                    android:layout_height="240dp"
+                    android:visibility="@{isLoading ? View.GONE : View.VISIBLE, default=visible}"
+                    android:layout_margin="15dp"
+                    android:scaleType="fitCenter"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/appbar"
+                    app:riv_corner_radius="8dp" />
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_date"
+                    android:visibility="@{isLoading ? View.GONE : View.VISIBLE, default=visible}"
+                    android:layout_marginTop="15dp"
+                    app:layout_constraintStart_toStartOf="@+id/imageMovie"
+                    app:layout_constraintTop_toBottomOf="@+id/imageMovie" />
+
+                <TextView
+                    android:id="@+id/birth_day"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:visibility="@{isLoading ? View.GONE : View.VISIBLE, default=visible}"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageView"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/imageView"
+                    app:layout_constraintTop_toTopOf="@+id/imageView" />
+
+                <ImageView
+                    android:id="@+id/imagePlace"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:visibility="@{isLoading ? View.GONE : View.VISIBLE, default=visible}"
+                    android:src="@drawable/ic_country"
+                    app:layout_constraintEnd_toEndOf="@+id/imageView"
+                    app:layout_constraintStart_toStartOf="@+id/imageView"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+                <TextView
+                    android:id="@+id/birth_at"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@+id/imagePlace"
+                    app:layout_constraintEnd_toEndOf="@+id/birth_day"
+                    android:visibility="@{isLoading ? View.GONE : View.VISIBLE, default=visible}"
+                    app:layout_constraintStart_toStartOf="@+id/birth_day"
+                    app:layout_constraintTop_toTopOf="@+id/imagePlace" />
+
+                <TextView
+                    android:id="@+id/biography"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:fontFamily="@font/normal"
+                    android:textSize="13sp"
+                    android:visibility="@{isLoading ? View.GONE : View.VISIBLE, default=visible}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/birth_at"
+                    app:layout_constraintStart_toStartOf="@+id/imageMovie"
+                    app:layout_constraintTop_toBottomOf="@+id/birth_at" />
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerViewAlsoKnown"
+                    android:layout_width="wrap_content"
+                    android:layout_height="240dp"
+                    android:layout_margin="15dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageMovie"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/imageMovie"
+                    app:layout_constraintTop_toTopOf="@+id/imageMovie" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+</layout>

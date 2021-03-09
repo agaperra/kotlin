@@ -18,5 +18,8 @@ class Constants {
         const val TOP_MOVIES = "/3/movie/top_rated"
         const val SEARCH_MOVIES = "/3/search/movie/"
         const val SEARCH_ACTORS = "/3/search/person"
+        const val ACTOR_PLACE_OF_BIRTH = "ActorPlaceOfBirth"
+        const val ACTOR_NAME = "ActorName"
+        const val ACTOR_PHOTO = "PhotoPath"
     }
 }

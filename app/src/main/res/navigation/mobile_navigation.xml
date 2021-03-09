@@ -68,25 +68,44 @@
             app:enterAnim="@anim/slide_from_bottom"
             app:exitAnim="@anim/fragment_fade_exit" />
 
-    </fragment>
+        <action
+            android:id="@+id/action_navigation_search_to_actorFragment"
+            app:destination="@id/actorFragment" />
 
-    <fragment
-        android:id="@+id/navigation_contacts"
-        android:name="com.geekbrains.kotlin_lessons.fragments.ContactsFragment"
-        android:label="@string/title_contacts"
-        tools:layout="@layout/fragment_search" >
     </fragment>
 
     <fragment
         android:id="@+id/infoFragment"
         android:name="com.geekbrains.kotlin_lessons.fragments.InfoFragment"
-        android:label="InfoFragment" >
+        android:label="InfoFragment"
+        tools:layout="@layout/fragment_info">
         <argument
             android:name="movieId"
             app:argType="integer" />
 
         <action
+            android:id="@+id/action_navigation_info_to_actorFragment"
+            app:destination="@id/actorFragment" />
+
+        <action
             android:id="@+id/disconnectInfo"
+            app:destination="@id/navigation_disconnect"
+            app:enterAnim="@anim/slide_from_bottom"
+            app:exitAnim="@anim/fragment_fade_exit" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/actorFragment"
+        android:name="com.geekbrains.kotlin_lessons.fragments.ActorFragment"
+        android:label="ActorFragment"
+        tools:layout="@layout/fragment_actors">
+        <argument
+            android:name="actorId"
+            app:argType="integer" />
+
+        <action
+            android:id="@+id/disconnectActor"
             app:destination="@id/navigation_disconnect"
             app:enterAnim="@anim/slide_from_bottom"
             app:exitAnim="@anim/fragment_fade_exit" />
