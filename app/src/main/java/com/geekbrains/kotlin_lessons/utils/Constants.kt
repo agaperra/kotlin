@@ -8,7 +8,6 @@ class Constants {
 
     companion object {
         @SuppressLint("ConstantLocale")
-        lateinit var sPrefs: SharedPreferencesManager
         const val PREF_ADULT: String = "PREF_ADULT"
         const val BASIC_URL: String = "https://api.themoviedb.org"
         const val IMAGE_URL: String = "https://image.tmdb.org/t/p/w400"

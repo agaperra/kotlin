@@ -29,7 +29,6 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 class ActorFragment : Fragment() {
 
@@ -113,8 +112,8 @@ class ActorFragment : Fragment() {
         binding.isLoading = true
         actorViewModel.getObservedActor().observe(viewLifecycleOwner, {
             setAlso(it.also_known_as)
-           setName(it.name)
-           setDate(it.birthday)
+            setName(it.name)
+            setDate(it.birthday)
             setCountry(it.place_of_birth)
             setOverview(it.biography)
             setPoster(it.profile_path)
@@ -124,14 +123,20 @@ class ActorFragment : Fragment() {
 
     }
 
-    private fun setListenerPlace(){
+    private fun setListenerPlace() {
         binding.birthAt.apply {
             paintFlags = paintFlags or Paint.UNDERLINE_TEXT_FLAG
             setOnClickListener {
-                binding.birthAt.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+                binding.birthAt.setTextColor(
+                    ContextCompat.getColor(
+                        requireContext(),
+                        R.color.white
+                    )
+                )
 
                 Intent(activity, MapsActivity::class.java).also {
                     it.putExtra(Constants.ACTOR_PLACE_OF_BIRTH, currentActor.place_of_birth)
+                    it.putExtra(Constants.ACTOR_NAME, currentActor.name)
                     context.startActivity(it)
                 }
             }

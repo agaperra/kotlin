@@ -12,13 +12,13 @@ import com.geekbrains.kotlin_lessons.App
 import com.geekbrains.kotlin_lessons.repositories.*
 
 class InfoViewModel(
-        private val stringInteractor: StringInteractor,
-        private val historyRepository: LocalRepository = LocalRepositoryImpl(App.getHistoryDao()),
-        private val favoriteRepository: FavoriteRepository = FavoriteRepositoryImpl(App.getFavoriteDao()),
-        private val watchedRepository: WatchedRepository = WatchedRepositoryImpl(App.getWatchedDao()),
-        private val noteRepository: NoteRepository = NoteRepositoryImpl(App.getNoteDao())
+    private val stringInteractor: StringInteractor,
+    private val historyRepository: LocalRepository = LocalRepositoryImpl(App.getHistoryDao()),
+    private val favoriteRepository: FavoriteRepository = FavoriteRepositoryImpl(App.getFavoriteDao()),
+    private val watchedRepository: WatchedRepository = WatchedRepositoryImpl(App.getWatchedDao()),
+    private val noteRepository: NoteRepository = NoteRepositoryImpl(App.getNoteDao())
 ) : ViewModel(),
-        LifecycleObserver, View.OnClickListener {
+    LifecycleObserver, View.OnClickListener {
 
     fun saveMovieToDB(movie: MovieFull) {
         historyRepository.saveEntity(movie)
@@ -88,8 +88,8 @@ class InfoViewModel(
             val hours = runtime / 60
             val minutes = runtime % 60
             return (String.format("%d", hours) + stringInteractor.textHour + String.format(
-                    "%02d",
-                    minutes
+                "%02d",
+                minutes
             ) + stringInteractor.textMinute)
         } ?: return stringInteractor.textUnknownRuntime
 

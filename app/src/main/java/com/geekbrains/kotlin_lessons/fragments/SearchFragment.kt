@@ -39,7 +39,7 @@ class SearchFragment : Fragment() {
             override fun onItemClick(movie: Movie) {
                 Variables.BOOLEAN = true
                 val action =
-                        SearchFragmentDirections.actionNavigationSearchToInfoFragment(movieId = movie.id)
+                    SearchFragmentDirections.actionNavigationSearchToInfoFragment(movieId = movie.id)
                 requireView().findNavController().navigate(action)
             }
         })
@@ -49,7 +49,8 @@ class SearchFragment : Fragment() {
         SearchActorsAdapter(onItemViewClickListener = object : OnActorViewClickListener {
             override fun onItemClick(actor: Actor) {
                 Variables.BOOLEAN = true
-                val action = SearchFragmentDirections.actionNavigationSearchToActorFragment(actor.id)
+                val action =
+                    SearchFragmentDirections.actionNavigationSearchToActorFragment(actor.id)
                 requireView().findNavController().navigate(action)
             }
         })
@@ -57,16 +58,13 @@ class SearchFragment : Fragment() {
     private var data = ""
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View {
         Variables.BOOLEAN = false
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_search, container, false)
         searchViewModel = SearchViewModel(StringInteractorImpl(requireContext()))
-
-        Variables.ADULT = searchViewModel.getPref()
-        binding.adultContent.isChecked = Variables.ADULT
 
         return binding.root
     }
@@ -78,50 +76,26 @@ class SearchFragment : Fragment() {
     }
 
     private fun doInitialization() {
-        binding.adultContent.setOnCheckedChangeListener { _, _ ->
-            when (binding.adultContent.isChecked) {
-                true -> {
-                    Variables.ADULT = true
-                    searchViewModel.setPref(Variables.ADULT)
-                }
-                false -> {
-                    Variables.ADULT = false
-                    searchViewModel.setPref(Variables.ADULT)
-                }
-            }
-            val snackbar =
-                    Snackbar.make(binding.root, getString(R.string.adult), Snackbar.LENGTH_LONG)
-
-            @SuppressLint("InflateParams")
-            val customSnackView: View =
-                    layoutInflater.inflate(R.layout.rounded, null)
-            snackbar.view.setBackgroundColor(Color.TRANSPARENT)
-            val snackbarLayout = snackbar.view as Snackbar.SnackbarLayout
-
-            snackbarLayout.setPadding(R.dimen._20sdp, R.dimen._20sdp, R.dimen._20sdp, R.dimen._20sdp)
-            snackbarLayout.addView(customSnackView, 0)
-            snackbar.show()
-        }
         binding.searchMovie.visibility = View.VISIBLE
         binding.searchActor.visibility = View.VISIBLE
         searchViewModel.liveDataPictures.observe(
-                viewLifecycleOwner,
-                { binding.textViewMovie.text = it })
+            viewLifecycleOwner,
+            { binding.textViewMovie.text = it })
         searchViewModel.liveDataActors.observe(
-                viewLifecycleOwner,
-                { binding.textViewActors.text = it })
+            viewLifecycleOwner,
+            { binding.textViewActors.text = it })
         binding.viewModelSearch = searchViewModel
 
         binding.movieRecycler.apply {
             adapter = movieAdapterSearch
             layoutManager =
-                    LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+                LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
         }
 
         binding.actorRecycler.apply {
             adapter = actorAdapterSearch
             layoutManager =
-                    LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+                LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
         }
         setObserver(searchViewModel, movieAdapterSearch)
         setObserverActor(searchViewModel, actorAdapterSearch)
@@ -159,23 +133,22 @@ class SearchFragment : Fragment() {
         binding.searchView.apply {
 
             var id = context
-                    .resources
-                    .getIdentifier("android:id/search_src_text", null, null)
+                .resources
+                .getIdentifier("android:id/search_src_text", null, null)
             val textView = findViewById<View>(id) as TextView
-            //использование resources.getColor(id: Int, theme: Resources.Theme!) возможно с API 23, а у меня минимальная версия API 21
             textView.setTextColor(resources.getColor(R.color.bottom_nav_menu))
             val typeface = ResourcesCompat.getFont(requireContext(), R.font.normal)
             textView.typeface = typeface
 
             id = context
-                    .resources
-                    .getIdentifier("android:id/search_close_btn", null, null)
+                .resources
+                .getIdentifier("android:id/search_close_btn", null, null)
             var imageView = findViewById<View>(id) as ImageView
             imageView.setImageResource(R.drawable.ic_baseline_close_24)
 
             id = context
-                    .resources
-                    .getIdentifier("android:id/search_button", null, null)
+                .resources
+                .getIdentifier("android:id/search_button", null, null)
             imageView = findViewById<View>(id) as ImageView
             imageView.setImageResource(R.drawable.ic_searcview)
 

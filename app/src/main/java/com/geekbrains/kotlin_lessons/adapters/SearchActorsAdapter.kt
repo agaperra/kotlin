@@ -12,13 +12,13 @@ import com.geekbrains.kotlin_lessons.utils.Constants
 import com.squareup.picasso.Picasso
 
 class SearchActorsAdapter(var onItemViewClickListener: OnActorViewClickListener) :
-        RecyclerView.Adapter<SearchActorsAdapter.ActorSearchViewHolder>() {
+    RecyclerView.Adapter<SearchActorsAdapter.ActorSearchViewHolder>() {
 
     private val actor = arrayListOf<Actor>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ActorSearchViewHolder(
-            itemView = LayoutInflater.from(parent.context)
-                    .inflate(R.layout.item_actor, parent, false)
+        itemView = LayoutInflater.from(parent.context)
+            .inflate(R.layout.item_actor, parent, false)
     )
 
 
@@ -27,7 +27,7 @@ class SearchActorsAdapter(var onItemViewClickListener: OnActorViewClickListener)
     fun clearItems() = this.actor.clear()
 
     override fun onBindViewHolder(holder: ActorSearchViewHolder, position: Int) =
-            holder.bindMovie(actor[position])
+        holder.bindMovie(actor[position])
 
     override fun getItemCount(): Int = actor.size
 
@@ -41,8 +41,8 @@ class SearchActorsAdapter(var onItemViewClickListener: OnActorViewClickListener)
                 poster = findViewById(R.id.actorPhoto)
 
                 Picasso.get().load("${Constants.IMAGE_URL}${actors.profile_path}")
-                        .placeholder(R.drawable.ic_baseline_no_photography_48)
-                        .into(poster)
+                    .placeholder(R.drawable.ic_baseline_no_photography_48)
+                    .into(poster)
 
                 actorName.text = actors.name?.replace(" ", "\n")
                 itemView.setOnClickListener {

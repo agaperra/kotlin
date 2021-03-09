@@ -12,8 +12,8 @@ import com.geekbrains.kotlin_lessons.repositories.ActorsDetailsRepository
 import com.geekbrains.kotlin_lessons.repositories.MovieDetailsRepository
 import com.geekbrains.kotlin_lessons.responses.CastResponse
 
-class ActorsViewModel: ViewModel(),
-        LifecycleObserver{
+class ActorsViewModel : ViewModel(),
+    LifecycleObserver {
 
     private val _observingActor = MutableLiveData<ActorFull>()
     private val actorDetailsRepository: ActorsDetailsRepository = ActorsDetailsRepository()

@@ -17,7 +17,7 @@ class ActorsDetailsRepository {
 
     fun getDetailsActor(id: Int, _observing: MutableLiveData<ActorFull>) {
         apiService.showDetailsActor(id, BuildConfig.FILM_API_KEY, Variables.LOCALE).enqueue(object :
-                retrofit2.Callback<ActorFull> {
+            retrofit2.Callback<ActorFull> {
             override fun onResponse(call: Call<ActorFull>, response: Response<ActorFull>) {
                 _observing.value = response.body()
             }

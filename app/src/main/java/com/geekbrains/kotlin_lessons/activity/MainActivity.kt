@@ -27,14 +27,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        Constants.sPrefs = SharedPreferencesManager(this)
         setNavigation()
     }
 
 
     private fun setNavigation() {
         val navHostFragment =
-                supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val navController = navHostFragment.navController
         binding.navView.setupWithNavController(navController)
     }
@@ -49,10 +48,11 @@ class MainActivity : AppCompatActivity() {
                 finish()
             } else {
                 val snackbar =
-                        Snackbar.make(binding.root, getString(R.string.try_exit), Snackbar.LENGTH_LONG)
+                    Snackbar.make(binding.root, getString(R.string.try_exit), Snackbar.LENGTH_LONG)
+
                 @SuppressLint("InflateParams")
                 val customSnackView: View =
-                        layoutInflater.inflate(R.layout.rounded, null)
+                    layoutInflater.inflate(R.layout.rounded, null)
                 snackbar.view.setBackgroundColor(Color.TRANSPARENT)
                 val snackbarLayout = snackbar.view as SnackbarLayout
 

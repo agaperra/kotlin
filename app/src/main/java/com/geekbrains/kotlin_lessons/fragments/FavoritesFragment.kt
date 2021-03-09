@@ -39,22 +39,20 @@ class FavoritesFragment : Fragment() {
             override fun onItemClick(movie: Movie) {
                 Variables.BOOLEAN = true
                 val action =
-                        FavoritesFragmentDirections.actionNavigationFavoritesToInfoFragment(movieId = movie.id)
+                    FavoritesFragmentDirections.actionNavigationFavoritesToInfoFragment(movieId = movie.id)
                 requireView().findNavController().navigate(action)
             }
         })
     }
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View {
         Variables.BOOLEAN = false
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_favorites, container, false)
         favoritesViewModel = FavoritesViewModel()
-        Variables.ADULT = favoritesViewModel.getPref()
-        binding.adultContent.isChecked = Variables.ADULT
         return binding.root
     }
 
@@ -83,36 +81,11 @@ class FavoritesFragment : Fragment() {
                 requireView().findNavController().navigate(R.id.disconnectMovie)
             }
             true -> {
-                binding.adultContent.setOnCheckedChangeListener { _, _ ->
-                    if (binding.adultContent.isChecked) {
-                        Variables.ADULT = true
-                        favoritesViewModel.setPref(Variables.ADULT)
-                    } else {
-                        Variables.ADULT = false
-                        favoritesViewModel.setPref(Variables.ADULT)
-                    }
-
-                }
-
-                val snackbar =
-                        Snackbar.make(binding.root, getString(R.string.adult), Snackbar.LENGTH_LONG)
-
-                @SuppressLint("InflateParams")
-                val customSnackView: View =
-                        layoutInflater.inflate(R.layout.rounded, null)
-                snackbar.view.setBackgroundColor(Color.TRANSPARENT)
-                val snackbarLayout = snackbar.view as Snackbar.SnackbarLayout
-
-                snackbarLayout.setPadding(R.dimen._20sdp, R.dimen._20sdp, R.dimen._20sdp, R.dimen._20sdp)
-                snackbarLayout.addView(customSnackView, 0)
-                snackbar.show()
-
-
 
                 binding.favoriteRecycler.apply {
                     adapter = favoriteAdapter
                     layoutManager =
-                            LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+                        LinearLayoutManager(context, RecyclerView.VERTICAL, false)
                 }
                 favoritesViewModel.favoriteLiveData.observe(viewLifecycleOwner, {
                     renderData(it)
@@ -125,20 +98,20 @@ class FavoritesFragment : Fragment() {
     }
 
 
-private fun renderData(appState: AppState) {
-    when (appState) {
-        is AppState.Success -> {
-            binding.favoriteRecycler.visibility = View.VISIBLE
-            favoriteAdapter.setData(appState.movieData)
-        }
-        is AppState.Loading -> {
-            binding.favoriteRecycler.visibility = View.GONE
-        }
-        is AppState.Error -> {
-            binding.favoriteRecycler.visibility = View.VISIBLE
-            favoritesViewModel.getAllFavorite()
+    private fun renderData(appState: AppState) {
+        when (appState) {
+            is AppState.Success -> {
+                binding.favoriteRecycler.visibility = View.VISIBLE
+                favoriteAdapter.setData(appState.movieData)
+            }
+            is AppState.Loading -> {
+                binding.favoriteRecycler.visibility = View.GONE
+            }
+            is AppState.Error -> {
+                binding.favoriteRecycler.visibility = View.VISIBLE
+                favoritesViewModel.getAllFavorite()
+            }
         }
     }
-}
 
 }

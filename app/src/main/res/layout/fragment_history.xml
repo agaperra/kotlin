@@ -62,23 +62,11 @@
                                 android:text="@string/title_history"
                                 android:textSize="@dimen/_30ssp"
                                 app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toStartOf="@+id/adultContent"
+
+                                app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
 
-
-                            <com.google.android.material.switchmaterial.SwitchMaterial
-                                android:id="@+id/adultContent"
-                                style="@style/SwitchStyle"
-                                android:layout_width="wrap_content"
-                                android:layout_height="0dp"
-                                android:layout_margin="15dp"
-                                android:fontFamily="@font/medium"
-                                android:textColor="@color/textColor_pink"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintBottom_toBottomOf="@+id/textView"
-                                android:minWidth="@dimen/_25sdp"/>
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
                     </com.google.android.material.appbar.CollapsingToolbarLayout>

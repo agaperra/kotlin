@@ -15,17 +15,17 @@ class AlsoKnownAsAdapter : RecyclerView.Adapter<AlsoKnownAsAdapter.AlsoViewHolde
     inner class AlsoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         fun bind(also: String) {
-            itemView.findViewById<TextView>(R.id.alsoItem).text =also
+            itemView.findViewById<TextView>(R.id.alsoItem).text = also
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = AlsoViewHolder(
-            itemView = LayoutInflater.from(parent.context)
-                    .inflate(R.layout.item_also_known, parent, false)
+        itemView = LayoutInflater.from(parent.context)
+            .inflate(R.layout.item_also_known, parent, false)
     )
 
     override fun onBindViewHolder(holder: AlsoViewHolder, position: Int) =
-            holder.bind(also[position])
+        holder.bind(also[position])
 
     override fun getItemCount() = also.count()
 
