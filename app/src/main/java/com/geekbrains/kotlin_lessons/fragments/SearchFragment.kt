@@ -23,7 +23,7 @@ import com.geekbrains.kotlin_lessons.interactors.string.StringInteractorImpl
 import com.geekbrains.kotlin_lessons.models.Movie
 import com.geekbrains.kotlin_lessons.receivers.NetworkConnectionReceiver
 import com.geekbrains.kotlin_lessons.utils.Constants
-import com.geekbrains.kotlin_lessons.utils.Constants.Companion.ADULT
+import com.geekbrains.kotlin_lessons.utils.Variables
 import com.geekbrains.kotlin_lessons.viewModels.SearchViewModel
 import com.google.android.material.snackbar.Snackbar
 
@@ -38,7 +38,7 @@ class SearchFragment : Fragment() {
     private val movieAdapterSearch by lazy {
         SearchMovieAdapter(onItemViewClickListener = object : OnItemViewClickListener {
             override fun onItemClick(movie: Movie) {
-                Constants.BOOLEAN = true
+                Variables.BOOLEAN = true
                 val action =
                         SearchFragmentDirections.actionNavigationSearchToInfoFragment(movieId = movie.id)
                 requireView().findNavController().navigate(action)
@@ -56,15 +56,12 @@ class SearchFragment : Fragment() {
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View {
-        Constants.BOOLEAN = false
+        Variables.BOOLEAN = false
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_search, container, false)
         searchViewModel = SearchViewModel(StringInteractorImpl(requireContext()))
 
-        ADULT = searchViewModel.getPref()
-        when (ADULT) {
-            true -> binding.adultContent.isChecked = true
-            false -> binding.adultContent.isChecked = false
-        }
+        Variables.ADULT = searchViewModel.getPref()
+        binding.adultContent.isChecked = Variables.ADULT
 
         return binding.root
     }
@@ -79,12 +76,12 @@ class SearchFragment : Fragment() {
         binding.adultContent.setOnCheckedChangeListener { _, _ ->
             when (binding.adultContent.isChecked) {
                 true -> {
-                    ADULT = true
-                    searchViewModel.setPref(ADULT)
+                    Variables.ADULT = true
+                    searchViewModel.setPref(Variables.ADULT)
                 }
                 false -> {
-                    ADULT = false
-                    searchViewModel.setPref(ADULT)
+                    Variables.ADULT = false
+                    searchViewModel.setPref(Variables.ADULT)
                 }
             }
             val snackbar =
@@ -96,7 +93,7 @@ class SearchFragment : Fragment() {
             snackbar.view.setBackgroundColor(Color.TRANSPARENT)
             val snackbarLayout = snackbar.view as Snackbar.SnackbarLayout
 
-            snackbarLayout.setPadding(20, 20, 20, 20)
+            snackbarLayout.setPadding(R.dimen._20sdp, R.dimen._20sdp, R.dimen._20sdp, R.dimen._20sdp)
             snackbarLayout.addView(customSnackView, 0)
             snackbar.show()
         }

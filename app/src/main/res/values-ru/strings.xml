@@ -18,6 +18,7 @@
     <string name="title_favorites">Избранное</string>
     <string name="title_settings">Настройки</string>
     <string name="title_search">Поиск</string>
+    <string name="title_contacts">Контакты</string>
     <string name="title_history">История</string>
     <string name="search">Поиск</string>
     <string name="popular">Популярное</string>
@@ -41,7 +42,7 @@
     <string name="try_exit">Нажмите ещё раз, чтобы выйти</string>
 
     <string name="adult">Доступ к контенту для взрослых изменён</string>
-
+    <string name="contacts">Доступ к контактам запрещён</string>
     <string name="budget">Бюджет: </string>
     <string name="revenue">Сборы: </string>
     <string name="rating">Рейтинг: </string>

@@ -7,6 +7,7 @@ import com.geekbrains.kotlin_lessons.repositories.FavoriteRepository
 import com.geekbrains.kotlin_lessons.repositories.FavoriteRepositoryImpl
 import com.geekbrains.kotlin_lessons.utils.AppState
 import com.geekbrains.kotlin_lessons.utils.Constants
+import com.geekbrains.kotlin_lessons.utils.Variables
 
 class FavoritesViewModel(
         val favoriteLiveData: MutableLiveData<AppState> = MutableLiveData(),
@@ -22,5 +23,5 @@ class FavoritesViewModel(
         Constants.sPrefs.editor.putBoolean(Constants.PREF_ADULT, param).apply()
     }
 
-    fun getPref() = Constants.sPrefs.retrieveBoolean(Constants.PREF_ADULT, Constants.ADULT)
+    fun getPref() = Constants.sPrefs.retrieveBoolean(Constants.PREF_ADULT, Variables.ADULT)
 }

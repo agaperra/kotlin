@@ -23,7 +23,7 @@ import com.geekbrains.kotlin_lessons.models.MovieFull
 import com.geekbrains.kotlin_lessons.models.ProductionCountries
 import com.geekbrains.kotlin_lessons.receivers.NetworkConnectionReceiver
 import com.geekbrains.kotlin_lessons.utils.Constants
-import com.geekbrains.kotlin_lessons.utils.Constants.Companion.ADULT
+import com.geekbrains.kotlin_lessons.utils.Variables
 import com.geekbrains.kotlin_lessons.viewModels.MovieViewModel
 import com.google.android.material.snackbar.Snackbar
 import java.util.ArrayList
@@ -38,7 +38,7 @@ class MovieFragment : Fragment() {
     private val movieAdapterPopular by lazy {
         HorizontalRecyclerAdapter(onItemViewClickListener = object : OnItemViewClickListener {
             override fun onItemClick(movie: Movie) {
-                Constants.BOOLEAN = true
+                Variables.BOOLEAN = true
                 val action = MovieFragmentDirections.openMovie(movieId = movie.id)
                 requireView().findNavController().navigate(action)
             }
@@ -48,7 +48,7 @@ class MovieFragment : Fragment() {
     private val movieAdapterNowPlaying by lazy {
         HorizontalRecyclerAdapter(onItemViewClickListener = object : OnItemViewClickListener {
             override fun onItemClick(movie: Movie) {
-                Constants.BOOLEAN = true
+                Variables.BOOLEAN = true
                 val action = MovieFragmentDirections.openMovie(movieId = movie.id)
                 requireView().findNavController().navigate(action)
             }
@@ -58,7 +58,7 @@ class MovieFragment : Fragment() {
     private val movieAdapterUpComing by lazy {
         HorizontalRecyclerAdapter(onItemViewClickListener = object : OnItemViewClickListener {
             override fun onItemClick(movie: Movie) {
-                Constants.BOOLEAN = true
+                Variables.BOOLEAN = true
                 val action = MovieFragmentDirections.openMovie(movieId = movie.id)
                 requireView().findNavController().navigate(action)
             }
@@ -68,7 +68,7 @@ class MovieFragment : Fragment() {
     private val movieAdapterTop by lazy {
         HorizontalRecyclerAdapter(onItemViewClickListener = object : OnItemViewClickListener {
             override fun onItemClick(movie: Movie) {
-                Constants.BOOLEAN = true
+                Variables.BOOLEAN = true
                 val action = MovieFragmentDirections.openMovie(movieId = movie.id)
                 requireView().findNavController().navigate(action)
             }
@@ -81,16 +81,13 @@ class MovieFragment : Fragment() {
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View {
-        Constants.BOOLEAN = false
+        Variables.BOOLEAN = false
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_movie, container, false)
 
         movieViewModel = MovieViewModel(StringInteractorImpl(requireContext()))
 
-        ADULT = movieViewModel.getPref()
-        when (ADULT) {
-            true -> binding.adultContent.isChecked = true
-            false -> binding.adultContent.isChecked = false
-        }
+        Variables.ADULT = movieViewModel.getPref()
+        binding.adultContent.isChecked = Variables.ADULT
         return binding.root
     }
 
@@ -122,12 +119,12 @@ class MovieFragment : Fragment() {
 
                     when (binding.adultContent.isChecked) {
                         true -> {
-                            ADULT = true
-                            movieViewModel.setPref(ADULT)
+                            Variables.ADULT = true
+                            movieViewModel.setPref(Variables.ADULT)
                         }
                         false -> {
-                            ADULT = false
-                            movieViewModel.setPref(ADULT)
+                            Variables.ADULT = false
+                            movieViewModel.setPref(Variables.ADULT)
                         }
                     }
                     val snackbar =
@@ -139,7 +136,7 @@ class MovieFragment : Fragment() {
                     snackbar.view.setBackgroundColor(Color.TRANSPARENT)
                     val snackbarLayout = snackbar.view as Snackbar.SnackbarLayout
 
-                    snackbarLayout.setPadding(20, 20, 20, 20)
+                    snackbarLayout.setPadding(R.dimen._20sdp, R.dimen._20sdp, R.dimen._20sdp, R.dimen._20sdp)
                     snackbarLayout.addView(customSnackView, 0)
                     snackbar.show()
 

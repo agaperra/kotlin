@@ -118,7 +118,7 @@ class HistoryAdapter(
                     snackbar.view.setBackgroundColor(Color.TRANSPARENT)
                     val snackbarLayout = snackbar.view as Snackbar.SnackbarLayout
 
-                    snackbarLayout.setPadding(20, 20, 20, 20)
+                    snackbarLayout.setPadding(R.dimen._20sdp, R.dimen._20sdp, R.dimen._20sdp, R.dimen._20sdp)
                     snackbarLayout.addView(customSnackView, 0)
                     snackbar.show()
                 }

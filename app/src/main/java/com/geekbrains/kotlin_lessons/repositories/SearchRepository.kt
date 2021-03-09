@@ -7,6 +7,7 @@ import com.geekbrains.kotlin_lessons.network.ApiClient
 import com.geekbrains.kotlin_lessons.network.ApiService
 import com.geekbrains.kotlin_lessons.responses.ActorsResponse
 import com.geekbrains.kotlin_lessons.responses.MovieResponse
+import com.geekbrains.kotlin_lessons.utils.Variables
 import retrofit2.Call
 import retrofit2.Response
 
@@ -18,8 +19,8 @@ class SearchRepository {
     fun searchMovies(query: String, _observingMovies: MutableLiveData<MovieResponse>) {
         apiService.searchMovie(
                 key = BuildConfig.FILM_API_KEY,
-                lang = Constants.LOCALE,
-                Constants.ADULT,
+                lang = Variables.LOCALE,
+                Variables.ADULT,
                 query = query
         )
                 .enqueue(object : retrofit2.Callback<MovieResponse> {
@@ -38,7 +39,7 @@ class SearchRepository {
     fun searchActors(query: String, _observingActors: MutableLiveData<ActorsResponse>) {
         apiService.searchActor(
                 key = BuildConfig.FILM_API_KEY,
-                lang = Constants.LOCALE,
+                lang = Variables.LOCALE,
                 query = query
         )
                 .enqueue(object : retrofit2.Callback<ActorsResponse> {

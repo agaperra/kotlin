@@ -10,8 +10,10 @@ import androidx.navigation.findNavController
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.geekbrains.kotlin_lessons.R
 import com.geekbrains.kotlin_lessons.viewModels.DisconnectViewModel
+import com.geekbrains.kotlin_lessons.viewModels.FavoritesViewModel
 
 class DisconnectFragment : Fragment() {
+
 
     private lateinit var disconnectViewModel: DisconnectViewModel
     override fun onCreateView(
@@ -19,8 +21,7 @@ class DisconnectFragment : Fragment() {
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View {
-        disconnectViewModel =
-                ViewModelProvider(this).get(DisconnectViewModel::class.java)
+        disconnectViewModel = DisconnectViewModel()
         return inflater.inflate(R.layout.connection_lost, container, false)
     }
 

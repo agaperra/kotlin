@@ -24,6 +24,7 @@ import com.geekbrains.kotlin_lessons.models.Movie
 import com.geekbrains.kotlin_lessons.receivers.NetworkConnectionReceiver
 import com.geekbrains.kotlin_lessons.utils.AppState
 import com.geekbrains.kotlin_lessons.utils.Constants
+import com.geekbrains.kotlin_lessons.utils.Variables
 import com.geekbrains.kotlin_lessons.viewModels.FavoritesViewModel
 import com.geekbrains.kotlin_lessons.viewModels.MovieViewModel
 import com.google.android.material.snackbar.Snackbar
@@ -36,7 +37,7 @@ class FavoritesFragment : Fragment() {
     private val favoriteAdapter: FavoriteAdapter by lazy {
         FavoriteAdapter(onItemViewClickListener = object : OnItemViewClickListener {
             override fun onItemClick(movie: Movie) {
-                Constants.BOOLEAN = true
+                Variables.BOOLEAN = true
                 val action =
                         FavoritesFragmentDirections.actionNavigationFavoritesToInfoFragment(movieId = movie.id)
                 requireView().findNavController().navigate(action)
@@ -49,15 +50,11 @@ class FavoritesFragment : Fragment() {
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View {
-        Constants.BOOLEAN = false
+        Variables.BOOLEAN = false
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_favorites, container, false)
         favoritesViewModel = FavoritesViewModel()
-        Constants.ADULT = favoritesViewModel.getPref()
-        when (Constants.ADULT) {
-            true -> binding.adultContent.isChecked = true
-            false -> binding.adultContent.isChecked = false
-        }
-
+        Variables.ADULT = favoritesViewModel.getPref()
+        binding.adultContent.isChecked = Variables.ADULT
         return binding.root
     }
 
@@ -87,31 +84,30 @@ class FavoritesFragment : Fragment() {
             }
             true -> {
                 binding.adultContent.setOnCheckedChangeListener { _, _ ->
-                    when (binding.adultContent.isChecked) {
-                        true -> {
-                            Constants.ADULT = true
-                            favoritesViewModel.setPref(Constants.ADULT)
-                        }
-                        false -> {
-                            Constants.ADULT = false
-                            favoritesViewModel.setPref(Constants.ADULT)
-                        }
+                    if (binding.adultContent.isChecked) {
+                        Variables.ADULT = true
+                        favoritesViewModel.setPref(Variables.ADULT)
+                    } else {
+                        Variables.ADULT = false
+                        favoritesViewModel.setPref(Variables.ADULT)
                     }
 
-                    val snackbar =
-                            Snackbar.make(binding.root, getString(R.string.adult), Snackbar.LENGTH_LONG)
-
-                    @SuppressLint("InflateParams")
-                    val customSnackView: View =
-                            layoutInflater.inflate(R.layout.rounded, null)
-                    snackbar.view.setBackgroundColor(Color.TRANSPARENT)
-                    val snackbarLayout = snackbar.view as Snackbar.SnackbarLayout
-
-                    snackbarLayout.setPadding(20, 20, 20, 20)
-                    snackbarLayout.addView(customSnackView, 0)
-                    snackbar.show()
-
                 }
+
+                val snackbar =
+                        Snackbar.make(binding.root, getString(R.string.adult), Snackbar.LENGTH_LONG)
+
+                @SuppressLint("InflateParams")
+                val customSnackView: View =
+                        layoutInflater.inflate(R.layout.rounded, null)
+                snackbar.view.setBackgroundColor(Color.TRANSPARENT)
+                val snackbarLayout = snackbar.view as Snackbar.SnackbarLayout
+
+                snackbarLayout.setPadding(R.dimen._20sdp, R.dimen._20sdp, R.dimen._20sdp, R.dimen._20sdp)
+                snackbarLayout.addView(customSnackView, 0)
+                snackbar.show()
+
+
 
                 binding.favoriteRecycler.apply {
                     adapter = favoriteAdapter
@@ -128,20 +124,21 @@ class FavoritesFragment : Fragment() {
         }
     }
 
-    private fun renderData(appState: AppState) {
-        when (appState) {
-            is AppState.Success -> {
-                binding.favoriteRecycler.visibility = View.VISIBLE
-                favoriteAdapter.setData(appState.movieData)
-            }
-            is AppState.Loading -> {
-                binding.favoriteRecycler.visibility = View.GONE
-            }
-            is AppState.Error -> {
-                binding.favoriteRecycler.visibility = View.VISIBLE
-                favoritesViewModel.getAllFavorite()
-            }
+
+private fun renderData(appState: AppState) {
+    when (appState) {
+        is AppState.Success -> {
+            binding.favoriteRecycler.visibility = View.VISIBLE
+            favoriteAdapter.setData(appState.movieData)
+        }
+        is AppState.Loading -> {
+            binding.favoriteRecycler.visibility = View.GONE
+        }
+        is AppState.Error -> {
+            binding.favoriteRecycler.visibility = View.VISIBLE
+            favoritesViewModel.getAllFavorite()
         }
     }
+}
 
 }
