@@ -11,6 +11,8 @@
     <string name="menu_favorites">Favorites</string>
     <string name="menu_search">Search</string>
     <string name="ok">OK</string>
+    <string name="title_noti">Movies in favorites are waiting for you</string>
+    <string name="message_noti">Do not forget to watch movies in your favorites.</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_maps">MapsActivity</string>
     <string name="title_movie">Main page</string>

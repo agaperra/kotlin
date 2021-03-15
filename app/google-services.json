@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "474425834622",
+    "project_id": "films-bee3c",
+    "storage_bucket": "films-bee3c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:474425834622:android:ea71294e3a9b4199ee6c2f",
+        "android_client_info": {
+          "package_name": "com.geekbrains.kotlin_lessons"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "474425834622-vbm9qeuf92vu88peprb2mrv94ic95cnp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDhgVBgsWCymkVvwdnrlPHIyLTv_-Cr21c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "474425834622-vbm9qeuf92vu88peprb2mrv94ic95cnp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

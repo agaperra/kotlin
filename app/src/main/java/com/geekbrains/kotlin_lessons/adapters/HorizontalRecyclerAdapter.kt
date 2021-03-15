@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.geekbrains.kotlin_lessons.App
 import com.geekbrains.kotlin_lessons.utils.Constants
 import com.geekbrains.kotlin_lessons.R
+import com.geekbrains.kotlin_lessons.activity.MainActivity
 import com.geekbrains.kotlin_lessons.adapters.HorizontalRecyclerAdapter.MovieViewHolder
 import com.geekbrains.kotlin_lessons.models.Genres
 import com.geekbrains.kotlin_lessons.models.Movie
@@ -18,9 +19,7 @@ import com.geekbrains.kotlin_lessons.models.MovieFull
 import com.geekbrains.kotlin_lessons.models.ProductionCountries
 import com.geekbrains.kotlin_lessons.repositories.FavoriteRepository
 import com.geekbrains.kotlin_lessons.repositories.FavoriteRepositoryImpl
-import com.geekbrains.kotlin_lessons.room.dao.FavoriteDao
 import com.geekbrains.kotlin_lessons.utils.showSnackBar
-import com.geekbrains.kotlin_lessons.viewModels.MovieViewModel
 import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
 import java.util.*
@@ -102,6 +101,8 @@ class HorizontalRecyclerAdapter(var onItemViewClickListener: OnItemViewClickList
                             )
                             snackbar =
                                 showSnackBar(R.string.add_to_favorites, Snackbar.LENGTH_SHORT)
+
+
                         }
                         else -> {
                             itemLike.setImageResource(R.drawable.ic_sharp_favorite_border_24)
@@ -117,10 +118,10 @@ class HorizontalRecyclerAdapter(var onItemViewClickListener: OnItemViewClickList
                     val snackbarLayout = snackbar.view as Snackbar.SnackbarLayout
 
                     snackbarLayout.setPadding(
-                        R.dimen._20sdp,
-                        R.dimen._20sdp,
-                        R.dimen._20sdp,
-                        R.dimen._20sdp
+                        20,
+                        20,
+                        20,
+                        20
                     )
                     snackbarLayout.addView(customSnackView, 0)
                     snackbar.show()
