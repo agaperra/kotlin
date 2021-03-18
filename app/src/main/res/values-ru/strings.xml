@@ -13,6 +13,8 @@
     <string name="menu_favorites">Избранное</string>
     <string name="menu_search">Поиск</string>
     <string name="ok">ОК</string>
+    <string name="title_noti">Фильмы в избранном ждут вас</string>
+    <string name="message_noti">Не забудьте посмотреть фильмы в избранном.</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_maps">MapsActivity</string>
     <string name="title_movie">Главная</string>

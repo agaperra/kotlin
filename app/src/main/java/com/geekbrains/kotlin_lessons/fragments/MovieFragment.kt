@@ -29,7 +29,9 @@ import com.geekbrains.kotlin_lessons.receivers.NetworkConnectionReceiver
 import com.geekbrains.kotlin_lessons.utils.Constants
 import com.geekbrains.kotlin_lessons.utils.Variables
 import com.geekbrains.kotlin_lessons.viewModels.MovieViewModel
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.iid.FirebaseInstanceId
 import java.util.ArrayList
 
 
@@ -110,6 +112,9 @@ class MovieFragment : Fragment() {
     }
 
 
+
+
+
     private fun doInitialization() {
         networkConnectionReceiver = NetworkConnectionReceiver()
         when (networkConnectionReceiver.checkInternet(requireContext())) {
@@ -148,6 +153,20 @@ class MovieFragment : Fragment() {
                 getLookNowMovies()
                 getUpComingMovies()
                 getTopMovies()
+
+//
+//                FirebaseInstanceId.getInstance().instanceId
+//                    .addOnCompleteListener(OnCompleteListener { task ->
+//                        if (!task.isSuccessful) {
+//                            // Не удалось получить токен, произошла ошибка
+//                            return@OnCompleteListener
+//                        }
+//
+//                        // Получить токен
+//                        val token = task.result!!.token
+//                        print(token)
+//                        // Сохранить токен...
+//                    })
 
             }
         }

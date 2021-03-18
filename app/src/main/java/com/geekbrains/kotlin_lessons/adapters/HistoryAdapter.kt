@@ -120,10 +120,10 @@ class HistoryAdapter(
                     val snackbarLayout = snackbar.view as Snackbar.SnackbarLayout
 
                     snackbarLayout.setPadding(
-                        R.dimen._20sdp,
-                        R.dimen._20sdp,
-                        R.dimen._20sdp,
-                        R.dimen._20sdp
+                        20,
+                        20,
+                        20,
+                        20
                     )
                     snackbarLayout.addView(customSnackView, 0)
                     snackbar.show()
