@@ -17,9 +17,9 @@ class DisconnectFragment : Fragment() {
 
     private lateinit var disconnectViewModel: DisconnectViewModel
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View {
         disconnectViewModel = DisconnectViewModel()
         return inflater.inflate(R.layout.connection_lost, container, false)

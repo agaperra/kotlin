@@ -11,7 +11,9 @@ import com.geekbrains.kotlin_lessons.models.Actor
 import com.makeramen.roundedimageview.RoundedImageView
 import com.squareup.picasso.Picasso
 
-class ActorsAdapter : RecyclerView.Adapter<ActorsAdapter.ActorsViewHolder>() {
+class ActorsAdapter(
+    var onItemViewClickListener: OnActorViewClickListener
+) : RecyclerView.Adapter<ActorsAdapter.ActorsViewHolder>() {
 
     private val actor = arrayListOf<Actor>()
 
@@ -22,20 +24,23 @@ class ActorsAdapter : RecyclerView.Adapter<ActorsAdapter.ActorsViewHolder>() {
 
         fun bindActor(actor: Actor) {
             Picasso.get().load("${Constants.IMAGE_URL}${actor.profile_path}")
-                    .placeholder(R.drawable.ic_baseline_no_photography_48)
-                    .into(actorPhoto)
+                .placeholder(R.drawable.ic_baseline_no_photography_48)
+                .into(actorPhoto)
 
             actorName.text = actor.name?.replace(" ", "\n")
+            itemView.setOnClickListener {
+                onItemViewClickListener.onItemClick(actor)
+            }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ActorsViewHolder(
-            itemView = LayoutInflater.from(parent.context)
-                    .inflate(R.layout.item_actor, parent, false)
+        itemView = LayoutInflater.from(parent.context)
+            .inflate(R.layout.item_actor, parent, false)
     )
 
     override fun onBindViewHolder(holder: ActorsViewHolder, position: Int) =
-            holder.bindActor(actor = actor[position])
+        holder.bindActor(actor = actor[position])
 
     override fun getItemCount() = actor.count()
 

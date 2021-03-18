@@ -27,19 +27,19 @@ import java.util.*
 
 
 class HorizontalRecyclerAdapter(var onItemViewClickListener: OnItemViewClickListener) :
-        RecyclerView.Adapter<MovieViewHolder>(), View.OnClickListener {
+    RecyclerView.Adapter<MovieViewHolder>(), View.OnClickListener {
 
     private val moviesList = arrayListOf<Movie>()
     private val favoriteRepository: FavoriteRepository =
-            FavoriteRepositoryImpl(App.getFavoriteDao())
+        FavoriteRepositoryImpl(App.getFavoriteDao())
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = MovieViewHolder(
-            LayoutInflater.from(parent.context)
-                    .inflate(R.layout.item_movie_list, parent, false)
+        LayoutInflater.from(parent.context)
+            .inflate(R.layout.item_movie_list, parent, false)
     )
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) =
-            holder.bindMovie(moviesList[position])
+        holder.bindMovie(moviesList[position])
 
     fun addItems(movies: ArrayList<Movie>) = this.moviesList.addAll(movies)
 
@@ -55,12 +55,12 @@ class HorizontalRecyclerAdapter(var onItemViewClickListener: OnItemViewClickList
             itemView.apply {
                 val poster: ImageView = findViewById(R.id.imageMovie)
                 Picasso.get().load("${Constants.IMAGE_URL}${movie.poster_path}")
-                        .placeholder(R.drawable.ic_baseline_image_not_supported_24)
-                        .into(poster)
+                    .placeholder(R.drawable.ic_baseline_image_not_supported_24)
+                    .into(poster)
 
                 findViewById<TextView>(R.id.textName).text = movie.title
                 findViewById<TextView>(R.id.textReleaseDate).text =
-                        movie.release_date.take(4)
+                    movie.release_date.take(4)
 
                 val itemLike = findViewById<ImageView>(R.id.like)
                 when (findFavorite(movie.id)) {
@@ -82,41 +82,46 @@ class HorizontalRecyclerAdapter(var onItemViewClickListener: OnItemViewClickList
                             itemLike.setImageResource(R.drawable.ic_baseline_favorite_24)
                             itemLike.tag = R.string.like
                             saveFavoriteToDB(
-                                    MovieFull(
-                                            movie.id,
-                                            "",
-                                            movie.overview,
-                                            movie.poster_path,
-                                            movie.release_date,
-                                            movie.title,
-                                            0.0,
-                                            0,
-                                            ArrayList<Genres>(),
-                                            ArrayList<ProductionCountries>(),
-                                            0,
-                                            0,
-                                            0,
-                                            "",
-                                            0.0
-                                    )
+                                MovieFull(
+                                    movie.id,
+                                    "",
+                                    movie.overview,
+                                    movie.poster_path,
+                                    movie.release_date,
+                                    movie.title,
+                                    0.0,
+                                    0,
+                                    ArrayList<Genres>(),
+                                    ArrayList<ProductionCountries>(),
+                                    0,
+                                    0,
+                                    0,
+                                    "",
+                                    0.0
+                                )
                             )
                             snackbar =
-                                    showSnackBar(R.string.add_to_favorites, Snackbar.LENGTH_SHORT)
+                                showSnackBar(R.string.add_to_favorites, Snackbar.LENGTH_SHORT)
                         }
                         else -> {
                             itemLike.setImageResource(R.drawable.ic_sharp_favorite_border_24)
                             itemLike.tag = R.string.no_like
                             deleteFavoriteFromDB(movie.id)
                             snackbar =
-                                    showSnackBar(R.string.remove_from_favorites, Snackbar.LENGTH_SHORT)
+                                showSnackBar(R.string.remove_from_favorites, Snackbar.LENGTH_SHORT)
                         }
                     }
                     @SuppressLint("InflateParams") val customSnackView: View =
-                            LayoutInflater.from(context).inflate(R.layout.rounded, null)
+                        LayoutInflater.from(context).inflate(R.layout.rounded, null)
                     snackbar.view.setBackgroundColor(Color.TRANSPARENT)
                     val snackbarLayout = snackbar.view as Snackbar.SnackbarLayout
 
-                    snackbarLayout.setPadding(R.dimen._20sdp, R.dimen._20sdp, R.dimen._20sdp, R.dimen._20sdp)
+                    snackbarLayout.setPadding(
+                        R.dimen._20sdp,
+                        R.dimen._20sdp,
+                        R.dimen._20sdp,
+                        R.dimen._20sdp
+                    )
                     snackbarLayout.addView(customSnackView, 0)
                     snackbar.show()
                 }

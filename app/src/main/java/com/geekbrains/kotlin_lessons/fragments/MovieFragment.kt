@@ -1,11 +1,15 @@
 package com.geekbrains.kotlin_lessons.fragments
 
+import android.Manifest
 import android.annotation.SuppressLint
+import android.content.pm.PackageManager
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
@@ -77,17 +81,15 @@ class MovieFragment : Fragment() {
 
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View {
         Variables.BOOLEAN = false
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_movie, container, false)
 
         movieViewModel = MovieViewModel(StringInteractorImpl(requireContext()))
 
-        Variables.ADULT = movieViewModel.getPref()
-        binding.adultContent.isChecked = Variables.ADULT
         return binding.root
     }
 
@@ -115,55 +117,29 @@ class MovieFragment : Fragment() {
                 requireView().findNavController().navigate(R.id.disconnectMovie)
             }
             true -> {
-                binding.adultContent.setOnCheckedChangeListener { _, _ ->
-
-                    when (binding.adultContent.isChecked) {
-                        true -> {
-                            Variables.ADULT = true
-                            movieViewModel.setPref(Variables.ADULT)
-                        }
-                        false -> {
-                            Variables.ADULT = false
-                            movieViewModel.setPref(Variables.ADULT)
-                        }
-                    }
-                    val snackbar =
-                            Snackbar.make(binding.root, getString(R.string.adult), Snackbar.LENGTH_LONG)
-
-                    @SuppressLint("InflateParams")
-                    val customSnackView: View =
-                            layoutInflater.inflate(R.layout.rounded, null)
-                    snackbar.view.setBackgroundColor(Color.TRANSPARENT)
-                    val snackbarLayout = snackbar.view as Snackbar.SnackbarLayout
-
-                    snackbarLayout.setPadding(R.dimen._20sdp, R.dimen._20sdp, R.dimen._20sdp, R.dimen._20sdp)
-                    snackbarLayout.addView(customSnackView, 0)
-                    snackbar.show()
-
-                }
 
                 binding.mainRecycler.apply {
                     adapter = movieAdapterPopular
                     layoutManager =
-                            LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+                        LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
                 }
 
                 binding.lookingRecycler.apply {
                     adapter = movieAdapterNowPlaying
                     layoutManager =
-                            LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+                        LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
                 }
 
                 binding.upcomingRecycler.apply {
                     adapter = movieAdapterUpComing
                     layoutManager =
-                            LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+                        LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
                 }
 
                 binding.topRecycler.apply {
                     adapter = movieAdapterTop
                     layoutManager =
-                            LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+                        LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
                 }
 
                 setUpLiveData()
@@ -245,11 +221,11 @@ class MovieFragment : Fragment() {
     private fun setUpLiveData() {
         movieViewModel.liveDataPopular.observe(viewLifecycleOwner, { binding.textView2.text = it })
         movieViewModel.liveDataNowPlaying.observe(
-                viewLifecycleOwner,
-                { binding.textLookNow.text = it })
+            viewLifecycleOwner,
+            { binding.textLookNow.text = it })
         movieViewModel.liveDataUpComing.observe(
-                viewLifecycleOwner,
-                { binding.textUpComingNow.text = it })
+            viewLifecycleOwner,
+            { binding.textUpComingNow.text = it })
         movieViewModel.liveDataTop.observe(viewLifecycleOwner, { binding.textTop.text = it })
     }
 

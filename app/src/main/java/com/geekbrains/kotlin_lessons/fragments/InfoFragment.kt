@@ -1,7 +1,9 @@
 package com.geekbrains.kotlin_lessons.fragments
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.graphics.Color
+import android.graphics.Paint
 import android.os.Bundle
 import android.text.Editable
 import android.view.LayoutInflater
@@ -10,6 +12,7 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
@@ -18,15 +21,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.geekbrains.kotlin_lessons.R
-import com.geekbrains.kotlin_lessons.adapters.ActorsAdapter
-import com.geekbrains.kotlin_lessons.adapters.GenresAdapter
+import com.geekbrains.kotlin_lessons.activity.MapsActivity
+import com.geekbrains.kotlin_lessons.adapters.*
 import com.geekbrains.kotlin_lessons.databinding.FragmentInfoBinding
 import com.geekbrains.kotlin_lessons.interactors.string.StringInteractorImpl
-import com.geekbrains.kotlin_lessons.models.Genres
-import com.geekbrains.kotlin_lessons.models.MovieFull
-import com.geekbrains.kotlin_lessons.models.ProductionCountries
+import com.geekbrains.kotlin_lessons.models.*
 import com.geekbrains.kotlin_lessons.receivers.NetworkConnectionReceiver
 import com.geekbrains.kotlin_lessons.utils.Constants
+import com.geekbrains.kotlin_lessons.utils.Variables
 import com.geekbrains.kotlin_lessons.viewModels.InfoViewModel
 import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
@@ -38,21 +40,29 @@ class InfoFragment : Fragment() {
     private lateinit var binding: FragmentInfoBinding
     private val args: InfoFragmentArgs by navArgs()
     private lateinit var genresAdapter: GenresAdapter
-    private lateinit var actorsAdapter: ActorsAdapter
     private lateinit var movieFavorite: MovieFull
 
+    private val actorsAdapter by lazy {
+        ActorsAdapter(onItemViewClickListener = object : OnActorViewClickListener {
+            override fun onItemClick(actor: Actor) {
+                Variables.BOOLEAN = true
+                val action = InfoFragmentDirections.actionNavigationInfoToActorFragment(actor.id)
+                requireView().findNavController().navigate(action)
+            }
+        })
+    }
     private lateinit var networkConnectionReceiver: NetworkConnectionReceiver
     private var flag: Boolean = false
 
 
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_info, container, false)
         infoViewModel =
-                InfoViewModel(StringInteractorImpl(requireContext()))
+            InfoViewModel(StringInteractorImpl(requireContext()))
         return binding.root
     }
 
@@ -73,6 +83,7 @@ class InfoFragment : Fragment() {
         }, 2000)
     }
 
+
     private fun goBack() {
         networkConnectionReceiver = NetworkConnectionReceiver()
         when (networkConnectionReceiver.checkInternet(context)) {
@@ -85,34 +96,34 @@ class InfoFragment : Fragment() {
     }
 
     private fun createMovie(movie: MovieFull) =
-            MovieFull(
-                    movie.id,
-                    "",
-                    movie.overview,
-                    movie.poster_path,
-                    movie.release_date,
-                    movie.title,
-                    0.0,
-                    0,
-                    ArrayList<Genres>(),
-                    ArrayList<ProductionCountries>(),
-                    0,
-                    0,
-                    0,
-                    "",
-                    0.0
-            )
+        MovieFull(
+            movie.id,
+            "",
+            movie.overview,
+            movie.poster_path,
+            movie.release_date,
+            movie.title,
+            0.0,
+            0,
+            ArrayList<Genres>(),
+            ArrayList<ProductionCountries>(),
+            0,
+            0,
+            0,
+            "",
+            0.0
+        )
 
 
     private fun saveMovie(movie: MovieFull) {
         infoViewModel.saveMovieToDB(
-                createMovie(movie)
+            createMovie(movie)
         )
     }
 
     private fun saveFavorite(movie: MovieFull) {
         infoViewModel.saveFavoriteToDB(
-                createMovie(movie)
+            createMovie(movie)
         )
     }
 
@@ -129,45 +140,45 @@ class InfoFragment : Fragment() {
 
     private fun findFavorite(movie: MovieFull): Int {
         return infoViewModel.findFavorite(
-                movie.id
+            movie.id
         )
     }
 
     private fun findWatched(movie: MovieFull): Int {
         return infoViewModel.findWatched(
-                movie.id
+            movie.id
         )
     }
 
     private fun getNote(movie: MovieFull): Int {
         return infoViewModel.getId(
-                movie.id
+            movie.id
         )
     }
 
     private fun findNote(movie: MovieFull): String {
         return infoViewModel.getNote(
-                movie.id
+            movie.id
         )
     }
 
     private fun deleteNote(movie: MovieFull) {
         infoViewModel.deleteNoteFromDB(
-                movie.id
+            movie.id
         )
     }
 
 
     private fun deleteFavorite(movie: MovieFull) {
         infoViewModel.deleteFavoriteFromDB(
-                movie.id
+            movie.id
         )
     }
 
 
     private fun deleteWatched(movie: MovieFull) {
         infoViewModel.deleteWatchedFromDB(
-                movie.id
+            movie.id
         )
     }
 
@@ -188,15 +199,14 @@ class InfoFragment : Fragment() {
                 binding.recyclerViewGenres.apply {
                     adapter = genresAdapter
                     layoutManager =
-                            LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+                        LinearLayoutManager(context, RecyclerView.VERTICAL, false)
                 }
 
-                actorsAdapter = ActorsAdapter()
 
                 binding.recyclerActors.apply {
                     adapter = actorsAdapter
                     layoutManager =
-                            LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+                        LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
                 }
 
                 lateinit var snackbar: Snackbar
@@ -220,35 +230,36 @@ class InfoFragment : Fragment() {
 
                     val mDialogBuilder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
                     val promptsView: View = LayoutInflater.from(context).inflate(
-                            R.layout.prompt,
-                            null
+                        R.layout.prompt,
+                        null
                     )
                     mDialogBuilder.setView(promptsView)
                     val edit: EditText = promptsView.findViewById(R.id.input_text)
                     edit.setText(binding.textAdd.text, TextView.BufferType.EDITABLE)
                     mDialogBuilder
-                            .setCancelable(false)
-                            .setPositiveButton(
-                                    "OK"
-                            ) { _, _ ->
-                                when {
-                                    edit.text.toString().trim() != "" -> {
-                                        binding.textAdd.text = edit.text
-                                        saveNote(movieFavorite, edit.text.toString())
-                                        binding.imageAdd.setImageResource(R.drawable.ic_baseline_drive_file_rename_outline_24)
-                                    }
-                                    edit.text.toString().trim() == "" && getNote(movieFavorite) == 1 -> {
-                                        deleteNote(movieFavorite)
-                                        binding.textAdd.text = getString(R.string.note)
-                                        binding.imageAdd.setImageResource(R.drawable.ic_baseline_add_24)
-                                    }
-                                    else -> {
-                                    }
+                        .setCancelable(false)
+                        .setPositiveButton(
+                            "OK"
+                        ) { _, _ ->
+                            when {
+                                edit.text.toString().trim() != "" -> {
+                                    binding.textAdd.text = edit.text
+                                    saveNote(movieFavorite, edit.text.toString())
+                                    binding.imageAdd.setImageResource(R.drawable.ic_baseline_drive_file_rename_outline_24)
+                                }
+                                edit.text.toString()
+                                    .trim() == "" && getNote(movieFavorite) == 1 -> {
+                                    deleteNote(movieFavorite)
+                                    binding.textAdd.text = getString(R.string.note)
+                                    binding.imageAdd.setImageResource(R.drawable.ic_baseline_add_24)
+                                }
+                                else -> {
                                 }
                             }
-                            .setNegativeButton(
-                                    "Отмена"
-                            ) { dialog, _ -> dialog.cancel() }
+                        }
+                        .setNegativeButton(
+                            "Отмена"
+                        ) { dialog, _ -> dialog.cancel() }
 
 
                     val alertDialog = mDialogBuilder.create()
@@ -263,30 +274,35 @@ class InfoFragment : Fragment() {
                             binding.like.tag = R.string.like
                             saveFavorite(movieFavorite)
                             snackbar =
-                                    Snackbar.make(
-                                            binding.root,
-                                            R.string.add_to_favorites,
-                                            Snackbar.LENGTH_SHORT
-                                    )
+                                Snackbar.make(
+                                    binding.root,
+                                    R.string.add_to_favorites,
+                                    Snackbar.LENGTH_SHORT
+                                )
                         }
                         else -> {
                             binding.like.setImageResource(R.drawable.ic_sharp_favorite_border_24)
                             binding.like.tag = R.string.no_like
                             deleteFavorite(movieFavorite)
                             snackbar =
-                                    Snackbar.make(
-                                            binding.root,
-                                            R.string.remove_from_favorites,
-                                            Snackbar.LENGTH_SHORT
-                                    )
+                                Snackbar.make(
+                                    binding.root,
+                                    R.string.remove_from_favorites,
+                                    Snackbar.LENGTH_SHORT
+                                )
                         }
                     }
                     @SuppressLint("InflateParams") val customSnackView: View =
-                            LayoutInflater.from(context).inflate(R.layout.rounded, null)
+                        LayoutInflater.from(context).inflate(R.layout.rounded, null)
                     snackbar.view.setBackgroundColor(Color.TRANSPARENT)
                     val snackbarLayout = snackbar.view as Snackbar.SnackbarLayout
 
-                    snackbarLayout.setPadding(R.dimen._20sdp, R.dimen._20sdp, R.dimen._20sdp, R.dimen._20sdp)
+                    snackbarLayout.setPadding(
+                        R.dimen._20sdp,
+                        R.dimen._20sdp,
+                        R.dimen._20sdp,
+                        R.dimen._20sdp
+                    )
                     snackbarLayout.addView(customSnackView, 0)
                     snackbar.show()
 
@@ -363,8 +379,8 @@ class InfoFragment : Fragment() {
     private fun setPoster(poster_path: String?) {
 
         Picasso.get().load("${Constants.IMAGE_URL}${poster_path}")
-                .placeholder(R.drawable.ic_baseline_image_not_supported_24)
-                .into(binding.imageMovie)
+            .placeholder(R.drawable.ic_baseline_image_not_supported_24)
+            .into(binding.imageMovie)
     }
 
     private fun setOverview(overview: String) {

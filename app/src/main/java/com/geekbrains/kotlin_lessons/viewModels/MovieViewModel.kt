@@ -11,7 +11,7 @@ import com.geekbrains.kotlin_lessons.utils.Constants
 import com.geekbrains.kotlin_lessons.utils.Variables
 
 class MovieViewModel(
-        private val stringInteractor: StringInteractor,
+    private val stringInteractor: StringInteractor,
 ) : ViewModel() {
 
     private val movieRepository: MovieRepository = MovieRepository()
@@ -45,13 +45,6 @@ class MovieViewModel(
     fun topMovie() {
         movieRepository.getTopMovies(_observingMoviesTop)
     }
-
-
-    fun setPref(param: Boolean) {
-        Constants.sPrefs.editor.putBoolean(Constants.PREF_ADULT, param).apply()
-    }
-
-    fun getPref() = Constants.sPrefs.retrieveBoolean(Constants.PREF_ADULT, Variables.ADULT)
 
 
     val liveDataPopular = MutableLiveData<String>()

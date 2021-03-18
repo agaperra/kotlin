@@ -36,22 +36,20 @@ class HistoryFragment : Fragment() {
             override fun onItemClick(movie: Movie) {
                 Variables.BOOLEAN = true
                 val action =
-                        HistoryFragmentDirections.actionNavigationHistoryToInfoFragment(movieId = movie.id)
+                    HistoryFragmentDirections.actionNavigationHistoryToInfoFragment(movieId = movie.id)
                 requireView().findNavController().navigate(action)
             }
         })
     }
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View {
         Variables.BOOLEAN = false
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_history, container, false)
         historyViewModel = HistoryViewModel()
-        Variables.ADULT = historyViewModel.getPref()
-        binding.adultContent.isChecked=Variables.ADULT
         return binding.root
     }
 
@@ -81,39 +79,10 @@ class HistoryFragment : Fragment() {
                 requireView().findNavController().navigate(R.id.disconnectMovie)
             }
             true -> {
-
-
-                binding.adultContent.setOnCheckedChangeListener { _, _ ->
-                    when (binding.adultContent.isChecked) {
-                        true -> {
-                            Variables.ADULT = true
-                            historyViewModel.setPref(Variables.ADULT)
-                        }
-                        false -> {
-                            Variables.ADULT = false
-                            historyViewModel.setPref(Variables.ADULT)
-                        }
-                    }
-
-                    val snackbar =
-                            Snackbar.make(binding.root, getString(R.string.adult), Snackbar.LENGTH_LONG)
-
-                    @SuppressLint("InflateParams")
-                    val customSnackView: View =
-                            layoutInflater.inflate(R.layout.rounded, null)
-                    snackbar.view.setBackgroundColor(Color.TRANSPARENT)
-                    val snackbarLayout = snackbar.view as Snackbar.SnackbarLayout
-
-                    snackbarLayout.setPadding(R.dimen._20sdp, R.dimen._20sdp, R.dimen._20sdp, R.dimen._20sdp)
-                    snackbarLayout.addView(customSnackView, 0)
-                    snackbar.show()
-                }
-
-
                 binding.history.apply {
                     adapter = historyAdapter
                     layoutManager =
-                            LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+                        LinearLayoutManager(context, RecyclerView.VERTICAL, false)
                 }
                 historyViewModel.historyLiveData.observe(viewLifecycleOwner, {
                     renderData(it)

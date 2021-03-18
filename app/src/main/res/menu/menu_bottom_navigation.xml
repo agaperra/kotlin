@@ -21,9 +21,5 @@
         android:icon="@drawable/ic_menu_search"
         android:title="@string/title_search" />
 
-    <item
-        android:id="@+id/navigation_contacts"
-        android:icon="@drawable/ic_baseline_perm_contact_calendar_24"
-        android:title="@string/title_contacts" />
 
 </menu>
