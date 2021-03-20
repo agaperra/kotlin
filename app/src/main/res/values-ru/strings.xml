@@ -9,6 +9,7 @@
     <string name="nav_header_desc">Главная</string>
     <string name="action_settings">Настройки</string>
     <string name="note">Заметка</string>
+    <string name="cancel">Отмена</string>
 
     <string name="menu_favorites">Избранное</string>
     <string name="menu_search">Поиск</string>

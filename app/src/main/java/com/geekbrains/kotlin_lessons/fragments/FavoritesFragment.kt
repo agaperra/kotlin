@@ -33,6 +33,8 @@ class FavoritesFragment : Fragment() {
 
     private lateinit var favoritesViewModel: FavoritesViewModel
     private lateinit var binding: FragmentFavoritesBinding
+    private var refreshing = 2000L
+
     private lateinit var networkConnectionReceiver: NetworkConnectionReceiver
     private val favoriteAdapter: FavoriteAdapter by lazy {
         FavoriteAdapter(onItemViewClickListener = object : OnItemViewClickListener {
@@ -71,7 +73,7 @@ class FavoritesFragment : Fragment() {
         swipeRefreshLayout.postOnAnimationDelayed({
             doInitialization()
             swipeRefreshLayout.isRefreshing = false
-        }, 2000)
+        }, refreshing)
     }
 
     private fun doInitialization() {

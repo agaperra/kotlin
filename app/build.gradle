@@ -25,16 +25,16 @@ android {
         viewBinding true
     }
 
-//    signingConfigs {
-//        release {
-//            Properties properties = new Properties()
-//            properties.load(project.rootProject.file('key.properties').newDataInputStream())
-//            storeFile file(properties.getProperty('storeFile'))
-//            keyAlias properties.getProperty('keyAlias')
-//            keyPassword properties.getProperty('keyPassword')
-//            storePassword properties.getProperty('storePassword')
-//        }
-//    }
+    signingConfigs {
+        release {
+            Properties properties = new Properties()
+            properties.load(project.rootProject.file('key.properties').newDataInputStream())
+            storeFile file(properties.getProperty('storeFile'))
+            keyAlias properties.getProperty('keyAlias')
+            keyPassword properties.getProperty('keyPassword')
+            storePassword properties.getProperty('storePassword')
+        }
+    }
 
     buildTypes.each {
         Properties properties = new Properties()
@@ -46,6 +46,7 @@ android {
     buildTypes {
         release {
             minifyEnabled false
+            signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             buildConfigField "String", "TYPE", '"RELEASE"'
         }

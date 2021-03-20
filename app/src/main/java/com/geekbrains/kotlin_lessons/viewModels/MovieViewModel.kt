@@ -14,35 +14,12 @@ class MovieViewModel(
     private val movieRepository: MovieRepository = MovieRepository()
 
     private val _observingMoviesPopular = MutableLiveData<MovieResponse>()
-    fun getObservedMoviesPopular() = _observingMoviesPopular
 
     private val _observingMoviesLookNow = MutableLiveData<MovieResponse>()
-    fun getObservedMoviesLookNow() = _observingMoviesLookNow
-
 
     private val _observingMoviesUpComing = MutableLiveData<MovieResponse>()
-    fun getObservedMoviesUpComing() = _observingMoviesUpComing
-
 
     private val _observingMoviesTop = MutableLiveData<MovieResponse>()
-    fun getObservedMoviesTop() = _observingMoviesTop
-
-    fun popularMovie() {
-        movieRepository.getPopularMovies(_observingMoviesPopular)
-    }
-
-    fun lookNowMovie() {
-        movieRepository.getLookNowMovies(_observingMoviesLookNow)
-    }
-
-    fun upComingMovie() {
-        movieRepository.getUpComingMovies(_observingMoviesUpComing)
-    }
-
-    fun topMovie() {
-        movieRepository.getTopMovies(_observingMoviesTop)
-    }
-
 
     val liveDataPopular = MutableLiveData<String>()
     val liveDataNowPlaying = MutableLiveData<String>()
@@ -54,6 +31,23 @@ class MovieViewModel(
         setNowPlaying()
         setUpComing()
         setTop()
+    }
+
+    fun getObserving(temp: Int): MutableLiveData<MovieResponse> {
+        return when(temp){
+            0->_observingMoviesPopular
+            1->_observingMoviesLookNow
+            2-> _observingMoviesUpComing
+            else ->_observingMoviesTop
+        }
+    }
+    fun setFilms(temp: Int){
+        when(temp){
+            0->movieRepository.getPopularMovies(_observingMoviesPopular)
+            1->movieRepository.getLookNowMovies(_observingMoviesLookNow)
+            2->movieRepository.getUpComingMovies(_observingMoviesUpComing)
+            else->movieRepository.getTopMovies(_observingMoviesTop)
+        }
     }
 
     private fun setPopular() {

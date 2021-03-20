@@ -259,7 +259,7 @@ class InfoFragment : Fragment() {
                             }
                         }
                         .setNegativeButton(
-                            "Отмена"
+                            R.string.cancel
                         ) { dialog, _ -> dialog.cancel() }
 
 
