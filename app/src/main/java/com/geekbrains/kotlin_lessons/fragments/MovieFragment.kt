@@ -153,21 +153,6 @@ class MovieFragment : Fragment() {
                 getLookNowMovies()
                 getUpComingMovies()
                 getTopMovies()
-
-//
-//                FirebaseInstanceId.getInstance().instanceId
-//                    .addOnCompleteListener(OnCompleteListener { task ->
-//                        if (!task.isSuccessful) {
-//                            // Не удалось получить токен, произошла ошибка
-//                            return@OnCompleteListener
-//                        }
-//
-//                        // Получить токен
-//                        val token = task.result!!.token
-//                        print(token)
-//                        // Сохранить токен...
-//                    })
-
             }
         }
 

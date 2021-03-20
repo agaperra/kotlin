@@ -57,7 +57,7 @@ class MovieViewModel(
     }
 
     private fun setPopular() {
-        liveDataPopular.value = BuildConfig.BUILD_TYPE//stringInteractor.textPopular
+        liveDataPopular.value = stringInteractor.textPopular
     }
 
     private fun setNowPlaying() {

@@ -25,6 +25,17 @@ android {
         viewBinding true
     }
 
+//    signingConfigs {
+//        release {
+//            Properties properties = new Properties()
+//            properties.load(project.rootProject.file('key.properties').newDataInputStream())
+//            storeFile file(properties.getProperty('storeFile'))
+//            keyAlias properties.getProperty('keyAlias')
+//            keyPassword properties.getProperty('keyPassword')
+//            storePassword properties.getProperty('storePassword')
+//        }
+//    }
+
     buildTypes.each {
         Properties properties = new Properties()
         properties.load(project.rootProject.file("film_key.properties").newDataInputStream())
@@ -36,11 +47,11 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "TYPE", '"RELEASE"'
         }
         debug{
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            initWith debug
             buildConfigField "String", "TYPE", '"DEBUG"'
             versionNameSuffix "-debug"
         }
