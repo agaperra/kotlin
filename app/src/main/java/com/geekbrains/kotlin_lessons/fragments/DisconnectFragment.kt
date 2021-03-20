@@ -14,6 +14,7 @@ import com.geekbrains.kotlin_lessons.viewModels.FavoritesViewModel
 
 class DisconnectFragment : Fragment() {
 
+    private var refreshing = 2000L
 
     private lateinit var disconnectViewModel: DisconnectViewModel
     override fun onCreateView(
@@ -40,7 +41,7 @@ class DisconnectFragment : Fragment() {
 
             requireView().findNavController().navigate(R.id.navigation_movie)
             swipeRefreshLayout.isRefreshing = false
-        }, 2000)
+        }, refreshing)
     }
 
 

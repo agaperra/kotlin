@@ -16,36 +16,31 @@ interface ApiService {
     @GET(value = Constants.POPULAR_MOVIES)
     fun getPopular(
         @Query("api_key") key: String,
-        @Query("language") lang: String,
-        @Query("adult") adult: Boolean
+        @Query("language") lang: String
     ): Call<MovieResponse>
 
     @GET(value = Constants.NOW_PLAYING_MOVIES)
     fun getLookNow(
         @Query("api_key") key: String,
-        @Query("language") lang: String,
-        @Query("adult") adult: Boolean
+        @Query("language") lang: String
     ): Call<MovieResponse>
 
     @GET(value = Constants.UPCOMING_MOVIES)
     fun getUpComing(
         @Query("api_key") key: String,
-        @Query("language") lang: String,
-        @Query("adult") adult: Boolean
+        @Query("language") lang: String
     ): Call<MovieResponse>
 
     @GET(value = Constants.TOP_MOVIES)
     fun getTop(
         @Query("api_key") key: String,
-        @Query("language") lang: String,
-        @Query("adult") adult: Boolean
+        @Query("language") lang: String
     ): Call<MovieResponse>
 
     @GET(value = Constants.SEARCH_MOVIES)
     fun searchMovie(
         @Query("api_key") key: String,
         @Query("language") lang: String,
-        @Query("adult") adult: Boolean,
         @Query("query") query: String
     ): Call<MovieResponse>
 

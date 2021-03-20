@@ -29,7 +29,6 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-@Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 class ActorFragment : Fragment() {
 
     private lateinit var actorViewModel: ActorsViewModel
@@ -37,6 +36,7 @@ class ActorFragment : Fragment() {
     private val args: ActorFragmentArgs by navArgs()
     private lateinit var alsoAdapter: AlsoKnownAsAdapter
     private lateinit var currentActor: ActorFull
+    private var refreshing = 2000L
 
     private lateinit var networkConnectionReceiver: NetworkConnectionReceiver
     private var flag: Boolean = false
@@ -68,7 +68,7 @@ class ActorFragment : Fragment() {
         swipeRefreshLayout.postOnAnimationDelayed({
             goBack()
             swipeRefreshLayout.isRefreshing = false
-        }, 2000)
+        }, refreshing)
     }
 
     private fun goBack() {
