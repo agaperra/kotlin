@@ -2,13 +2,10 @@ package com.geekbrains.kotlin_lessons.viewModels
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.geekbrains.kotlin_lessons.App
+import com.geekbrains.kotlin_lessons.BuildConfig
 import com.geekbrains.kotlin_lessons.interactors.string.StringInteractor
-import com.geekbrains.kotlin_lessons.models.MovieFull
 import com.geekbrains.kotlin_lessons.repositories.*
 import com.geekbrains.kotlin_lessons.responses.MovieResponse
-import com.geekbrains.kotlin_lessons.utils.Constants
-import com.geekbrains.kotlin_lessons.utils.Variables
 
 class MovieViewModel(
     private val stringInteractor: StringInteractor,
@@ -60,7 +57,7 @@ class MovieViewModel(
     }
 
     private fun setPopular() {
-        liveDataPopular.value = stringInteractor.textPopular
+        liveDataPopular.value = BuildConfig.BUILD_TYPE//stringInteractor.textPopular
     }
 
     private fun setNowPlaying() {

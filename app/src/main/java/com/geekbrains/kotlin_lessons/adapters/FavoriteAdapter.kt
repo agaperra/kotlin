@@ -15,6 +15,7 @@ import com.geekbrains.kotlin_lessons.models.MovieFull
 import com.geekbrains.kotlin_lessons.repositories.FavoriteRepository
 import com.geekbrains.kotlin_lessons.repositories.FavoriteRepositoryImpl
 import com.geekbrains.kotlin_lessons.utils.Constants
+import com.geekbrains.kotlin_lessons.utils.SnackBarMaker
 import com.geekbrains.kotlin_lessons.utils.showSnackBar
 import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
@@ -114,19 +115,7 @@ class FavoriteAdapter(
                                 showSnackBar(R.string.remove_from_favorites, Snackbar.LENGTH_SHORT)
                         }
                     }
-                    @SuppressLint("InflateParams") val customSnackView: View =
-                        LayoutInflater.from(context).inflate(R.layout.rounded, null)
-                    snackbar.view.setBackgroundColor(Color.TRANSPARENT)
-                    val snackbarLayout = snackbar.view as Snackbar.SnackbarLayout
-
-                    snackbarLayout.setPadding(
-                        20,
-                        20,
-                        20,
-                        20
-                    )
-                    snackbarLayout.addView(customSnackView, 0)
-                    snackbar.show()
+                    SnackBarMaker.createAndShowSnackBar(LayoutInflater.from(context), snackbar)
                 }
 
             }
