@@ -32,6 +32,7 @@ import com.geekbrains.kotlin_lessons.utils.Variables
 import com.geekbrains.kotlin_lessons.viewModels.InfoViewModel
 import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
+import android.widget.Toast
 
 
 class InfoFragment : Fragment() {
@@ -273,38 +274,42 @@ class InfoFragment : Fragment() {
                             binding.like.setImageResource(R.drawable.ic_baseline_favorite_24)
                             binding.like.tag = R.string.like
                             saveFavorite(movieFavorite)
-                            snackbar =
-                                Snackbar.make(
-                                    binding.root,
-                                    R.string.add_to_favorites,
-                                    Snackbar.LENGTH_SHORT
-                                )
+//                            snackbar =
+//                                Snackbar.make(
+//                                    binding.root,
+//                                    R.string.add_to_favorites,
+//                                    Snackbar.LENGTH_SHORT
+//                                )
+                            Toast.makeText(context, R.string.add_to_favorites, Toast.LENGTH_LONG).show()
                         }
                         else -> {
                             binding.like.setImageResource(R.drawable.ic_sharp_favorite_border_24)
                             binding.like.tag = R.string.no_like
                             deleteFavorite(movieFavorite)
-                            snackbar =
-                                Snackbar.make(
-                                    binding.root,
-                                    R.string.remove_from_favorites,
-                                    Snackbar.LENGTH_SHORT
-                                )
+//                            snackbar =
+//                                Snackbar.make(
+//                                    binding.root,
+//                                    R.string.remove_from_favorites,
+//                                    Snackbar.LENGTH_SHORT
+//                                )
+                            Toast.makeText(context, R.string.remove_from_favorites, Toast.LENGTH_LONG).show()
+
                         }
                     }
-                    @SuppressLint("InflateParams") val customSnackView: View =
-                        LayoutInflater.from(context).inflate(R.layout.rounded, null)
-                    snackbar.view.setBackgroundColor(Color.TRANSPARENT)
-                    val snackbarLayout = snackbar.view as Snackbar.SnackbarLayout
-
-                    snackbarLayout.setPadding(
-                        R.dimen._20sdp,
-                        R.dimen._20sdp,
-                        R.dimen._20sdp,
-                        R.dimen._20sdp
-                    )
-                    snackbarLayout.addView(customSnackView, 0)
-                    snackbar.show()
+//                    @SuppressLint("InflateParams") val customSnackView: View =
+//                        LayoutInflater.from(activity?.applicationContext)
+//                            .inflate(R.layout.rounded, null)
+//                    snackbar.view.setBackgroundColor(Color.TRANSPARENT)
+//                    val snackbarLayout = snackbar.view as Snackbar.SnackbarLayout
+//
+//                    snackbarLayout.setPadding(
+//                        R.dimen._20sdp,
+//                        R.dimen._20sdp,
+//                        R.dimen._20sdp,
+//                        R.dimen._20sdp
+//                    )
+//                    snackbarLayout.addView(customSnackView, 0)
+//                    snackbar.show()
 
                 }
             }

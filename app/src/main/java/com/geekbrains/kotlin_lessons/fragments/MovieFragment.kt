@@ -1,15 +1,11 @@
 package com.geekbrains.kotlin_lessons.fragments
 
-import android.Manifest
-import android.annotation.SuppressLint
-import android.content.pm.PackageManager
-import android.graphics.Color
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.core.content.ContextCompat
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
@@ -17,22 +13,18 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.geekbrains.kotlin_lessons.R
+import com.geekbrains.kotlin_lessons.activity.MainActivity
+import com.geekbrains.kotlin_lessons.activity.MainActivity.Companion.preferencesManager
 import com.geekbrains.kotlin_lessons.adapters.HorizontalRecyclerAdapter
 import com.geekbrains.kotlin_lessons.adapters.OnItemViewClickListener
 import com.geekbrains.kotlin_lessons.databinding.FragmentMovieBinding
 import com.geekbrains.kotlin_lessons.interactors.string.StringInteractorImpl
-import com.geekbrains.kotlin_lessons.models.Genres
 import com.geekbrains.kotlin_lessons.models.Movie
-import com.geekbrains.kotlin_lessons.models.MovieFull
-import com.geekbrains.kotlin_lessons.models.ProductionCountries
 import com.geekbrains.kotlin_lessons.receivers.NetworkConnectionReceiver
 import com.geekbrains.kotlin_lessons.utils.Constants
+import com.geekbrains.kotlin_lessons.utils.SharedPreferencesManager
 import com.geekbrains.kotlin_lessons.utils.Variables
 import com.geekbrains.kotlin_lessons.viewModels.MovieViewModel
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.iid.FirebaseInstanceId
-import java.util.ArrayList
 
 
 class MovieFragment : Fragment() {
@@ -40,6 +32,7 @@ class MovieFragment : Fragment() {
     private lateinit var binding: FragmentMovieBinding
     private lateinit var movieViewModel: MovieViewModel
     private lateinit var networkConnectionReceiver: NetworkConnectionReceiver
+    lateinit var sPrefs: SharedPreferencesManager
 
     private val movieAdapterPopular by lazy {
         HorizontalRecyclerAdapter(onItemViewClickListener = object : OnItemViewClickListener {
@@ -89,11 +82,11 @@ class MovieFragment : Fragment() {
     ): View {
         Variables.BOOLEAN = false
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_movie, container, false)
-
         movieViewModel = MovieViewModel(StringInteractorImpl(requireContext()))
-
+        sPrefs = preferencesManager!!
         return binding.root
     }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.refresh.setOnRefreshListener {
@@ -110,9 +103,6 @@ class MovieFragment : Fragment() {
             swipeRefreshLayout.isRefreshing = false
         }, 2000)
     }
-
-
-
 
 
     private fun doInitialization() {
@@ -153,6 +143,18 @@ class MovieFragment : Fragment() {
                 getLookNowMovies()
                 getUpComingMovies()
                 getTopMovies()
+                switchCheckEnter(Constants.TAG_THEME, Constants.THEME_DARK)
+
+                binding.themeSwitch.setOnCheckedChangeListener { _, isChecked ->
+
+                    if (isChecked) {
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                        sPrefs.storeInt(Constants.TAG_THEME, Constants.THEME_DARK)
+                    } else {
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                        sPrefs.storeInt(Constants.TAG_THEME, Constants.THEME_LIGHT)
+                    }
+                }
 
 //
 //                FirebaseInstanceId.getInstance().instanceId
@@ -171,6 +173,18 @@ class MovieFragment : Fragment() {
             }
         }
 
+    }
+
+    private fun switchCheckEnter(tag: String?, defValue: Int) {
+        when (sPrefs.retrieveInt(tag, defValue)) {
+            0 -> {
+                binding.themeSwitch.isChecked = true
+            }
+            1 -> {
+                binding.themeSwitch.isChecked = false
+            }
+
+        }
     }
 
     private fun getPopularMovies() {
