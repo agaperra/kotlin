@@ -149,92 +149,32 @@ class MovieFragment : Fragment() {
 
                 setUpLiveData()
                 binding.viewModel = movieViewModel
-                getPopularMovies()
-                getLookNowMovies()
-                getUpComingMovies()
-                getTopMovies()
-
-//
-//                FirebaseInstanceId.getInstance().instanceId
-//                    .addOnCompleteListener(OnCompleteListener { task ->
-//                        if (!task.isSuccessful) {
-//                            // Не удалось получить токен, произошла ошибка
-//                            return@OnCompleteListener
-//                        }
-//
-//                        // Получить токен
-//                        val token = task.result!!.token
-//                        print(token)
-//                        // Сохранить токен...
-//                    })
-
+                getFilms(0, movieAdapterPopular)
+                getFilms(1, movieAdapterNowPlaying)
+                getFilms(2, movieAdapterUpComing)
+                getFilms(3, movieAdapterTop)
             }
         }
 
     }
 
-    private fun getPopularMovies() {
+    private fun getFilms(temp: Int, adapter: HorizontalRecyclerAdapter){
         binding.isLoading = true
         movieViewModel.apply {
-            getObservedMoviesPopular().observe(viewLifecycleOwner, { movieResponse ->
-                movieAdapterPopular.clearItems()
+            getObserving(temp).observe(viewLifecycleOwner, { movieResponse ->
+                adapter.clearItems()
                 movieResponse.results.let {
-                    movieAdapterPopular.addItems(it)
-                    movieAdapterPopular.notifyDataSetChanged()
+                    adapter.addItems(it)
+                    adapter.notifyDataSetChanged()
                     binding.isLoading = false
                 }
 
             })
-            popularMovie()
+            setFilms(temp)
         }
     }
 
 
-    private fun getLookNowMovies() {
-        binding.isLoading = true
-        movieViewModel.apply {
-            getObservedMoviesLookNow().observe(viewLifecycleOwner, { movieResponse ->
-                movieAdapterNowPlaying.clearItems()
-                movieResponse.results.let {
-                    movieAdapterNowPlaying.addItems(it)
-                    movieAdapterNowPlaying.notifyDataSetChanged()
-                    binding.isLoading = false
-                }
-            })
-            lookNowMovie()
-        }
-    }
-
-    private fun getUpComingMovies() {
-        binding.isLoading = true
-        movieViewModel.apply {
-            getObservedMoviesUpComing().observe(viewLifecycleOwner, { movieResponse ->
-                movieAdapterUpComing.clearItems()
-                movieResponse.results.let {
-                    movieAdapterUpComing.addItems(it)
-                    movieAdapterUpComing.notifyDataSetChanged()
-                    binding.isLoading = false
-                }
-            })
-            upComingMovie()
-        }
-    }
-
-    private fun getTopMovies() {
-        binding.isLoading = true
-        movieViewModel.apply {
-            getObservedMoviesTop().observe(viewLifecycleOwner, { movieResponse ->
-                movieAdapterTop.clearItems()
-                movieResponse.results.let {
-                    movieAdapterTop.addItems(it)
-                    movieAdapterTop.notifyDataSetChanged()
-                    binding.isLoading = false
-
-                }
-            })
-            topMovie()
-        }
-    }
 
 
     private fun setUpLiveData() {

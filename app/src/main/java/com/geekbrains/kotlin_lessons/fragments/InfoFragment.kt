@@ -28,6 +28,7 @@ import com.geekbrains.kotlin_lessons.interactors.string.StringInteractorImpl
 import com.geekbrains.kotlin_lessons.models.*
 import com.geekbrains.kotlin_lessons.receivers.NetworkConnectionReceiver
 import com.geekbrains.kotlin_lessons.utils.Constants
+import com.geekbrains.kotlin_lessons.utils.SnackBarMaker
 import com.geekbrains.kotlin_lessons.utils.Variables
 import com.geekbrains.kotlin_lessons.viewModels.InfoViewModel
 import com.google.android.material.snackbar.Snackbar
@@ -258,7 +259,7 @@ class InfoFragment : Fragment() {
                             }
                         }
                         .setNegativeButton(
-                            "Отмена"
+                            R.string.cancel
                         ) { dialog, _ -> dialog.cancel() }
 
 
@@ -292,19 +293,7 @@ class InfoFragment : Fragment() {
                                 )
                         }
                     }
-                    @SuppressLint("InflateParams") val customSnackView: View =
-                        LayoutInflater.from(context).inflate(R.layout.rounded, null)
-                    snackbar.view.setBackgroundColor(Color.TRANSPARENT)
-                    val snackbarLayout = snackbar.view as Snackbar.SnackbarLayout
-
-                    snackbarLayout.setPadding(
-                        R.dimen._20sdp,
-                        R.dimen._20sdp,
-                        R.dimen._20sdp,
-                        R.dimen._20sdp
-                    )
-                    snackbarLayout.addView(customSnackView, 0)
-                    snackbar.show()
+                    SnackBarMaker.createAndShowSnackBar(LayoutInflater.from(context), snackbar)
 
                 }
             }
