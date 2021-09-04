@@ -20,7 +20,6 @@ class SearchRepository {
         apiService.searchMovie(
                 key = BuildConfig.FILM_API_KEY,
                 lang = Variables.LOCALE,
-                Variables.ADULT,
                 query = query
         )
                 .enqueue(object : retrofit2.Callback<MovieResponse> {

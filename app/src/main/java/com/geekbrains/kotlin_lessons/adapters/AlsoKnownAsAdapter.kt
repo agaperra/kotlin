@@ -10,7 +10,7 @@ import com.geekbrains.kotlin_lessons.R
 
 class AlsoKnownAsAdapter : RecyclerView.Adapter<AlsoKnownAsAdapter.AlsoViewHolder>() {
 
-    private val also = arrayListOf<String>()
+    private val listAlso = arrayListOf<String>()
 
     inner class AlsoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
@@ -25,13 +25,13 @@ class AlsoKnownAsAdapter : RecyclerView.Adapter<AlsoKnownAsAdapter.AlsoViewHolde
     )
 
     override fun onBindViewHolder(holder: AlsoViewHolder, position: Int) =
-        holder.bind(also[position])
+        holder.bind(listAlso[position])
 
-    override fun getItemCount() = also.count()
+    override fun getItemCount() = listAlso.count()
 
-    fun setAlso(also_s: List<String>) = also.addAll(also_s)
+    fun setAlso(newAlso: List<String>) = listAlso.addAll(newAlso)
 
-    fun clearItems() = this.also.clear()
+    fun clearItems() = this.listAlso.clear()
 
 
 }
