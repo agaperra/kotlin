@@ -20,5 +20,9 @@ class Constants {
         const val ACTOR_PLACE_OF_BIRTH = "ActorPlaceOfBirth"
         const val ACTOR_NAME = "ActorName"
         const val ACTOR_PHOTO = "PhotoPath"
+
+        const val TAG_THEME = "TAG_THEME"
+        const val THEME_DARK = 0
+        const val THEME_LIGHT = 1
     }
 }
